@@ -1,3 +1,4 @@
+import { useState } from "react";
 import logo from "../assets/side-logo.png";
 import { Link } from "react-router-dom";
 
@@ -10,6 +11,8 @@ const pages = [
 ];
 
 export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <header className="w-full bg-black border-b border-castlepink">
       <div className="w-full max-w-[1200px] mx-auto py-4 px-[10px] lg:px-0 flex justify-between items-center gap-4">
