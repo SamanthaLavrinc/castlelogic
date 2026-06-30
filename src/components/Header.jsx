@@ -58,8 +58,10 @@ export default function Header() {
         >
           <div className="relative w-6 h-6">
                       <span
-                        className={`absolute left-0 top-2 w-6 h-[2px] rounded-full bg-castlepink origin-center transform transition-all duration-300 ${
-                          menuOpen ? "rotate-45 translate-y-2" : ""
+                        className={`absolute left-0 top-2 w-6 h-[2px] rounded-full bg-castlepink transition-all duration-300 ${
+                          menuOpen
+                            ? "top-3 rotate-45"
+                            : ""
                         }`}
                       />
 
@@ -70,8 +72,10 @@ export default function Header() {
                       />
 
                       <span
-                        className={`absolute left-0 top-6 w-6 h-[2px] rounded-full bg-castlepink origin-center transform transition-all duration-300 ${
-                          menuOpen ? "-rotate-45 -translate-y-2" : ""
+                        className={`absolute left-0 top-4 w-6 h-[2px] rounded-full bg-castlepink transition-all duration-300 ${
+                          menuOpen
+                            ? "top-3 -rotate-45"
+                            : ""
                         }`}
                       />
                     </div>
