@@ -1,6 +1,7 @@
 import { useState } from "react";
 import logo from "../assets/side-logo.png";
 import { Link } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 
 const pages = [
   { name: "HOME", path: "/home" },
@@ -54,25 +55,23 @@ export default function Header() {
         {/* Hamburger Button */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="flex h-10 w-10 items-center justify-center"
+          className="flex h-10 w-10 items-center justify-center text-castlepink transition-transform duration-300"
           aria-label="Toggle menu"
         >
           <div className="relative h-6 w-6">
-            <span
-              className={`absolute left-0 top-1/2 h-0.5 w-6 -translate-y-2 rounded-full bg-castlepink transition-all duration-300 ${
-                menuOpen ? "translate-y-0 rotate-45" : ""
+            <Menu
+              size={26}
+              strokeWidth={2.5}
+              className={`absolute inset-0 transition-all duration-300 ${
+                menuOpen ? "scale-75 opacity-0 rotate-90" : "scale-100 opacity-100 rotate-0"
               }`}
             />
 
-            <span
-              className={`absolute left-0 top-1/2 h-0.5 w-6 rounded-full bg-castlepink transition-all duration-300 ${
-                menuOpen ? "opacity-0" : ""
-              }`}
-            />
-
-            <span
-              className={`absolute left-0 top-1/2 h-0.5 w-6 translate-y-2 rounded-full bg-castlepink transition-all duration-300 ${
-                menuOpen ? "translate-y-0 -rotate-45" : ""
+            <X
+              size={26}
+              strokeWidth={2.5}
+              className={`absolute inset-0 transition-all duration-300 ${
+                menuOpen ? "scale-100 opacity-100 rotate-0" : "scale-75 opacity-0 -rotate-90"
               }`}
             />
           </div>
