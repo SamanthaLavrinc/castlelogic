@@ -15,7 +15,7 @@ export default function Header() {
 
   return (
     <header className="w-full bg-black border-b border-castlepink">
-      <div className="w-full max-w-[1200px] mx-auto py-4 px-[10px] lg:px-0 flex justify-between items-center gap-4">
+      <div className="hidden md:flex w-full max-w-[1200px] mx-auto py-4 px-[10px] lg:px-0 flex justify-between items-center gap-4">
 
         {/* Logo */}
         <div>
@@ -36,31 +36,6 @@ export default function Header() {
             </Link>
           ))}
         </nav>
-
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-castlepink text-3xl"
-        >
-          <div className="relative w-6 h-6">
-            <span
-              className={`absolute left-0 top-2 w-6 h-[2px] rounded-full bg-castlepink origin-center transform transition-all duration-300 ${
-                menuOpen ? "rotate-45 translate-y-2" : ""
-              }`}
-            />
-
-            <span
-              className={`absolute left-0 top-4 w-6 h-[2px] rounded-full bg-castlepink origin-center transform transition-all duration-300 ${
-                menuOpen ? "opacity-0" : ""
-              }`}
-            />
-
-            <span
-              className={`absolute left-0 top-6 w-6 h-[2px] rounded-full bg-castlepink origin-center transform transition-all duration-300 ${
-                menuOpen ? "-rotate-45 -translate-y-2" : ""
-              }`}
-            />
-          </div>
-        </button>
 
       </div>
     </header>
