@@ -58,19 +58,19 @@ export default function Header() {
         >
           <div className="flex h-6 w-6 flex-col items-center justify-center gap-1.5">
             <span
-              className={`block h-0.5 w-6 rounded-full bg-castlepink transition-all duration-300 ${
+              className={`block h-0.5 w-6 rounded-full bg-castlepink origin-center transition-all duration-300 ${
                 menuOpen ? "translate-y-2 rotate-45" : ""
               }`}
             />
 
             <span
-              className={`block h-0.5 w-6 rounded-full bg-castlepink transition-all duration-300 ${
+              className={`block h-0.5 w-6 rounded-full bg-castlepink origin-center transition-all duration-300 ${
                 menuOpen ? "opacity-0" : ""
               }`}
             />
 
             <span
-              className={`block h-0.5 w-6 rounded-full bg-castlepink transition-all duration-300 ${
+              className={`block h-0.5 w-6 rounded-full bg-castlepink origin-center transition-all duration-300 ${
                 menuOpen ? "-translate-y-2 -rotate-45" : ""
               }`}
             />
