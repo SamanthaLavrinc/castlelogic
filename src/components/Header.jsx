@@ -1,4 +1,13 @@
 import logo from "../assets/side-logo.png";
+import { Link } from "react-router-dom";
+
+const pages = [
+  { name: "HOME", path: "/" },
+  { name: "PROJECTS", path: "/projects" },
+  { name: "RESUME", path: "/resume" },
+  { name: "ABOUT", path: "/about" },
+  { name: "CONTACT", path: "/contact" },
+];
 
 export default function Header() {
   return (
@@ -12,17 +21,16 @@ export default function Header() {
 
         {/* Pretty full-time navigation */}
         <nav className="flex space-x-6 font-fredoka font-bold tracking-wide">
-          {["HOME", "PROJECTS", "RESUME", "ABOUT", "CONTACT"].map((item) => (
-            <a
-              key={item}
-              href={`/${item.toLowerCase()}`}
+          {pages.map((page) => (
+            <Link
+              key={page.name}
+              to={page.path}
               className="relative group text-castlepurple hover:text-castlepink transition-colors"
             >
-              {item}
+              {page.name}
 
-              {/* Pretty underline hover animation */}
               <span className="absolute left-0 bottom-[-4px] h-[2px] w-0 bg-castlepink transition-all duration-300 group-hover:w-full"></span>
-            </a>
+            </Link>
           ))}
         </nav>
 
