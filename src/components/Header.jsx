@@ -37,6 +37,13 @@ export default function Header() {
           ))}
         </nav>
 
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="md:hidden text-castlepink text-3xl"
+        >
+          {menuOpen ? "✕" : "☰"}
+        </button>
+
       </div>
     </header>
   );
