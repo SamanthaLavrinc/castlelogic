@@ -21,8 +21,12 @@ export default function Header() {
       <div className="hidden md:flex w-full max-w-[1200px] mx-auto py-4 px-[10px] lg:px-0 justify-between items-center gap-4">
 
         {/* Logo */}
-        <div>
-          <img src={logo} alt="Castle Logic Logo" className="max-h-16 w-auto shrink-0" />
+        <div className="shrink-0">
+          <img
+            src={logo}
+            alt="Castle Logic Logo"
+            className="h-16 w-auto"
+          />
         </div>
 
         {/* Pretty full-time navigation */}
