@@ -54,24 +54,25 @@ export default function Header() {
         {/* Hamburger Button */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="text-castlepink"
+          className="flex h-10 w-10 items-center justify-center"
+          aria-label="Toggle menu"
         >
-          <div className="flex h-6 w-6 flex-col items-center justify-center gap-1.5">
+          <div className="relative h-6 w-6">
             <span
-              className={`block h-0.5 w-6 rounded-full bg-castlepink origin-center transition-all duration-300 ${
-                menuOpen ? "translate-y-2 rotate-45" : ""
+              className={`absolute left-0 top-1/2 h-0.5 w-6 -translate-y-2 rounded-full bg-castlepink transition-all duration-300 ${
+                menuOpen ? "translate-y-0 rotate-45" : ""
               }`}
             />
 
             <span
-              className={`block h-0.5 w-6 rounded-full bg-castlepink origin-center transition-all duration-300 ${
+              className={`absolute left-0 top-1/2 h-0.5 w-6 rounded-full bg-castlepink transition-all duration-300 ${
                 menuOpen ? "opacity-0" : ""
               }`}
             />
 
             <span
-              className={`block h-0.5 w-6 rounded-full bg-castlepink origin-center transition-all duration-300 ${
-                menuOpen ? "-translate-y-2 -rotate-45" : ""
+              className={`absolute left-0 top-1/2 h-0.5 w-6 translate-y-2 rounded-full bg-castlepink transition-all duration-300 ${
+                menuOpen ? "translate-y-0 -rotate-45" : ""
               }`}
             />
           </div>
