@@ -41,7 +41,25 @@ export default function Header() {
           onClick={() => setMenuOpen(!menuOpen)}
           className="md:hidden text-castlepink text-3xl"
         >
-          {menuOpen ? "✕" : "☰"}
+          <div className="relative w-8 h-8">
+            <span
+              className={`absolute left-0 top-2 w-8 h-0.5 bg-castlepink transition-all duration-300 ${
+                menuOpen ? "rotate-45 top-4" : ""
+              }`}
+            />
+
+            <span
+              className={`absolute left-0 top-4 w-8 h-0.5 bg-castlepink transition-all duration-300 ${
+                menuOpen ? "opacity-0" : ""
+              }`}
+            />
+
+            <span
+              className={`absolute left-0 top-6 w-8 h-0.5 bg-castlepink transition-all duration-300 ${
+                menuOpen ? "-rotate-45 top-4" : ""
+              }`}
+            />
+          </div>
         </button>
 
       </div>
