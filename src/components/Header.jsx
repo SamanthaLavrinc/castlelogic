@@ -22,7 +22,7 @@ export default function Header() {
 
         {/* Logo */}
         <div>
-          <img src={logo} alt="Castle Logic Logo" className="max-h-20 w-auto" />
+          <img src={logo} alt="Castle Logic Logo" className="max-h-16 w-auto shrink-0" />
         </div>
 
         {/* Pretty full-time navigation */}
