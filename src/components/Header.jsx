@@ -2,7 +2,7 @@ import logo from "../assets/side-logo.png";
 import { Link } from "react-router-dom";
 
 const pages = [
-  { name: "HOME", path: "/" },
+  { name: "HOME", path: "/home" },
   { name: "PROJECTS", path: "/projects" },
   { name: "RESUME", path: "/resume" },
   { name: "ABOUT", path: "/about" },
