@@ -56,31 +56,25 @@ export default function Header() {
           onClick={() => setMenuOpen(!menuOpen)}
           className="text-castlepink"
         >
-          <div className="relative w-6 h-6">
-                      <span
-                        className={`absolute left-1/2 top-1/2 h-[2px] w-6 rounded-full bg-castlepink transition-all duration-300 -translate-x-1/2 ${
-                          menuOpen
-                            ? "rotate-45"
-                            : "-translate-y-2"
-                        }`}
-                      />
+          <div className="flex h-6 w-6 flex-col items-center justify-center gap-1.5">
+            <span
+              className={`block h-0.5 w-6 rounded-full bg-castlepink transition-all duration-300 ${
+                menuOpen ? "translate-y-2 rotate-45" : ""
+              }`}
+            />
 
-                      <span
-                        className={`absolute left-1/2 top-1/2 h-[2px] w-6 rounded-full bg-castlepink transition-all duration-300 -translate-x-1/2 ${
-                          menuOpen
-                            ? "opacity-0"
-                            : ""
-                        }`}
-                      />
+            <span
+              className={`block h-0.5 w-6 rounded-full bg-castlepink transition-all duration-300 ${
+                menuOpen ? "opacity-0" : ""
+              }`}
+            />
 
-                      <span
-                        className={`absolute left-1/2 top-1/2 h-[2px] w-6 rounded-full bg-castlepink transition-all duration-300 -translate-x-1/2 ${
-                          menuOpen
-                            ? "-rotate-45"
-                            : "translate-y-2"
-                        }`}
-                      />
-                    </div>
+            <span
+              className={`block h-0.5 w-6 rounded-full bg-castlepink transition-all duration-300 ${
+                menuOpen ? "-translate-y-2 -rotate-45" : ""
+              }`}
+            />
+          </div>
         </button>
 
       </div>
