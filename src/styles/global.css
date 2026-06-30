@@ -2,6 +2,10 @@
 @import "tailwindcss/preflight";
 @tailwind utilities;
 
+@theme {
+  --breakpoint-nav: 888px;
+}
+
 :root {
   --castlepink: #FF46A2;
   --castlepurple: #cb90ff;
