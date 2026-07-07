@@ -18,7 +18,7 @@ export default function Header() {
     <header className="w-full bg-black border-b border-castlepink">
 
       {/* Desktop Header */}
-      <div className="hidden nav:flex w-full max-w-[1200px] mx-auto py-4 px-[10px] lg:px-0 justify-between items-center gap-4">
+      <div className="hidden lg:flex w-full max-w-[1200px] mx-auto py-4 px-[10px] lg:px-0 justify-between items-center gap-4">
 
         {/* Logo */}
         <div className="shrink-0">
@@ -47,7 +47,7 @@ export default function Header() {
       </div>
 
       {/* Mobile Header */}
-      <div className="flex nav:hidden w-full px-4 py-4 justify-between items-center">
+      <div className="flex lg:hidden w-full px-4 py-4 justify-between items-center">
 
         {/* Logo */}
         <img
