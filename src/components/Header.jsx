@@ -18,7 +18,7 @@ export default function Header() {
     <header className="w-full bg-black border-b border-castlepink">
 
       {/* Desktop Header */}
-      <div className="hidden lg:flex w-full max-w-[1200px] mx-auto py-4 px-[10px] lg:px-0 justify-between items-center gap-4">
+      <div className="hidden lg:flex w-full max-w-[1200px] mx-auto px-4 py-4 justify-between items-center gap-4">
 
         {/* Logo */}
         <div className="shrink-0">
