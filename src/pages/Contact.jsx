@@ -35,10 +35,15 @@ export default function Contact() {
           </p>
         ) : (
           <>
-            <p className="text-center text-castlepurple mb-10 text-lg">
-              Have a project in mind or just want to say hello?
-              Send me a message below!
-            </p>
+            <div className="text-center text-castlepurple mb-10 text-lg space-y-4">
+              <p>
+                I'm open to full-time roles and contract work alike. If you're hiring, I'd love
+                to hear about the role. If you've got a project in mind, here's roughly how it
+                goes: we talk through what you actually need, I put together a scoped plan, and
+                we build it iteratively, so you're never waiting for one big reveal at the end.
+              </p>
+              <p>Tell me a bit about what you're looking for below, and I'll get back to you.</p>
+            </div>
 
             {/* Contact Form */}
             <form onSubmit={handleSubmit} className="flex flex-col gap-6">
