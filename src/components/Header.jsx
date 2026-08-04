@@ -47,24 +47,24 @@ export default function Header() {
       </div>
 
       {/* Mobile Header */}
-      <div className="flex lg:hidden w-full px-4 py-4 justify-between items-center">
+      <div className="flex lg:hidden w-full px-5 py-3 justify-between items-center gap-3">
 
         {/* Logo */}
         <img
           src={logo}
           alt="Castle Logic Logo"
-          className="max-h-16 w-auto"
+          className="h-8 w-auto shrink-0"
         />
 
         {/* Hamburger Button */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="flex h-10 w-10 items-center justify-center text-castlepink transition-transform duration-300"
+          className="flex h-11 w-11 shrink-0 items-center justify-center text-castlepink transition-transform duration-300"
           aria-label="Toggle menu"
         >
           <div className="relative h-6 w-6">
             <Menu
-              size={26}
+              size={24}
               strokeWidth={2.5}
               className={`absolute inset-0 transition-all duration-300 ${
                 menuOpen ? "scale-75 opacity-0 rotate-90" : "scale-100 opacity-100 rotate-0"
@@ -72,7 +72,7 @@ export default function Header() {
             />
 
             <X
-              size={26}
+              size={24}
               strokeWidth={2.5}
               className={`absolute inset-0 transition-all duration-300 ${
                 menuOpen ? "scale-100 opacity-100 rotate-0" : "scale-75 opacity-0 -rotate-90"
