@@ -1,0 +1,7 @@
+{
+  "slug": "ux-lab",
+  "title": "UX Lab",
+  "category": "UI Experiments",
+  "order": 3,
+  "summary": "Collection of UI/interaction experiments exploring layout, hierarchy, and motion."
+}

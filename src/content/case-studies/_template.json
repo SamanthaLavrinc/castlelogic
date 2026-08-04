@@ -1,0 +1,16 @@
+{
+  "slug": "your-project-slug",
+  "title": "Project Title",
+  "category": "Full-Stack",
+  "order": 5,
+  "summary": "One or two sentences — this is what shows on the project card.",
+  "role": "Your role on this project (e.g. Solo full-stack engineer)",
+  "stack": ["React", "Node", "PostgreSQL"],
+  "problem": "What was the challenge or need going in?",
+  "approach": "What did you actually build or do?",
+  "results": "What changed because of it? Include numbers if you have them.",
+  "image": "/case-studies/your-project-slug/cover.png",
+  "links": [
+    { "label": "Live site", "url": "https://example.com" }
+  ]
+}

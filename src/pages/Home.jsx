@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import { caseStudies } from "../content/case-studies";
+import CaseStudyCard from "../components/CaseStudyCard";
 
 export default function Home() {
+  const featured = caseStudies.slice(0, 3);
+
   return (
     <main className="min-h-screen bg-black text-white px-4 sm:px-4 py-12 font-fredoka relative z-0">
       {/* Hero Section */}
@@ -17,26 +21,18 @@ export default function Home() {
         </p>
       </section>
 
-      {/* Placeholder Project Cards */}
-      <section className="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 relative z-10 px-4">
-        {["Project 1", "Project 2", "Project 3"].map((proj) => (
-          <div 
-            key={proj} 
-            className="w-full max-w-[calc(99%-1rem)] bg-gray-900 border border-castlepink rounded-lg p-6 hover:scale-105 transform transition-transform duration-300 mx-auto"
-          >
-            <h2 className="text-xl font-bold text-castlepink mb-2">{proj}</h2>
-            <p className="text-castlepurple">
-              Placeholder description for {proj}. This will eventually showcase UX/UI and graphic design work.
-            </p>
-            <Link 
-              to="/projects" 
-              className="inline-block mt-4 text-castlepink hover:text-white transition-colors"
-            >
-              See more
-            </Link>
-          </div>
+      {/* Featured Project Cards */}
+      <section className="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6 relative z-10 px-4">
+        {featured.map((study) => (
+          <CaseStudyCard key={study.slug} study={study} />
         ))}
       </section>
+
+      <div className="text-center mb-16 relative z-10">
+        <Link to="/projects" className="text-castlepink hover:text-castlepurple transition-colors">
+          See all projects →
+        </Link>
+      </div>
 
       {/* About / Expertise Section */}
       <section className="max-w-[1200px] mx-auto text-center mb-16 relative z-10">

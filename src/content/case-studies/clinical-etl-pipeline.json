@@ -1,0 +1,7 @@
+{
+  "slug": "clinical-etl-pipeline",
+  "title": "Clinical ETL Pipeline",
+  "category": "Full-Stack",
+  "order": 2,
+  "summary": "Transforms unstructured clinical records into structured JSON for downstream analytics."
+}
