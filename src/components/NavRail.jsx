@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { Home, LayoutGrid, FileText, User, Mail, Menu, X } from "lucide-react";
+import castleIcon from "../assets/castle.png";
 
 const links = [
   { name: "Home", path: "/home", icon: Home },
@@ -17,30 +18,41 @@ export default function NavRail() {
     <>
       {/* Desktop icon rail: expands on hover or keyboard focus, never hover-only */}
       <nav
-        className="hidden lg:flex group fixed right-0 top-0 h-screen z-40 w-16 hover:w-56 focus-within:w-56 flex-col items-start justify-center gap-2 py-6 px-3 bg-black border-l border-castlepink overflow-hidden transition-all duration-300"
+        className="hidden lg:flex group fixed right-0 top-0 h-screen z-40 w-16 hover:w-56 focus-within:w-56 flex-col items-start pt-6 px-3 bg-black border-l border-castlepink overflow-hidden transition-all duration-300"
         aria-label="Primary"
       >
-        {links.map((link) => {
-          const Icon = link.icon;
-          return (
-            <NavLink
-              key={link.path}
-              to={link.path}
-              className={({ isActive }) =>
-                `flex items-center gap-3 w-full px-3 py-3 rounded-lg font-fredoka font-bold tracking-wide transition-colors ${
-                  isActive
-                    ? "text-castlepink bg-gray-900"
-                    : "text-castlepurple hover:text-castlepink"
-                }`
-              }
-            >
-              <Icon size={22} className="shrink-0" />
-              <span className="whitespace-nowrap opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-200">
-                {link.name}
-              </span>
-            </NavLink>
-          );
-        })}
+        <Link to="/home" className="flex items-center gap-3 w-full px-3 py-2 mb-4 shrink-0">
+          <img src={castleIcon} alt="" className="h-8 w-8 shrink-0 object-contain" />
+          <span className="whitespace-nowrap opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-200 font-fredoka font-bold text-castlepink tracking-wide">
+            Castle Logic
+          </span>
+        </Link>
+
+        <div className="w-full border-t border-castlepink/30 mb-2 shrink-0" />
+
+        <div className="flex flex-col gap-1 w-full">
+          {links.map((link) => {
+            const Icon = link.icon;
+            return (
+              <NavLink
+                key={link.path}
+                to={link.path}
+                className={({ isActive }) =>
+                  `flex items-center gap-3 w-full px-3 py-3 rounded-lg font-fredoka font-bold tracking-wide transition-colors ${
+                    isActive
+                      ? "text-castlepink bg-gray-900"
+                      : "text-castlepurple hover:text-castlepink"
+                  }`
+                }
+              >
+                <Icon size={22} className="shrink-0" />
+                <span className="whitespace-nowrap opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-200">
+                  {link.name}
+                </span>
+              </NavLink>
+            );
+          })}
+        </div>
       </nav>
 
       {/* Mobile trigger */}
