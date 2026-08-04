@@ -21,13 +21,13 @@ export default function Header() {
       <div className="hidden lg:flex w-full max-w-[1200px] mx-auto px-4 py-4 justify-between items-center gap-4">
 
         {/* Logo */}
-        <div className="shrink-0">
+        <Link to="/home" className="shrink-0">
           <img
             src={logo}
             alt="Castle Logic Logo"
             className="h-16 w-auto"
           />
-        </div>
+        </Link>
 
         {/* Pretty full-time navigation */}
         <nav className="flex space-x-6 font-fredoka font-bold tracking-wide">
@@ -50,11 +50,13 @@ export default function Header() {
       <div className="flex lg:hidden w-full px-5 py-3 justify-between items-center gap-3">
 
         {/* Logo */}
-        <img
-          src={logo}
-          alt="Castle Logic Logo"
-          className="h-8 w-auto shrink-0"
-        />
+        <Link to="/home" className="shrink-0">
+          <img
+            src={logo}
+            alt="Castle Logic Logo"
+            className="h-8 w-auto"
+          />
+        </Link>
 
         {/* Hamburger Button */}
         <button

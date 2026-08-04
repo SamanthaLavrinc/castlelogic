@@ -25,7 +25,7 @@ export default function Contact() {
 
         {state.succeeded ? (
           <p className="text-center text-castlepurple text-lg py-10">
-            Thanks — your message is on its way. I'll get back to you soon!
+            Thanks, your message is on its way. I'll get back to you soon!
           </p>
         ) : (
           <>
