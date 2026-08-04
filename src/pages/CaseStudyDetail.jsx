@@ -28,7 +28,7 @@ export default function CaseStudyDetail() {
         </Link>
 
         <p className="text-xs uppercase tracking-wide text-castlepink/70 mt-6 mb-1">{study.category}</p>
-        <h1 className="text-4xl font-bold text-castlepink mb-4 tracking-wider">{study.title}</h1>
+        <h1 className="text-4xl font-semibold uppercase text-castlepink mb-4 tracking-wider">{study.title}</h1>
         <p className="text-lg text-castlepurple mb-10">{study.summary}</p>
 
         {study.image && (
