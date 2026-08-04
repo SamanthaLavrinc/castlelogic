@@ -21,8 +21,8 @@ export default function NavRail() {
         className="hidden lg:flex group fixed right-0 top-0 h-screen z-40 w-16 hover:w-56 focus-within:w-56 flex-col items-start pt-6 px-3 bg-black border-l border-castlepink overflow-hidden transition-all duration-300"
         aria-label="Primary"
       >
-        <Link to="/home" className="flex items-center gap-3 w-full px-3 py-2 mb-4 shrink-0">
-          <img src={castleIcon} alt="" className="h-10 w-10 shrink-0 object-contain" />
+        <Link to="/home" className="flex items-center gap-3 w-full py-2 mb-4 shrink-0">
+          <img src={castleIcon} alt="" className="h-14 w-14 shrink-0 object-contain" />
           <span className="whitespace-nowrap overflow-hidden max-w-0 opacity-0 group-hover:max-w-[140px] group-hover:opacity-100 group-focus-within:max-w-[140px] group-focus-within:opacity-100 transition-all duration-200 font-fredoka font-bold text-castlepink tracking-wide">
             CASTLE LOGIC
           </span>
