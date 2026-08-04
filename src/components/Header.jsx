@@ -83,6 +83,26 @@ export default function Header() {
 
       </div>
 
+      {/* Mobile Menu Panel */}
+      <div
+        className={`lg:hidden overflow-hidden transition-all duration-300 ${
+          menuOpen ? "max-h-80" : "max-h-0"
+        }`}
+      >
+        <nav className="flex flex-col px-4 pb-4 font-fredoka font-bold tracking-wide">
+          {pages.map((page) => (
+            <Link
+              key={page.name}
+              to={page.path}
+              onClick={() => setMenuOpen(false)}
+              className="py-3 border-t border-castlepink/30 text-castlepurple hover:text-castlepink transition-colors"
+            >
+              {page.name}
+            </Link>
+          ))}
+        </nav>
+      </div>
+
     </header>
   );
 }
