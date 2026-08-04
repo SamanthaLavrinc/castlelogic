@@ -17,9 +17,21 @@ export default function Timeline() {
 
   const timeline = [
     {
+      title: "Founder & Software Engineer",
+      company: "Castle Logic LLC",
+      date: "Oct 2025 – Present",
+      bullets: [
+        "Architected and developed a relationship mapping platform for therapists, translating client requirements into a scalable graph-based web application.",
+        "Designed the system architecture, relational database schema, and graph data model to represent and visualize complex interpersonal relationships.",
+        "Implemented application architecture, graph data layer, and database operations using React, PostgreSQL, and Supabase.",
+        "Partnered directly with clients to define requirements, prioritize features, and deliver iterative software solutions aligned with business objectives.",
+        "Led end-to-end software development from architecture through deployment."
+      ],
+    },
+    {
       title: "Software Engineer – NLP & Clinical Informatics",
       company: "Realyze Intelligence - Carta Healthcare",
-      date: "Oct 2022 – Present",
+      date: "Oct 2022 – Oct 2025",
       bullets: [
 "Developed and maintained multi-layer NLP pipelines leveraging Apache cTAKES, Java, and PostgreSQL to transform unstructured clinical text into FHIR-compliant structured data, supporting scalable healthcare applications.",
         "Enhanced finite-state machines and regex-based detection systems to improve extraction of clinical dates, measurements, and terminology, boosting accuracy and efficiency across pipelines.",

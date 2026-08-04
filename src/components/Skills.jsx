@@ -18,9 +18,11 @@ export default function Skills() {
     { name: "Java", level: 5, category: "backend" },
     { name: "SQL", level: 5, category: "backend" },
     { name: "PostgreSQL", level: 5, category: "backend" },
+    { name: "Supabase", level: 4, category: "backend" },
     { name: "Python", level: 3, category: "backend" },
-    { name: "C#", level: 2, category: "backend" },
-    { name: "C++", level: 3, category: "backend" },
+    { name: "Software Architecture", level: 5, category: "backend" },
+    { name: "REST APIs", level: 4, category: "backend" },
+    { name: "Database Administration", level: 4, category: "backend" },
     { name: "ETL/Data Integration", level: 3, category: "backend" },
     { name: "JSON/Serialization", level: 3, category: "backend" },
 
@@ -33,6 +35,9 @@ export default function Skills() {
 
     // --- TOOLS ---
     { name: "Git", level: 4, category: "tools" },
+    { name: "GitHub", level: 4, category: "tools" },
+    { name: "AWS", level: 4, category: "tools" },
+    { name: "Vercel", level: 4, category: "tools" },
     { name: "VS Code", level: 4, category: "tools" },
     { name: "Intellij", level: 4, category: "tools" },
     { name: "Linux", level: 3, category: "tools" },
