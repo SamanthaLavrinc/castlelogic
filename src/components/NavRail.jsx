@@ -22,9 +22,9 @@ export default function NavRail() {
         aria-label="Primary"
       >
         <Link to="/home" className="flex items-center gap-3 w-full px-3 py-2 mb-4 shrink-0">
-          <img src={castleIcon} alt="" className="h-8 w-8 shrink-0 object-contain" />
-          <span className="whitespace-nowrap opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-200 font-fredoka font-bold text-castlepink tracking-wide">
-            Castle Logic
+          <img src={castleIcon} alt="" className="h-10 w-10 shrink-0 object-contain" />
+          <span className="whitespace-nowrap overflow-hidden max-w-0 opacity-0 group-hover:max-w-[140px] group-hover:opacity-100 group-focus-within:max-w-[140px] group-focus-within:opacity-100 transition-all duration-200 font-fredoka font-bold text-castlepink tracking-wide">
+            CASTLE LOGIC
           </span>
         </Link>
 
@@ -37,18 +37,28 @@ export default function NavRail() {
               <NavLink
                 key={link.path}
                 to={link.path}
-                className={({ isActive }) =>
-                  `flex items-center gap-3 w-full px-3 py-3 rounded-lg font-fredoka font-bold tracking-wide transition-colors ${
-                    isActive
-                      ? "text-castlepink bg-gray-900"
-                      : "text-castlepurple hover:text-castlepink"
-                  }`
-                }
+                className="flex items-center gap-3 w-full font-fredoka font-bold tracking-wide"
               >
-                <Icon size={22} className="shrink-0" />
-                <span className="whitespace-nowrap opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-200">
-                  {link.name}
-                </span>
+                {({ isActive }) => (
+                  <>
+                    <span
+                      className={`flex items-center justify-center h-10 w-10 shrink-0 rounded-lg transition-colors ${
+                        isActive
+                          ? "text-castlepink bg-gray-900"
+                          : "text-castlepurple hover:text-castlepink"
+                      }`}
+                    >
+                      <Icon size={22} />
+                    </span>
+                    <span
+                      className={`whitespace-nowrap overflow-hidden max-w-0 opacity-0 group-hover:max-w-[140px] group-hover:opacity-100 group-focus-within:max-w-[140px] group-focus-within:opacity-100 transition-all duration-200 ${
+                        isActive ? "text-castlepink" : "text-castlepurple hover:text-castlepink"
+                      }`}
+                    >
+                      {link.name}
+                    </span>
+                  </>
+                )}
               </NavLink>
             );
           })}
