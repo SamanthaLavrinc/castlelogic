@@ -5,6 +5,7 @@ import puppeteer from "puppeteer";
 
 const PORT = 4173;
 const BASE_URL = `http://localhost:${PORT}`;
+const SITE_URL = "https://castlelogic.dev";
 const DIST_DIR = path.resolve("dist");
 const CASE_STUDIES_DIR = path.resolve("src/content/case-studies");
 
@@ -23,6 +24,17 @@ const routes = [
   "/contact",
   ...getCaseStudySlugs().map((slug) => `/projects/${slug}`),
 ];
+
+function writeSitemapAndRobots() {
+  const urls = routes
+    .map((route) => `  <url>\n    <loc>${SITE_URL}${route}</loc>\n  </url>`)
+    .join("\n");
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
+  writeFileSync(path.join(DIST_DIR, "sitemap.xml"), sitemap);
+
+  const robots = `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`;
+  writeFileSync(path.join(DIST_DIR, "robots.txt"), robots);
+}
 
 function waitForServer(url, timeoutMs = 15000) {
   const start = Date.now();
@@ -80,6 +92,8 @@ async function main() {
       mkdirSync(outDir, { recursive: true });
       writeFileSync(path.join(outDir, "index.html"), html);
     }
+
+    writeSitemapAndRobots();
 
     console.log(`Prerendered ${routes.length} routes.`);
   } finally {

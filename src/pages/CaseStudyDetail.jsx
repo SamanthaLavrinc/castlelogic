@@ -47,6 +47,7 @@ export default function CaseStudyDetail() {
           <img
             src={study.image}
             alt={study.title}
+            loading="lazy"
             className="w-full rounded-lg border border-castlepink mb-10"
           />
         )}

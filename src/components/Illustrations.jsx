@@ -1,16 +1,16 @@
 import { useState } from "react";
-import amyHurst from "../assets/design/amy_hurst.png";
-import bird from "../assets/design/bird.png";
-import deer from "../assets/design/deer.png";
-import ettalong from "../assets/design/ettalong.png";
-import gnome from "../assets/design/gnome.png";
-import greaseDucks from "../assets/design/greaseducks.png";
-import hairext from "../assets/design/hair_extensions.png";
-import invitation from "../assets/design/invitation.png";
-import kawaii from "../assets/design/kawaii.png";
-import tattersails from "../assets/design/tattersails.png";
-import teaching from "../assets/design/teaching_stuff.png";
-import header1 from "../assets/design/header_right.png";
+import amyHurst from "../assets/design/amy_hurst.webp";
+import bird from "../assets/design/bird.webp";
+import deer from "../assets/design/deer.webp";
+import ettalong from "../assets/design/ettalong.webp";
+import gnome from "../assets/design/gnome.webp";
+import greaseDucks from "../assets/design/greaseducks.webp";
+import hairext from "../assets/design/hair_extensions.webp";
+import invitation from "../assets/design/invitation.webp";
+import kawaii from "../assets/design/kawaii.webp";
+import tattersails from "../assets/design/tattersails.webp";
+import teaching from "../assets/design/teaching_stuff.webp";
+import header1 from "../assets/design/header_right.webp";
 
 export default function Illustrations() {
 
@@ -62,6 +62,7 @@ export default function Illustrations() {
                 <img
                     src={proj.img}
                     alt={proj.title}
+                    loading="lazy"
                     className="max-w-full max-h-full object-contain"
                 />
                 </div>
