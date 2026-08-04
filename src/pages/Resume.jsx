@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import Skills from "../components/Skills";
 import Timeline from "../components/Timeline";
+import SEO from "../components/SEO";
 import frontendPDF from "../assets/resume/Lavrinc-frontend.pdf";
 import backendPDF from "../assets/resume/Lavrinc-backend.pdf";
 
@@ -16,6 +17,11 @@ export default function Resume() {
 
   return (
     <main className="min-h-screen bg-black text-white px-4 sm:px-10 py-12 font-fredoka">
+      <SEO
+        title="Resume"
+        description="Samantha Lavrinc's resume: Pittsburgh-based Software Engineer with backend development experience and a design background dating back to 2006. Java, SQL, React, and TypeScript."
+        path="/resume"
+      />
 
       {/* --- Header Banner --- */}
       <section className="max-w-[1200px] mx-auto text-center mb-12">
@@ -54,12 +60,12 @@ export default function Resume() {
           <User size={28} /> SUMMARY
         </h2>
         <p className="text-castlepurple text-xl leading-relaxed">
-          Software Engineer with 3+ years of hands-on backend development experience and a long-standing background in design implementation 
-          and UI/UX work dating back to 2006. Adept in Java, SQL, and scalable CI/CD pipelines, with strong proficiency in React, TypeScript, 
-          and responsive, component-driven front-end development. Blends deep experience in visual communication, user-centered design, and 
-          modern web engineering to create interfaces that are both intuitive and technically robust. Backed by formal training in both 
-          software engineering and design, with a passion for delivering solutions that merge reliable backend architecture with refined, 
-          purposeful user experiences.
+          Pittsburgh-based Software Engineer with hands-on backend development experience and a
+          design background that goes back to 2006. I work in Java, SQL, and CI/CD pipelines,
+          and I'm equally comfortable in React, TypeScript, and component-driven front-end
+          development. I care about the same thing on both sides: interfaces that are intuitive
+          and backend systems that actually hold up. Formally trained in both software
+          engineering and design.
         </p>
       </section>
 

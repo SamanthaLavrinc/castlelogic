@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { caseStudies } from "../content/case-studies";
 import CaseStudyCard from "../components/CaseStudyCard";
+import SEO from "../components/SEO";
 
 export default function Projects() {
   const categories = ["All", ...new Set(caseStudies.map((s) => s.category))];
@@ -13,6 +14,11 @@ export default function Projects() {
 
   return (
     <main className="min-h-screen bg-black text-white px-4 sm:px-10 py-12 font-fredoka">
+      <SEO
+        title="Projects"
+        description="Full-stack builds, UI experiments, and design work from Castle Logic. Case studies spanning React, backend architecture, and illustration."
+        path="/projects"
+      />
 
       {/* Hero / Intro */}
       <section className="max-w-[1200px] mx-auto mb-16 text-center">
@@ -20,7 +26,7 @@ export default function Projects() {
           EXPLORING FULL-STACK, DESIGN, AND UX PROJECTS
         </h1>
         <p className="text-lg sm:text-xl text-castlepurple">
-          Here’s a growing collection of experiments, prototypes, and full-stack builds. Each project blends creativity, design, and solid engineering — with a touch of fun and personality.
+          Here’s a growing collection of experiments, prototypes, and full-stack builds. Each project blends creativity, design, and solid engineering, with a touch of fun and personality.
         </p>
       </section>
 

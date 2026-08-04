@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import SEO from "../components/SEO";
 import logo from "../assets/castlelogic.png";
 
 export default function Landing() {
@@ -10,6 +11,11 @@ export default function Landing() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-black">
+      <SEO
+        title="Software Engineering & Product Design"
+        description="Castle Logic is the portfolio of Samantha Lavrinc, a Pittsburgh-based full-stack software engineer and designer building clean, scalable, beautifully-designed web experiences."
+        path="/"
+      />
       {/* Entire box is clickable */}
       <div
         onClick={handleEnter}

@@ -5,12 +5,12 @@
     <link rel="icon" type="image/png" href="/icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta
-            name="description"
-            content="Castle Logic is the portfolio of Samantha Lavrinc, showcasing software engineering, product design, frontend development, UX/UI, and illustration."
-    />
-
-    <title>Castle Logic | Software Engineering & Product Design</title>
+    <!-- No static <title>/<meta description> here on purpose: react-helmet-async
+         (src/components/SEO.jsx) sets these per-route, but never removes tags it
+         didn't render itself. A static fallback here would sit alongside Helmet's
+         tag rather than get replaced by it — and since only the first <title> in
+         a document is spec-valid, a non-JS crawler reading the prerendered HTML
+         would see the generic fallback instead of the real per-route title. -->
 
     <link rel="preload" as="image" href="/assets/side-logo.png">
 
@@ -34,7 +34,6 @@
     }
     </script>
 
-    <!--
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -47,11 +46,34 @@
       "foundingDate": "2024",
       "address": {
         "@type": "PostalAddress",
+        "addressLocality": "Pittsburgh",
+        "addressRegion": "PA",
         "addressCountry": "US"
       }
     }
     </script>
-    -->
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Samantha Lavrinc",
+      "url": "https://castlelogic.dev",
+      "jobTitle": "Founder & Lead Software Engineer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Castle Logic LLC"
+      },
+      "email": "contact@castlelogic.dev",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Pittsburgh",
+        "addressRegion": "PA",
+        "addressCountry": "US"
+      },
+      "knowsAbout": ["React", "Java", "SQL", "TypeScript", "UX/UI Design", "NLP", "Full-Stack Development"]
+    }
+    </script>
 
   </head>
   <body>

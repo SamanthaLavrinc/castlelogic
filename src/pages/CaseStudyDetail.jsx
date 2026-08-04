@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { getCaseStudy } from "../content/case-studies";
+import SEO from "../components/SEO";
 
 export default function CaseStudyDetail() {
   const { slug } = useParams();
@@ -8,6 +9,11 @@ export default function CaseStudyDetail() {
   if (!study) {
     return (
       <main className="min-h-screen bg-black text-white px-4 sm:px-10 py-16 font-fredoka text-center">
+        <SEO
+          title="Case Study Not Found"
+          description="That project doesn't exist on Castle Logic (yet)."
+          path={`/projects/${slug}`}
+        />
         <h1 className="text-3xl font-bold text-castlepink mb-4">Case study not found</h1>
         <p className="text-castlepurple mb-8">That project doesn't exist (yet).</p>
         <Link
@@ -22,6 +28,12 @@ export default function CaseStudyDetail() {
 
   return (
     <main className="min-h-screen bg-black text-white px-4 sm:px-10 py-16 font-fredoka">
+      <SEO
+        title={study.title}
+        description={study.summary}
+        path={`/projects/${study.slug}`}
+        image={study.image ? `https://castlelogic.dev${study.image}` : undefined}
+      />
       <div className="max-w-[800px] mx-auto">
         <Link to="/projects" className="text-castlepurple hover:text-castlepink transition-colors">
           ← Back to Projects

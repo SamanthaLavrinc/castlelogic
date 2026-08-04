@@ -3,7 +3,7 @@
   "title": "Project Title",
   "category": "Full-Stack",
   "order": 5,
-  "summary": "One or two sentences — this is what shows on the project card.",
+  "summary": "One or two sentences. This is what shows on the project card.",
   "role": "Your role on this project (e.g. Solo full-stack engineer)",
   "stack": ["React", "Node", "PostgreSQL"],
   "problem": "What was the challenge or need going in?",

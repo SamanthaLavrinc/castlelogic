@@ -1,4 +1,5 @@
 import { useForm, ValidationError } from "@formspree/react";
+import SEO from "../components/SEO";
 
 export default function Contact() {
   const [state, handleSubmit] = useForm("xaewweej", {
@@ -7,6 +8,11 @@ export default function Contact() {
 
   return (
     <main className="bg-black text-white px-4 sm:px-10 py-16 font-fredoka flex justify-center">
+      <SEO
+        title="Contact"
+        description="Have a project in mind? Get in touch with Samantha Lavrinc at Castle Logic."
+        path="/contact"
+      />
       <div
         className="
           w-full max-w-[700px]

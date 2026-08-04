@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom";
 import Illustrations from "../components/Illustrations";
+import SEO from "../components/SEO";
 
 export default function About() {
   return (
     <main className="min-h-screen bg-black text-white px-4 sm:px-10 py-12 font-fredoka">
+      <SEO
+        title="About"
+        description="Meet Samantha Lavrinc, a Pittsburgh-based full-stack developer and designer blending clean code, product engineering, and illustrative design at Castle Logic."
+        path="/about"
+      />
 
       {/* TITLE SECTION */}
       <section className="max-w-[1200px] mx-auto mb-12 text-center">
@@ -11,10 +17,10 @@ export default function About() {
           WHERE DESIGN MEETS DEV MAGIC
         </h1>
         <p className="text-lg sm:text-xl text-castlepurple max-w-[1200px] mx-auto">
-          I'm Sam — a full-stack developer and designer who believes great digital experiences 
-          happen when aesthetics, architecture, and usability all work together. 
-          Castle Logic is the place where my love for clean code, problem-solving, 
-          and vibrant illustrative design all collide.
+          I'm Sam, a Pittsburgh-based full-stack developer and designer. I believe the best
+          digital experiences happen when good design and solid engineering get treated as
+          the same problem, not two separate ones. Castle Logic is where that comes together:
+          clean code, real problem-solving, and design work I actually care about.
         </p>
       </section>
 
@@ -27,25 +33,53 @@ export default function About() {
         <div className="text-castlepurple text-lg sm:text-xl space-y-6 leading-relaxed">
 
           <p>
-            I started in the world of <span className="text-castlepink">graphic design and illustration</span> — 
-            color palettes, shapes, storytelling, the whole deal. Over time I became 
-            fascinated by how design interacts with the web, which led me 
-            straight into frontend development… and then, inevitably, backend 
-            architecture and full-stack systems.
+            I started in <span className="text-castlepink">graphic design and illustration</span>:
+            color palettes, shapes, storytelling, all of it. Over time I got curious about how
+            design actually works on the web, which pulled me into frontend development, and
+            then backend architecture, and eventually full-stack systems, because I wanted to
+            understand the whole thing, not just the part people see.
           </p>
 
           <p>
-            I’ve since spent my career in product teams and healthcare tech orgs, pairing visual storytelling with 
-            deep technical engineering. Whether building front-end experiences or architecting NLP and ETL logic 
-            that turns chaotic clinical text into clean, structured JSON, I’ve learned how to bridge the “looks good” 
-            side of software with the “runs flawlessly” side that users never see — but always feel.
+            Since then I've worked on product teams and in healthcare tech, pairing visual
+            storytelling with real technical engineering. Whether I'm building a front end or
+            architecting NLP and ETL logic that turns messy clinical text into clean, structured
+            data, the job is the same: bridge the side that looks good with the side that
+            actually works, the part users never see but always feel.
           </p>
 
           <p>
-            Today, Castle Logic pulls together everything I love: 
-            <span className="text-castlepink"> React, Tailwind/CSS, Java, JavaScript, SQL, and designing data pipelines that 
-              turn chaos into structure</span>, 
-            along with illustration, design, and creating things that genuinely help people.
+            Today, Castle Logic is everything I care about in one place:
+            <span className="text-castlepink"> React, Java, SQL, and data pipelines that turn
+              chaos into structure</span>,
+            plus illustration and design and the plain goal of building things that actually
+            help people.
+          </p>
+        </div>
+      </section>
+
+      {/* HOW I WORK */}
+      <section className="max-w-[1200px] mx-auto mb-12 space-y-6">
+        <h2 className="text-3xl sm:text-2xl font-bold text-castlepink text-center tracking-wider">
+          HOW I WORK
+        </h2>
+
+        <div className="text-castlepurple text-lg sm:text-xl space-y-6 leading-relaxed">
+          <p>
+            I use AI to direct and orchestrate development work the same way a lead engineer
+            directs a team. I set the architecture, hand off focused implementation, and review
+            everything before it ships. It's the same structured, detail-driven habit I already
+            built doing NLP and clinical data pipelines, just applied to how I run multiple
+            projects at once now.
+          </p>
+
+          <p>
+            What AI still can't do is notice the one small thing that actually matters: the edge
+            case a client didn't think to mention, the detail that changes how a feature should
+            really work. That's the part that's on me. Years spent building tools for
+            healthcare, and more recently a therapy insight platform, taught me how to listen
+            for what people actually need underneath what they say they want, and turn that into
+            something that runs reliably and feels right to use.
           </p>
         </div>
       </section>
@@ -67,7 +101,7 @@ export default function About() {
           </div>
           <div className="p-6 border border-castlepink rounded-2xl bg-gray-900 hover:scale-[1.02] transition-transform">
             <h3 className="text-castlepink text-xl mb-2 tracking-wider">Design & Illustration</h3>
-            <p>Branding, vector illustration, layouts, print & packaging, and creating visuals that don’t just decorate — they communicate.</p>
+            <p>Branding, vector illustration, layouts, print & packaging, and creating visuals that don’t just decorate, they communicate.</p>
           </div>
           <div className="p-6 border border-castlepink rounded-2xl bg-gray-900 hover:scale-[1.02] transition-transform">
             <h3 className="text-castlepink text-xl mb-2 tracking-wider">Bridging Both Worlds</h3>
@@ -82,7 +116,7 @@ export default function About() {
           ILLUSTRATION & DESIGN HIGHLIGHTS
         </h2>
         <p className="text-castlepurple text-lg sm:text-xl">
-          A small showcase of past work — because creativity is part of the process, not just decoration.
+          A small showcase of past work, because creativity is part of the process, not just decoration.
         </p>
       </section>
 

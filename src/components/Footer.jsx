@@ -8,7 +8,7 @@ export default function Footer() {
         </p>
 
         <p className="text-castlepurple/70">
-          Design & Development Studio - United States
+          Design & Development Studio - Pittsburgh, PA
         </p>
 
         <a
