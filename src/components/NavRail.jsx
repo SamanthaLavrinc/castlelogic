@@ -22,7 +22,7 @@ export default function NavRail() {
         aria-label="Primary"
       >
         <Link to="/home" className="flex items-center gap-3 w-full py-2 mb-4 shrink-0">
-          <img src={castleIcon} alt="" className="h-14 w-14 shrink-0 object-contain" />
+          <img src={castleIcon} alt="" className="h-12 w-12 shrink-0 object-contain" />
           <span className="whitespace-nowrap overflow-hidden max-w-0 opacity-0 group-hover:max-w-[140px] group-hover:opacity-100 group-focus-within:max-w-[140px] group-focus-within:opacity-100 transition-all duration-200 font-fredoka font-bold text-castlepink tracking-wide">
             CASTLE LOGIC
           </span>
