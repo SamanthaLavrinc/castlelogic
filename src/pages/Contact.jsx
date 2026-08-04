@@ -1,41 +1,20 @@
-import { useState } from "react";
+import { useForm, ValidationError } from "@formspree/react";
 
 export default function Contact() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    message: "",
+  const [state, handleSubmit] = useForm("xaewweej", {
+    data: { _subject: "[Castle Logic Contact] New website message" },
   });
-
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // TEMPORARY -- replace this with EmailJS / Formspree
-    console.log("Form submitted:", form);
-
-    alert("Your message has been sent!");
-
-    // Clear form
-    setForm({ name: "", email: "", message: "" });
-  };
 
   return (
     <main className="bg-black text-white px-4 sm:px-10 py-16 font-fredoka flex justify-center">
       <div
         className="
-          w-full max-w-[700px] 
-          bg-gray-900 p-10 rounded-2xl 
+          w-full max-w-[700px]
+          bg-gray-900 p-10 rounded-2xl
           border border-castlepink shadow-xl
 
           /* FIX: boxed container height behavior */
-          max-h-[900px] 
+          max-h-[900px]
           overflow-auto
         "
       >
@@ -44,60 +23,83 @@ export default function Contact() {
           CONTACT ME
         </h1>
 
-        <p className="text-center text-castlepurple mb-10 text-lg">
-          Have a project in mind or just want to say hello?
-          Send me a message below!
-        </p>
+        {state.succeeded ? (
+          <p className="text-center text-castlepink text-lg font-semibold py-10">
+            Thanks — your message is on its way. I'll get back to you soon!
+          </p>
+        ) : (
+          <>
+            <p className="text-center text-castlepurple mb-10 text-lg">
+              Have a project in mind or just want to say hello?
+              Send me a message below!
+            </p>
 
-        {/* Contact Form */}
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-          {/* Name */}
-          <div>
-            <label className="block mb-1 text-castlepink font-semibold">Name</label>
-            <input
-              type="text"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              className="w-full px-4 py-3 rounded-lg bg-black border border-castlepink text-white focus:outline-none focus:ring-2 focus:ring-castlepink"
-              required
-            />
-          </div>
+            {/* Contact Form */}
+            <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+              {/* Name */}
+              <div>
+                <label className="block mb-1 text-castlepink font-semibold">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  className="w-full px-4 py-3 rounded-lg bg-black border border-castlepink text-white focus:outline-none focus:ring-2 focus:ring-castlepink"
+                  required
+                />
+                <ValidationError
+                  prefix="Name"
+                  field="name"
+                  errors={state.errors}
+                  className="text-red-400 text-sm mt-1"
+                />
+              </div>
 
-          {/* Email */}
-          <div>
-            <label className="block mb-1 text-castlepink font-semibold">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              className="w-full px-4 py-3 rounded-lg bg-black border border-castlepink text-white focus:outline-none focus:ring-2 focus:ring-castlepink"
-              required
-            />
-          </div>
+              {/* Email */}
+              <div>
+                <label className="block mb-1 text-castlepink font-semibold">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  className="w-full px-4 py-3 rounded-lg bg-black border border-castlepink text-white focus:outline-none focus:ring-2 focus:ring-castlepink"
+                  required
+                />
+                <ValidationError
+                  prefix="Email"
+                  field="email"
+                  errors={state.errors}
+                  className="text-red-400 text-sm mt-1"
+                />
+              </div>
 
-          {/* Message */}
-          <div>
-            <label className="block mb-1 text-castlepink font-semibold">Message</label>
-            <textarea
-              name="message"
-              value={form.message}
-              onChange={handleChange}
-              rows="6"
-              className="w-full px-4 py-3 rounded-lg bg-black border border-castlepink text-white resize-none focus:outline-none focus:ring-2 focus:ring-castlepink"
-              required
-            ></textarea>
-          </div>
+              {/* Message */}
+              <div>
+                <label className="block mb-1 text-castlepink font-semibold">Message</label>
+                <textarea
+                  name="message"
+                  rows="6"
+                  className="w-full px-4 py-3 rounded-lg bg-black border border-castlepink text-white resize-none focus:outline-none focus:ring-2 focus:ring-castlepink"
+                  required
+                ></textarea>
+                <ValidationError
+                  prefix="Message"
+                  field="message"
+                  errors={state.errors}
+                  className="text-red-400 text-sm mt-1"
+                />
+              </div>
 
-          {/* Button */}
-          <button
-            type="submit"
-            className="mt-4 px-6 py-3 rounded-lg border border-castlepink text-castlepink hover:bg-gray-800 hover:text-castlepurple transition-all hover-glow-small text-lg font-semibold"
-          >
-            Send Message
-          </button>
-        </form>
+              {/* Button */}
+              <button
+                type="submit"
+                disabled={state.submitting}
+                className="mt-4 px-6 py-3 rounded-lg border border-castlepink text-castlepink hover:bg-gray-800 hover:text-castlepurple transition-all hover-glow-small text-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {state.submitting ? "Sending..." : "Send Message"}
+              </button>
+
+              <ValidationError errors={state.errors} className="text-red-400 text-sm text-center" />
+            </form>
+          </>
+        )}
       </div>
     </main>
   );
