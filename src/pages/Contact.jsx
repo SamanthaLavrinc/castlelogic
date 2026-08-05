@@ -19,7 +19,7 @@ export default function Contact() {
         <h2 className="text-2xl sm:text-3xl font-bold text-castlepink mb-4 tracking-wider">
           LET'S BUILD SOMETHING TOGETHER
         </h2>
-        <p className="text-castlepink text-lg">
+        <p className="text-castlepurple text-lg">
           I'm open to full-time roles and contract work alike. If you're hiring, I'd love to
           hear about the role. If you've got a project in mind, here's roughly how it goes: we
           talk through what you actually need, I put together a scoped plan, and we build it
