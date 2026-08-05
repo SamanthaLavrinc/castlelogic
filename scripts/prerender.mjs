@@ -2,6 +2,7 @@ import { spawn } from "node:child_process";
 import { readdirSync, readFileSync, mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import puppeteer from "puppeteer";
+import chromium from "@sparticuz/chromium";
 
 const PORT = 4173;
 const BASE_URL = `http://localhost:${PORT}`;
@@ -65,7 +66,19 @@ async function main() {
     await waitForServer(BASE_URL);
 
     console.log("Launching headless browser...");
-    const browser = await puppeteer.launch();
+    // Vercel's build container is missing the shared libraries regular Chrome
+    // needs (libnspr4.so etc.) — @sparticuz/chromium bundles a build compiled
+    // to run without them. Local machines have those libraries, so keep using
+    // Puppeteer's own downloaded Chrome there instead, to keep local testing working.
+    const browser = await puppeteer.launch(
+      process.env.VERCEL
+        ? {
+            args: chromium.args,
+            executablePath: await chromium.executablePath(),
+            headless: true,
+          }
+        : { headless: true }
+    );
     const page = await browser.newPage();
 
     // Render every route first and hold the HTML in memory. The dev/preview
