@@ -2,11 +2,6 @@
 @import "tailwindcss/preflight";
 @tailwind utilities;
 
-@theme {
-  --font-fredoka: "Fredoka", sans-serif;
-  --font-nunito: "Nunito", sans-serif;
-}
-
 :root {
   --castlepink: #FF46A2;
   --castlepurple: #cb90ff;

@@ -7,7 +7,6 @@ import CaseStudyDetail from "../pages/CaseStudyDetail";
 import About from "../pages/About";
 import Resume from "../pages/Resume";
 import Contact from "../pages/Contact";
-import NotFound from "../pages/NotFound";
 
 export default function AppRoutes() {
   return (
@@ -21,7 +20,6 @@ export default function AppRoutes() {
         <Route path="/about" element={<About />} />
         <Route path="/resume" element={<Resume />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="*" element={<NotFound />} />
       </Route>
 
     </Routes>
