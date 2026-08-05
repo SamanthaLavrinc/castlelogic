@@ -7,12 +7,26 @@ export default function Contact() {
   });
 
   return (
-    <main className="bg-black text-white px-4 sm:px-10 py-16 font-fredoka flex justify-center">
+    <main className="bg-black text-white px-4 sm:px-10 py-16 font-fredoka flex flex-col items-center">
       <SEO
         title="Contact"
         description="Have a project in mind? Get in touch with Samantha Lavrinc at Castle Logic."
         path="/contact"
       />
+
+      {/* Intro / pitch */}
+      <div className="w-full max-w-[700px] text-center mb-10">
+        <h2 className="text-2xl sm:text-3xl font-bold text-castlepink mb-4 tracking-wider">
+          LET'S BUILD SOMETHING TOGETHER
+        </h2>
+        <p className="text-castlepink text-lg">
+          I'm open to full-time roles and contract work alike. If you're hiring, I'd love to
+          hear about the role. If you've got a project in mind, here's roughly how it goes: we
+          talk through what you actually need, I put together a scoped plan, and we build it
+          iteratively, so you're never waiting for one big reveal at the end.
+        </p>
+      </div>
+
       <div
         className="
           w-full max-w-[700px]
@@ -35,15 +49,10 @@ export default function Contact() {
           </p>
         ) : (
           <>
-            <div className="text-center text-castlepurple mb-10 text-lg space-y-4">
-              <p>
-                I'm open to full-time roles and contract work alike. If you're hiring, I'd love
-                to hear about the role. If you've got a project in mind, here's roughly how it
-                goes: we talk through what you actually need, I put together a scoped plan, and
-                we build it iteratively, so you're never waiting for one big reveal at the end.
-              </p>
-              <p>Tell me a bit about what you're looking for below, and I'll get back to you.</p>
-            </div>
+            <p className="text-center text-castlepurple mb-10 text-lg">
+              Have a project in mind or just want to say hello?
+              Send me a message below!
+            </p>
 
             {/* Contact Form */}
             <form onSubmit={handleSubmit} className="flex flex-col gap-6">
