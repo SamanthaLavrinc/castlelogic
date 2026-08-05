@@ -58,7 +58,7 @@ function waitForServer(url, timeoutMs = 15000) {
 async function main() {
   console.log("Starting preview server...");
   const server = spawn("npx", ["vite", "preview", "--port", String(PORT), "--strictPort"], {
-    stdio: "pipe",
+    stdio: "inherit",
   });
 
   try {
