@@ -15,8 +15,9 @@ export default function About() {
 
       {/* TITLE SECTION */}
       <section className="max-w-[1250px] mx-auto mb-24">
-        <div className="flex flex-col sm:flex-row items-start gap-8 sm:gap-6">
-          {/* Photo, with a soft ambient glow tying it to the accent color */}
+        <div className="flex flex-col sm:flex-row sm:items-stretch gap-8 sm:gap-6 max-w-[820px] mx-auto">
+          {/* Photo stretches to match the text column's height, so it always spans
+              from the headline down to the buttons regardless of copy length. */}
           <div className="relative shrink-0 w-56 sm:w-60 lg:w-64 mx-auto sm:mx-0">
             <div
               className="absolute -inset-6 bg-castlepink/15 rounded-[2rem] blur-2xl -z-10"
@@ -25,7 +26,7 @@ export default function About() {
             <img
               src={pfp}
               alt="Samantha Lavrinc"
-              className="w-full h-auto rounded-2xl border-2 border-castlepink/70 shadow-[0_0_30px_-5px_rgba(255,70,162,0.35)]"
+              className="w-full h-full object-cover object-top rounded-2xl border-2 border-castlepink/70 shadow-[0_0_30px_-5px_rgba(255,70,162,0.35)]"
             />
           </div>
 
