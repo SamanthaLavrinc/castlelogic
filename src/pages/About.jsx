@@ -15,7 +15,7 @@ export default function About() {
 
       {/* TITLE SECTION */}
       <section className="max-w-[1250px] mx-auto mb-24">
-        <div className="flex flex-col sm:flex-row sm:items-stretch gap-8 sm:gap-6 max-w-[820px] mx-auto">
+        <div className="flex flex-col sm:flex-row sm:items-stretch gap-8 sm:gap-6 max-w-[1000px] mx-auto">
           {/* Photo stretches to match the text column's height, so it always spans
               from the headline down to the buttons regardless of copy length. */}
           <div className="relative shrink-0 w-56 sm:w-60 lg:w-64 mx-auto sm:mx-0">
@@ -26,16 +26,14 @@ export default function About() {
             <img
               src={pfp}
               alt="Samantha Lavrinc"
-              className="w-full h-full object-cover object-top rounded-2xl border-2 border-castlepink/70 shadow-[0_0_30px_-5px_rgba(255,70,162,0.35)]"
+              className="w-full h-full object-cover object-top -scale-x-100 rounded-2xl border-2 border-castlepink/70 shadow-[0_0_30px_-5px_rgba(255,70,162,0.35)]"
             />
           </div>
 
           {/* Text column: top offset roughly lines the headline up with eye level in the photo */}
           <div className="flex-1 text-center sm:text-left sm:pt-24 lg:pt-32">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-castlepink tracking-wide leading-tight mb-2">
-              WHERE DESIGN
-              <br />
-              MEETS DEV MAGIC
+              WHERE DESIGN MEETS DEV MAGIC
             </h1>
 
             <p className="text-xl sm:text-2xl font-semibold text-castlepurple tracking-wide mb-6">
