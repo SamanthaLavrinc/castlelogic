@@ -58,6 +58,14 @@
   box-sizing: border-box;
 }
 
+/* Always reserve space for the vertical scrollbar, even on pages short enough
+   not to need one — otherwise the page width (and anything centered in it,
+   like the header) shifts by the scrollbar's width when navigating between a
+   tall page and a short one. */
+html {
+  scrollbar-gutter: stable;
+}
+
 /* Global body style */
 body {
   font-family: Arial, sans-serif;
