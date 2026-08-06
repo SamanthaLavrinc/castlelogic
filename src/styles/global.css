@@ -63,7 +63,7 @@
    like the header) shifts by the scrollbar's width when navigating between a
    tall page and a short one. */
 html {
-  scrollbar-gutter: stable both-edges;
+  scrollbar-gutter: stable;
 }
 
 /* Global body style */
