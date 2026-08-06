@@ -14,22 +14,23 @@ export default function About() {
 
       {/* TITLE SECTION */}
       <section className="max-w-[1200px] mx-auto mb-12">
-        <h1 className="text-4xl sm:text-3xl font-bold text-castlepink mb-8 tracking-wide text-center">
-          WHERE DESIGN MEETS DEV MAGIC
-        </h1>
-
         <div className="flex flex-col sm:flex-row items-center gap-8 sm:gap-10 max-w-[900px] mx-auto">
           <img
             src={pfp}
             alt="Samantha Lavrinc"
             className="w-56 sm:w-64 lg:w-72 h-auto rounded-2xl border-4 border-castlepink shrink-0 mx-auto sm:mx-0"
           />
-          <p className="text-lg sm:text-xl text-castlepurple text-center sm:text-left">
-            I'm Sam, a Pittsburgh-based full-stack developer and designer. I believe the best
-            digital experiences happen when good design and solid engineering get treated as
-            the same problem, not two separate ones. Castle Logic is where that comes together:
-            clean code, real problem-solving, and design work I actually care about.
-          </p>
+          <div className="text-center sm:text-left">
+            <h1 className="text-4xl sm:text-3xl font-bold text-castlepink mb-4 tracking-wide">
+              WHERE DESIGN MEETS DEV MAGIC
+            </h1>
+            <p className="text-lg sm:text-xl text-castlepurple">
+              I'm Sam, a Pittsburgh-based full-stack developer and designer. I believe the best
+              digital experiences happen when good design and solid engineering get treated as
+              the same problem, not two separate ones. Castle Logic is where that comes together:
+              clean code, real problem-solving, and design work I actually care about.
+            </p>
+          </div>
         </div>
       </section>
 
