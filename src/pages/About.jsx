@@ -14,7 +14,7 @@ export default function About() {
       />
 
       {/* TITLE SECTION */}
-      <section className="max-w-[1250px] mx-auto mb-24">
+      <section className="max-w-[1200px] mx-auto mb-24">
         <div className="flex flex-col sm:flex-row sm:items-stretch gap-8 sm:gap-6 max-w-[1000px] mx-auto">
           {/* Photo stretches to match the text column's height, so it always spans
               from the headline down to the buttons regardless of copy length. */}
