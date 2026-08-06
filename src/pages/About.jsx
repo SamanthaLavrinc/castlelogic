@@ -30,8 +30,8 @@ export default function About() {
             />
           </div>
 
-          {/* Text column: top offset roughly lines the headline up with eye level in the photo */}
-          <div className="flex-1 text-center sm:text-left sm:pt-24 lg:pt-32">
+          {/* Text column: centered vertically within the photo's height */}
+          <div className="flex-1 text-center sm:text-left sm:flex sm:flex-col sm:justify-center">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-castlepink tracking-wide leading-tight mb-2">
               WHERE DESIGN MEETS DEV MAGIC
             </h1>
