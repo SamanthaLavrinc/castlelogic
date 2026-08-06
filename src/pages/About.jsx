@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Illustrations from "../components/Illustrations";
 import SEO from "../components/SEO";
-import pfp from "../assets/pfp/pfp.webp";
+import pfp from "../assets/pfp/pfp-cropped.webp";
 
 export default function About() {
   return (
@@ -18,11 +18,11 @@ export default function About() {
           WHERE DESIGN MEETS DEV MAGIC
         </h1>
 
-        <div className="flex flex-col sm:flex-row items-center gap-8 sm:gap-10 max-w-[900px] mx-auto">
+        <div className="flex flex-col sm:flex-row items-start gap-8 sm:gap-10 max-w-[900px] mx-auto">
           <img
             src={pfp}
             alt="Samantha Lavrinc"
-            className="w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 rounded-full border-4 border-castlepink object-cover object-[50%_15%] shrink-0"
+            className="w-56 sm:w-64 lg:w-72 h-auto rounded-2xl border-4 border-castlepink shrink-0 mx-auto sm:mx-0"
           />
           <p className="text-lg sm:text-xl text-castlepurple text-center sm:text-left">
             I'm Sam, a Pittsburgh-based full-stack developer and designer. I believe the best
