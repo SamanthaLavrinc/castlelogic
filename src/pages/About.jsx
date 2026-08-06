@@ -1,10 +1,7 @@
 import { Link } from "react-router-dom";
-import { Linkedin, Github } from "lucide-react";
 import Illustrations from "../components/Illustrations";
 import SEO from "../components/SEO";
 import pfp from "../assets/pfp/pfp-cropped.webp";
-
-const FOCUS_AREAS = ["Full-Stack Engineering", "Clinical NLP", "Product Design", "Pittsburgh, PA"];
 
 export default function About() {
   return (
@@ -21,54 +18,18 @@ export default function About() {
           WHERE DESIGN MEETS DEV MAGIC
         </h1>
 
-        <div className="max-w-[900px] mx-auto border border-castlepink rounded-2xl bg-gray-900 p-6 sm:p-8">
-          <div className="flex flex-col sm:flex-row items-start gap-8 sm:gap-10">
-            <img
-              src={pfp}
-              alt="Samantha Lavrinc"
-              className="w-56 sm:w-64 lg:w-72 h-auto rounded-2xl border-4 border-castlepink shrink-0 mx-auto sm:mx-0"
-            />
-            <div className="flex-1 flex flex-col gap-6 w-full">
-              <p className="text-lg sm:text-xl text-castlepurple text-center sm:text-left">
-                I'm Sam, a Pittsburgh-based full-stack developer and designer. I believe the best
-                digital experiences happen when good design and solid engineering get treated as
-                the same problem, not two separate ones. Castle Logic is where that comes together:
-                clean code, real problem-solving, and design work I actually care about.
-              </p>
-
-              <div className="flex flex-wrap justify-center sm:justify-start gap-2">
-                {FOCUS_AREAS.map((area) => (
-                  <span
-                    key={area}
-                    className="px-3 py-1 text-sm rounded-full border border-castlepink/40 text-castlepurple"
-                  >
-                    {area}
-                  </span>
-                ))}
-              </div>
-
-              <div className="flex justify-center sm:justify-start gap-4">
-                <a
-                  href="https://www.linkedin.com/in/slavrinc/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl border border-castlepink hover-glow-small text-castlepink hover:bg-gray-800 hover:text-castlepurple transition-all"
-                >
-                  <Linkedin size={18} />
-                  LinkedIn
-                </a>
-                <a
-                  href="https://github.com/SamanthaLavrinc"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl border border-castlepink hover-glow-small text-castlepink hover:bg-gray-800 hover:text-castlepurple transition-all"
-                >
-                  <Github size={18} />
-                  GitHub
-                </a>
-              </div>
-            </div>
-          </div>
+        <div className="flex flex-col sm:flex-row items-center gap-8 sm:gap-10 max-w-[900px] mx-auto">
+          <img
+            src={pfp}
+            alt="Samantha Lavrinc"
+            className="w-56 sm:w-64 lg:w-72 h-auto rounded-2xl border-4 border-castlepink shrink-0 mx-auto sm:mx-0"
+          />
+          <p className="text-lg sm:text-xl text-castlepurple text-center sm:text-left">
+            I'm Sam, a Pittsburgh-based full-stack developer and designer. I believe the best
+            digital experiences happen when good design and solid engineering get treated as
+            the same problem, not two separate ones. Castle Logic is where that comes together:
+            clean code, real problem-solving, and design work I actually care about.
+          </p>
         </div>
       </section>
 
