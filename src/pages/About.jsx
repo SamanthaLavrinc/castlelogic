@@ -30,10 +30,13 @@ export default function About() {
               the same problem, not two separate ones.
             </p>
             <p className="text-lg sm:text-xl text-castlepurple">
-              Castle Logic is where that comes together: <em>clean code</em>,{" "}
-              <span className="underline">real problem-solving</span>, and{" "}
-              <strong className="font-semibold">design work I actually care about</strong>.
+              Castle Logic is where that comes together:
             </p>
+            <div className="text-lg sm:text-xl text-castlepink text-center mt-2 space-y-1">
+              <p>clean code,</p>
+              <p>real problem-solving, and</p>
+              <p>design work I actually care about.</p>
+            </div>
           </div>
         </div>
       </section>
