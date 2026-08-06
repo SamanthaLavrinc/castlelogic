@@ -24,11 +24,15 @@ export default function About() {
             <h1 className="text-4xl sm:text-3xl font-bold text-castlepink mb-4 tracking-wide">
               WHERE DESIGN MEETS DEV MAGIC
             </h1>
-            <p className="text-lg sm:text-xl text-castlepurple">
+            <p className="text-lg sm:text-xl text-castlepurple mb-4">
               I'm Sam, a Pittsburgh-based full-stack developer and designer. I believe the best
               digital experiences happen when good design and solid engineering get treated as
-              the same problem, not two separate ones. Castle Logic is where that comes together:
-              clean code, real problem-solving, and design work I actually care about.
+              the same problem, not two separate ones.
+            </p>
+            <p className="text-lg sm:text-xl text-castlepurple">
+              Castle Logic is where that comes together: <em>clean code</em>,{" "}
+              <span className="underline">real problem-solving</span>, and{" "}
+              <strong className="font-semibold">design work I actually care about</strong>.
             </p>
           </div>
         </div>
