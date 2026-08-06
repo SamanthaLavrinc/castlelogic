@@ -76,17 +76,17 @@ export default function Timeline() {
             onClick={() => toggle(index)}
           >
             {/* Top row: collapse icon, title, and date */}
-            <div className="flex justify-between items-center mb-1">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 mb-1">
               <div className="flex items-center gap-2">
                 {/* Chevron */}
                 {openIndexes.includes(index) ? (
-                  <ChevronDown className="text-castlepink transition-all" size={24} />
+                  <ChevronDown className="text-castlepink transition-all shrink-0" size={24} />
                 ) : (
-                  <ChevronRight className="text-castlepink transition-all" size={24} />
+                  <ChevronRight className="text-castlepink transition-all shrink-0" size={24} />
                 )}
                 <h3 className="text-xl font-semibold text-white">{job.title}</h3>
               </div>
-              <p className="text-lg font-semibold text-white">{job.date}</p>
+              <p className="text-lg font-semibold text-white sm:shrink-0">{job.date}</p>
             </div>
 
             {/* Company */}

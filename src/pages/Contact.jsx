@@ -30,7 +30,7 @@ export default function Contact() {
       <div
         className="
           w-full max-w-[700px]
-          bg-gray-900 p-10 rounded-2xl
+          bg-gray-900 p-6 sm:p-10 rounded-2xl
           border border-castlepink shadow-xl
 
           /* FIX: boxed container height behavior */
