@@ -6,7 +6,7 @@ import pfp from "../assets/pfp/pfp-cropped.webp";
 
 export default function About() {
   return (
-    <main className="min-h-screen bg-black text-white px-4 sm:px-10 py-12 font-fredoka">
+    <main className="min-h-screen bg-black text-white px-4 sm:px-10 pt-7 pb-12 font-fredoka">
       <SEO
         title="About"
         description="Meet Samantha Lavrinc, a Pittsburgh-based full-stack developer and designer blending clean code, product engineering, and illustrative design at Castle Logic."
@@ -14,8 +14,8 @@ export default function About() {
       />
 
       {/* TITLE SECTION */}
-      <section className="max-w-[1100px] mx-auto mb-24">
-        <div className="flex flex-col sm:flex-row items-start gap-8 sm:gap-12">
+      <section className="max-w-[1250px] mx-auto mb-24">
+        <div className="flex flex-col sm:flex-row items-start gap-8 sm:gap-6">
           {/* Photo, with a soft ambient glow tying it to the accent color */}
           <div className="relative shrink-0 w-56 sm:w-60 lg:w-64 mx-auto sm:mx-0">
             <div
@@ -30,8 +30,8 @@ export default function About() {
           </div>
 
           {/* Text column: top offset roughly lines the headline up with eye level in the photo */}
-          <div className="flex-1 text-center sm:text-left sm:pt-32 lg:pt-40">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-castlepink tracking-wide leading-tight mb-3">
+          <div className="flex-1 text-center sm:text-left sm:pt-24 lg:pt-32">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-castlepink tracking-wide leading-tight mb-2">
               WHERE DESIGN
               <br />
               MEETS DEV MAGIC
@@ -47,7 +47,7 @@ export default function About() {
               in translation.
             </p>
 
-            <div className="flex flex-wrap justify-center sm:justify-start gap-x-6 gap-y-2 mb-8">
+            <div className="flex flex-wrap justify-center sm:justify-start gap-x-6 gap-y-2 mb-6">
               <span className="flex items-center gap-2 text-castlepurple">
                 <Check size={16} className="text-castlepink shrink-0" />
                 Clean Architecture
