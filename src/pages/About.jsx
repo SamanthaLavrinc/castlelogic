@@ -18,7 +18,7 @@ export default function About() {
         <div className="flex flex-col sm:flex-row sm:items-stretch gap-8 sm:gap-6 max-w-[1000px] mx-auto">
           {/* Photo stretches to match the text column's height, so it always spans
               from the headline down to the buttons regardless of copy length. */}
-          <div className="relative shrink-0 w-56 sm:w-60 lg:w-64 mx-auto sm:mx-0">
+          <div className="relative shrink-0 w-56 sm:w-60 lg:w-64 mx-auto sm:mx-0 sm:self-start sm:h-[calc(100%-30px)]">
             <div
               className="absolute -inset-6 bg-castlepink/15 rounded-[2rem] blur-2xl -z-10"
               aria-hidden="true"
