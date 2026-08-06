@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Illustrations from "../components/Illustrations";
 import SEO from "../components/SEO";
+import pfp from "../assets/pfp/pfp.webp";
 
 export default function About() {
   return (
@@ -12,16 +13,24 @@ export default function About() {
       />
 
       {/* TITLE SECTION */}
-      <section className="max-w-[1200px] mx-auto mb-12 text-center">
-        <h1 className="text-4xl sm:text-3xl font-bold text-castlepink mb-4 tracking-wide">
+      <section className="max-w-[1200px] mx-auto mb-12">
+        <h1 className="text-4xl sm:text-3xl font-bold text-castlepink mb-8 tracking-wide text-center">
           WHERE DESIGN MEETS DEV MAGIC
         </h1>
-        <p className="text-lg sm:text-xl text-castlepurple max-w-[1200px] mx-auto">
-          I'm Sam, a Pittsburgh-based full-stack developer and designer. I believe the best
-          digital experiences happen when good design and solid engineering get treated as
-          the same problem, not two separate ones. Castle Logic is where that comes together:
-          clean code, real problem-solving, and design work I actually care about.
-        </p>
+
+        <div className="flex flex-col sm:flex-row items-center gap-8 sm:gap-10 max-w-[900px] mx-auto">
+          <img
+            src={pfp}
+            alt="Samantha Lavrinc"
+            className="w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 rounded-full border-4 border-castlepink object-cover object-[50%_15%] shrink-0"
+          />
+          <p className="text-lg sm:text-xl text-castlepurple text-center sm:text-left">
+            I'm Sam, a Pittsburgh-based full-stack developer and designer. I believe the best
+            digital experiences happen when good design and solid engineering get treated as
+            the same problem, not two separate ones. Castle Logic is where that comes together:
+            clean code, real problem-solving, and design work I actually care about.
+          </p>
+        </div>
       </section>
 
       {/* HISTORY / BACKGROUND SECTION */}
