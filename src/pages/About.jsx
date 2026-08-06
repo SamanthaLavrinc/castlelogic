@@ -14,7 +14,7 @@ export default function About() {
       />
 
       {/* TITLE SECTION */}
-      <section className="max-w-[1200px] mx-auto mb-24">
+      <section className="max-w-[1200px] mx-auto mb-16">
         <div className="flex flex-col sm:flex-row sm:items-stretch gap-8 sm:gap-6 max-w-[1000px] mx-auto">
           {/* Photo stretches to match the text column's height, so it always spans
               from the headline down to the buttons regardless of copy length. */}
@@ -31,22 +31,22 @@ export default function About() {
           </div>
 
           {/* Text column: centered vertically within the photo's height */}
-          <div className="flex-1 text-center sm:text-left sm:flex sm:flex-col sm:justify-center">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-castlepink tracking-wide leading-tight mb-2">
+          <div className="flex-1 text-center sm:text-left sm:flex sm:flex-col sm:justify-center space-y-5">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-castlepink tracking-wide leading-tight">
               WHERE DESIGN MEETS DEV MAGIC
             </h1>
 
-            <p className="text-xl sm:text-2xl font-semibold text-castlepurple tracking-wide mb-6">
+            <p className="text-xl sm:text-2xl font-semibold text-castlepurple tracking-wide">
               Full-Stack Engineer &amp; Designer
             </p>
 
-            <p className="text-lg text-castlepurple mb-6 max-w-[520px] mx-auto sm:mx-0">
+            <p className="text-lg text-castlepurple max-w-[520px] mx-auto sm:mx-0">
               I'm a Pittsburgh-based engineer who also designs, and a designer who also ships
               production code. Most people pick one side. I build on both, so nothing gets lost
               in translation.
             </p>
 
-            <div className="flex flex-wrap justify-center sm:justify-start gap-x-6 gap-y-2 mb-6">
+            <div className="flex flex-wrap justify-center sm:justify-start gap-x-6 gap-y-2">
               <span className="flex items-center gap-2 text-castlepurple">
                 <Check size={16} className="text-castlepink shrink-0" />
                 Clean Architecture
@@ -80,7 +80,7 @@ export default function About() {
       </section>
 
       {/* HISTORY / BACKGROUND SECTION */}
-      <section className="max-w-[1200px] mx-auto mb-12 space-y-8">
+      <section className="max-w-[1200px] mx-auto mb-16 space-y-8">
         <h2 className="text-3xl sm:text-2xl font-bold text-castlepink text-center tracking-wider">
           A LITTLE ABOUT MY JOURNEY
         </h2>
@@ -114,7 +114,7 @@ export default function About() {
       </section>
 
       {/* HOW I WORK */}
-      <section className="max-w-[1200px] mx-auto mb-12 space-y-6">
+      <section className="max-w-[1200px] mx-auto mb-16 space-y-6">
         <h2 className="text-3xl sm:text-2xl font-bold text-castlepink text-center tracking-wider">
           HOW I WORK
         </h2>
@@ -140,7 +140,7 @@ export default function About() {
       </section>
 
       {/* FULL STACK FOCUS */}
-      <section className="max-w-[1200px] mx-auto mb-12">
+      <section className="max-w-[1200px] mx-auto mb-16">
         <h2 className="text-3xl sm:text-2xl font-bold text-castlepink mb-6 text-center tracking-wider">
           WHAT I DO AS A FULL-STACK DEVELOPER
         </h2>
