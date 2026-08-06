@@ -15,7 +15,11 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="w-full bg-black border-b border-castlepink">
+    <header className="w-full bg-black relative">
+      <div
+        className="absolute bottom-0 left-0 w-full h-[1px] bg-[linear-gradient(to_right,transparent,var(--castlepink)_20%,var(--castlepink)_80%,transparent)]"
+        aria-hidden="true"
+      />
 
       {/* Desktop Header */}
       <div className="hidden lg:flex w-full max-w-[1200px] mx-auto px-4 py-4 justify-between items-center gap-4">
