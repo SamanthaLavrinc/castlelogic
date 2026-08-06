@@ -6,7 +6,7 @@ import pfp from "../assets/pfp/pfp-cropped.webp";
 
 export default function About() {
   return (
-    <main className="min-h-screen bg-black text-white px-4 sm:px-10 pt-10 pb-12 font-fredoka">
+    <main className="min-h-screen bg-black text-white px-4 sm:px-10 pt-16 pb-12 font-fredoka">
       <SEO
         title="About"
         description="Meet Samantha Lavrinc, a Pittsburgh-based full-stack developer and designer blending clean code, product engineering, and illustrative design at Castle Logic."
