@@ -40,7 +40,7 @@ export default function About() {
               Full-Stack Engineer &amp; Designer
             </p>
 
-            <p className="text-lg text-castlepurple max-w-[520px] mx-auto sm:mx-0">
+            <p className="text-lg text-castlepurple">
               I'm a Pittsburgh-based engineer who also designs, and a designer who also ships
               production code. Most people pick one side. I build on both, so nothing gets lost
               in translation.
