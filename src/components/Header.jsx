@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
 const pages = [
-  { name: "HOME", path: "/home" },
+  { name: "HOME", path: "/" },
   { name: "PROJECTS", path: "/projects" },
   { name: "RESUME", path: "/resume" },
   { name: "ABOUT", path: "/about" },
@@ -25,7 +25,7 @@ export default function Header() {
       <div className="hidden lg:flex w-full max-w-[1200px] mx-auto px-4 py-4 justify-between items-center gap-4">
 
         {/* Logo */}
-        <Link to="/home" className="shrink-0">
+        <Link to="/" className="shrink-0">
           <img
             src={logo}
             alt="Castle Logic Logo"
@@ -54,7 +54,7 @@ export default function Header() {
       <div className="flex lg:hidden w-full px-5 py-3 justify-between items-center gap-3">
 
         {/* Logo */}
-        <Link to="/home" className="shrink-0">
+        <Link to="/" className="shrink-0">
           <img
             src={logo}
             alt="Castle Logic Logo"

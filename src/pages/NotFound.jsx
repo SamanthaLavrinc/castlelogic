@@ -16,7 +16,7 @@ export default function NotFound() {
       </p>
       <div className="flex flex-col sm:flex-row gap-4">
         <Link
-          to="/home"
+          to="/"
           className="px-6 py-3 border border-castlepink text-castlepink rounded-lg hover-glow-small hover:bg-gray-900 hover:text-castlepurple transition-colors"
         >
           Back to Home

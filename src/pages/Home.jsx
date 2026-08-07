@@ -10,9 +10,9 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-black text-white px-4 sm:px-4 py-8 sm:py-12 font-fredoka relative z-0">
       <SEO
-        title="Home"
+        title="Software Engineering & Product Design"
         description="Pittsburgh-based full-stack software engineer and designer building beautiful experiences on powerful foundations. React, Java, SQL, and NLP data pipelines."
-        path="/home"
+        path="/"
       />
       {/* Hero Section */}
       <section className="text-center max-w-[1200px] mx-auto mb-10 sm:mb-16 relative z-10">

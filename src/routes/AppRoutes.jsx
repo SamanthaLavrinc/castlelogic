@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import Landing from "../pages/Landing";
 import Layout from "../components/Layout";
 import Home from "../pages/Home";
 import Projects from "../pages/Projects";
@@ -12,10 +11,8 @@ import NotFound from "../pages/NotFound";
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Landing />} />
-
       <Route element={<Layout />}>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:slug" element={<CaseStudyDetail />} />
         <Route path="/about" element={<About />} />

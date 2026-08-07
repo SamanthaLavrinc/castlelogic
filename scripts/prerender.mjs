@@ -18,7 +18,6 @@ function getCaseStudySlugs() {
 
 const routes = [
   "/",
-  "/home",
   "/projects",
   "/about",
   "/resume",
