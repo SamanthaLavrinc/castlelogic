@@ -1,0 +1,14 @@
+{
+  "slug": "my-orbit",
+  "title": "myOrbit",
+  "category": "Full-Stack",
+  "order": 1,
+  "summary": "A relationship-mapping tool built to solve the tangled-cast-of-characters problem in therapy sessions — visualizing closeness, tone, and interpersonal dynamics at a glance so therapists don't have to keep interrupting to ask 'wait, which Cathy?'",
+  "role": "Solo full-stack engineer, contracted via Castle Logic LLC for EmmeCo — built using agentic engineering workflows",
+  "stack": ["React 19", "Vite", "Tailwind CSS v4", "Cytoscape.js", "Supabase"],
+  "problem": "In therapy sessions, clients build out a whole cast of people over time — friends, family, coworkers — and therapists often have to interrupt the flow just to re-orient ('wait, is that the Cathy from the Christmas party?'). myOrbit gives anyone a visual relationship map they control, showing closeness and relationship tone at a glance, so context can be shared without breaking the conversation. It's positioned deliberately as a personal reflection tool, not a healthcare product — therapists never get account access; a client can generate and hand off a PDF export if they choose to share it.",
+  "approach": "I evaluated several graph paradigms — hierarchical trees, force-directed graphs — before choosing a concentric-ring model built on Cytoscape.js. Relationships in a person's life aren't hierarchical: three mutual friends can form a triangle of connections, and the graph needed to represent bonds between the people in someone's life, not just a hub-and-spoke view centered on the user. Ring placement is driven by a relationship-strength value rather than stored coordinates, so layouts stay stable across sessions while still being manually rearrangeable within a ring's bounds. Edge style (solid/dashed) encodes relationship tone (supportive/strained), making both closeness and quality of a relationship readable at a glance without any UI navigation.",
+  "results": "Pre-launch — the core visualization, person/category management, and notes are built and in active internal use; a live demo and usage data will be added once the product is polished and in front of real users.",
+  "image": "/case-studies/my-orbit/cover.png",
+  "links": []
+}

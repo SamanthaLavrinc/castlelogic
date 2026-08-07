@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { caseStudies } from "../content/case-studies";
 import CaseStudyCard from "../components/CaseStudyCard";
 import SEO from "../components/SEO";
+import Reveal from "../components/Reveal";
 
 export default function Home() {
   const featured = caseStudies.slice(0, 3);
@@ -28,36 +29,42 @@ export default function Home() {
       </section>
 
       {/* Featured Project Cards */}
-      <section className="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6 relative z-10 px-4">
-        {featured.map((study) => (
-          <CaseStudyCard key={study.slug} study={study} />
-        ))}
-      </section>
+      <Reveal>
+        <section className="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6 relative z-10 px-4">
+          {featured.map((study) => (
+            <CaseStudyCard key={study.slug} study={study} />
+          ))}
+        </section>
 
-      <div className="text-center mb-16 relative z-10">
-        <Link to="/projects" className="text-castlepink hover:text-castlepurple transition-colors">
-          See all projects →
-        </Link>
-      </div>
+        <div className="text-center mb-16 relative z-10">
+          <Link to="/projects" className="text-castlepink hover:text-castlepurple transition-colors">
+            See all projects →
+          </Link>
+        </div>
+      </Reveal>
 
       {/* About / Expertise Section */}
-      <section className="max-w-[1200px] mx-auto text-center mb-16 relative z-10">
-        <h2 className="text-2xl font-bold text-castlepink mb-4 tracking-wider">WHAT CASTLE LOGIC CAN DO</h2>
-        <p className="text-castlepurple text-lg sm:text-xl">
-          Castle Logic builds full-stack, end-to-end solutions: intuitive interfaces backed by real backend logic, data workflows, and system architecture. Whether it’s React on the surface or Java, SQL, and NLP pipelines underneath, every project blends creativity with solid engineering.
-        </p>
-      </section>
+      <Reveal>
+        <section className="max-w-[1200px] mx-auto text-center mb-16 relative z-10">
+          <h2 className="text-2xl font-bold text-castlepink mb-4 tracking-wider">WHAT CASTLE LOGIC CAN DO</h2>
+          <p className="text-castlepurple text-lg sm:text-xl">
+            Castle Logic builds full-stack, end-to-end solutions: intuitive interfaces backed by real backend logic, data workflows, and system architecture. Whether it’s React on the surface or Java, SQL, and NLP pipelines underneath, every project blends creativity with solid engineering.
+          </p>
+        </section>
+      </Reveal>
 
       {/* Call to Action */}
-      <section className="text-center max-w-[1200px] mx-auto relative z-10">
-        <p className="text-castlepurple mb-4">Interested in collaborating?</p>
-        <Link 
-          to="/contact" 
-          className="inline-block px-6 py-3 border border-castlepink text-castlepink rounded-lg hover-glow-small hover:bg-gray-900 hover:text-castlepurple transition-colors"
-        >
-          Get in Touch
-        </Link>
-      </section>
+      <Reveal>
+        <section className="text-center max-w-[1200px] mx-auto relative z-10">
+          <p className="text-castlepurple mb-4">Interested in collaborating?</p>
+          <Link
+            to="/contact"
+            className="inline-block px-6 py-3 border border-castlepink text-castlepink rounded-lg hover-glow-small hover:bg-gray-900 hover:text-castlepurple transition-colors"
+          >
+            Get in Touch
+          </Link>
+        </section>
+      </Reveal>
     </main>
   );
 }

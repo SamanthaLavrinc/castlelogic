@@ -1,8 +1,12 @@
 import Header from "./Header";
 import Footer from "./Footer";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars -- `motion` is used as the `motion.div` JSX tag below
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Layout() {
+  const location = useLocation();
+
   return (
     <div className="flex flex-col min-h-screen bg-black text-white">
       <Header />
@@ -10,7 +14,17 @@ export default function Layout() {
       {/* Main content grows to push footer down */}
       <main className="flex-grow flex justify-center p-[10px] lg:p-0 py-8">
         <div className="w-full max-w-[1200px]">
-          <Outlet />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={location.pathname}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+            >
+              <Outlet />
+            </motion.div>
+          </AnimatePresence>
         </div>
       </main>
 

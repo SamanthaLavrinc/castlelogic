@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { caseStudies } from "../content/case-studies";
 import CaseStudyCard from "../components/CaseStudyCard";
 import SEO from "../components/SEO";
+import Reveal from "../components/Reveal";
 
 export default function Projects() {
   const categories = ["All", ...new Set(caseStudies.map((s) => s.category))];
@@ -48,22 +49,26 @@ export default function Projects() {
       </section>
 
       {/* Project Cards */}
-      <section className="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-        {projects.map((study) => (
-          <CaseStudyCard key={study.slug} study={study} />
-        ))}
-      </section>
+      <Reveal>
+        <section className="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          {projects.map((study) => (
+            <CaseStudyCard key={study.slug} study={study} />
+          ))}
+        </section>
+      </Reveal>
 
       {/* Call to Action */}
-      <section className="text-center max-w-[1200px] mx-auto">
-        <p className="text-castlepurple mb-4">Excited to collaborate or see more?</p>
-        <Link
-          to="/contact"
-          className="inline-block px-6 py-3 border border-castlepink text-castlepink rounded-lg hover-glow-small hover:bg-gray-900 hover:text-castlepurple transition-colors"
-        >
-          Get in Touch
-        </Link>
-      </section>
+      <Reveal>
+        <section className="text-center max-w-[1200px] mx-auto">
+          <p className="text-castlepurple mb-4">Excited to collaborate or see more?</p>
+          <Link
+            to="/contact"
+            className="inline-block px-6 py-3 border border-castlepink text-castlepink rounded-lg hover-glow-small hover:bg-gray-900 hover:text-castlepurple transition-colors"
+          >
+            Get in Touch
+          </Link>
+        </section>
+      </Reveal>
     </main>
   );
 }
