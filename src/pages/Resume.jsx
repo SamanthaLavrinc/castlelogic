@@ -17,7 +17,7 @@ import backendPDF from "../assets/resume/Lavrinc-backend.pdf";
 export default function Resume() {
 
   return (
-    <main className="min-h-screen bg-black text-white px-4 sm:px-10 py-12 font-fredoka">
+    <main className="min-h-screen bg-black text-white px-4 sm:px-10 py-8 sm:py-12 font-fredoka">
       <SEO
         title="Resume"
         description="Samantha Lavrinc's resume: Pittsburgh-based Software Engineer with backend development experience and a design background dating back to 2006. Java, SQL, React, and TypeScript."
@@ -25,7 +25,7 @@ export default function Resume() {
       />
 
       {/* --- Header Banner --- */}
-      <section className="max-w-[1200px] mx-auto text-center mb-12">
+      <section className="max-w-[1200px] mx-auto text-center mb-8 sm:mb-12">
         <h1 className="text-4xl font-bold mb-1 tracking-wide">SAMANTHA LAVRINC</h1>
         <p className="text-castlepurple text-base font-light mb-4">
           Founder & Lead Software Engineer – Castle Logic LLC
@@ -57,7 +57,7 @@ export default function Resume() {
 
       {/* --- Summary Section --- */}
       <Reveal>
-        <section className="max-w-[1200px] mx-auto mb-12">
+        <section className="max-w-[1200px] mx-auto mb-8 sm:mb-12">
           <h2 className="flex items-center gap-3 text-3xl font-bold text-castlepink mb-5 tracking-wider justify-center">
             <User size={28} /> SUMMARY
           </h2>
@@ -74,7 +74,7 @@ export default function Resume() {
 
       {/* --- Experience Timeline --- */}
       <Reveal>
-        <section className="max-w-[1200px] mx-auto mb-12">
+        <section className="max-w-[1200px] mx-auto mb-8 sm:mb-12">
           <h2 className="flex items-center gap-3 text-3xl font-bold text-castlepink mb-5 tracking-wider justify-center">
             <Briefcase size={28} /> EXPERIENCE
           </h2>
@@ -84,7 +84,7 @@ export default function Resume() {
 
       {/* --- Education --- */}
       <Reveal>
-        <section className="max-w-[1200px] mx-auto mb-12">
+        <section className="max-w-[1200px] mx-auto mb-8 sm:mb-12">
           <h2 className="flex items-center gap-3 text-3xl font-bold text-castlepink mb-5 tracking-wider justify-center">
             <GraduationCap size={28} /> EDUCATION
           </h2>
@@ -113,7 +113,7 @@ export default function Resume() {
 
       {/* --- Skills Section --- */}
       <Reveal>
-        <section className="max-w-[1200px] mx-auto mb-12">
+        <section className="max-w-[1200px] mx-auto mb-8 sm:mb-12">
           <h2 className="flex items-center gap-3 text-3xl font-bold text-castlepink mb-5 tracking-wider justify-center">
             <Star size={28} /> SKILLS
           </h2>
@@ -123,7 +123,7 @@ export default function Resume() {
 
       {/* --- Download Buttons --- */}
       <Reveal>
-        <section className="max-w-[1200px] mx-auto text-center mb-12">
+        <section className="max-w-[1200px] mx-auto text-center mb-8 sm:mb-12">
           <h2 className="flex items-center gap-3 text-2xl sm:text-3xl font-bold text-castlepink mb-5 tracking-wider justify-center">
             <Download size={26} /> RESUME
           </h2>

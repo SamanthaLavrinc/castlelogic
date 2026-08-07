@@ -7,7 +7,7 @@ import pfp from "../assets/pfp/pfp-cropped.webp";
 
 export default function About() {
   return (
-    <main className="min-h-screen bg-black text-white px-4 sm:px-10 pt-16 pb-12 font-fredoka">
+    <main className="min-h-screen bg-black text-white px-4 sm:px-10 pt-10 sm:pt-16 pb-8 sm:pb-12 font-fredoka">
       <SEO
         title="About"
         description="Meet Samantha Lavrinc, a Pittsburgh-based full-stack developer and designer blending clean code, product engineering, and illustrative design at Castle Logic."
@@ -15,7 +15,7 @@ export default function About() {
       />
 
       {/* TITLE SECTION */}
-      <section className="max-w-[1200px] mx-auto mb-16">
+      <section className="max-w-[1200px] mx-auto mb-10 sm:mb-16">
         <div className="flex flex-col sm:flex-row sm:items-stretch gap-8 sm:gap-6 max-w-[1000px] mx-auto">
           {/* Photo stretches to match the text column's height, so it always spans
               from the headline down to the buttons regardless of copy length. */}
@@ -82,7 +82,7 @@ export default function About() {
 
       {/* HISTORY / BACKGROUND SECTION */}
       <Reveal>
-        <section className="max-w-[1200px] mx-auto mb-16 space-y-8">
+        <section className="max-w-[1200px] mx-auto mb-10 sm:mb-16 space-y-8">
           <h2 className="text-3xl sm:text-2xl font-bold text-castlepink text-center tracking-wider">
             A LITTLE ABOUT MY JOURNEY
           </h2>
@@ -118,7 +118,7 @@ export default function About() {
 
       {/* HOW I WORK */}
       <Reveal>
-        <section className="max-w-[1200px] mx-auto mb-16 space-y-6">
+        <section className="max-w-[1200px] mx-auto mb-10 sm:mb-16 space-y-6">
           <h2 className="text-3xl sm:text-2xl font-bold text-castlepink text-center tracking-wider">
             HOW I WORK
           </h2>
@@ -146,7 +146,7 @@ export default function About() {
 
       {/* FULL STACK FOCUS */}
       <Reveal>
-        <section className="max-w-[1200px] mx-auto mb-16">
+        <section className="max-w-[1200px] mx-auto mb-10 sm:mb-16">
           <h2 className="text-3xl sm:text-2xl font-bold text-castlepink mb-6 text-center tracking-wider">
             WHAT I DO AS A FULL-STACK DEVELOPER
           </h2>
@@ -174,7 +174,7 @@ export default function About() {
 
       {/* GALLERY TITLE + Illustrations */}
       <Reveal>
-        <section className="max-w-[1200px] mx-auto mb-8 text-center">
+        <section className="max-w-[1200px] mx-auto mb-6 sm:mb-8 text-center">
           <h2 className="text-3xl sm:text-2xl font-bold text-castlepink mb-2 tracking-wider">
             ILLUSTRATION & DESIGN HIGHLIGHTS
           </h2>
@@ -187,7 +187,7 @@ export default function About() {
 
       {/* CTA */}
       <Reveal>
-        <section className="text-center max-w-[1200px] mx-auto mt-16">
+        <section className="text-center max-w-[1200px] mx-auto mt-10 sm:mt-16">
           <p className="text-castlepurple mb-4 text-lg">
             Want to collaborate, build something new, or talk about an idea?
           </p>

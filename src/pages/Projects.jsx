@@ -14,7 +14,7 @@ export default function Projects() {
     : caseStudies.filter((p) => p.category === activeCategory);
 
   return (
-    <main className="min-h-screen bg-black text-white px-4 sm:px-10 py-12 font-fredoka">
+    <main className="min-h-screen bg-black text-white px-4 sm:px-10 py-8 sm:py-12 font-fredoka">
       <SEO
         title="Projects"
         description="Full-stack builds, UI experiments, and design work from Castle Logic. Case studies spanning React, backend architecture, and illustration."
@@ -22,7 +22,7 @@ export default function Projects() {
       />
 
       {/* Hero / Intro */}
-      <section className="max-w-[1200px] mx-auto mb-16 text-center">
+      <section className="max-w-[1200px] mx-auto mb-10 sm:mb-16 text-center">
         <h1 className="text-4xl sm:text-3xl font-bold text-castlepink mb-4 tracking-wider">
           EXPLORING FULL-STACK, DESIGN, AND UX PROJECTS
         </h1>
@@ -32,7 +32,7 @@ export default function Projects() {
       </section>
 
       {/* Category Tabs */}
-      <section className="max-w-[1200px] mx-auto mb-12 flex justify-center gap-4 flex-wrap">
+      <section className="max-w-[1200px] mx-auto mb-8 sm:mb-12 flex justify-center gap-4 flex-wrap">
         {categories.map((cat) => (
           <button
             key={cat}
@@ -50,7 +50,7 @@ export default function Projects() {
 
       {/* Project Cards */}
       <Reveal>
-        <section className="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <section className="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10 sm:mb-16">
           {projects.map((study) => (
             <CaseStudyCard key={study.slug} study={study} />
           ))}

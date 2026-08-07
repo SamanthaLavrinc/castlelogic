@@ -8,7 +8,7 @@ export default function CaseStudyDetail() {
 
   if (!study) {
     return (
-      <main className="min-h-screen bg-black text-white px-4 sm:px-10 py-16 font-fredoka text-center">
+      <main className="min-h-screen bg-black text-white px-4 sm:px-10 py-10 sm:py-16 font-fredoka text-center">
         <SEO
           title="Case Study Not Found"
           description="That project doesn't exist on Castle Logic (yet)."
@@ -27,7 +27,7 @@ export default function CaseStudyDetail() {
   }
 
   return (
-    <main className="min-h-screen bg-black text-white px-4 sm:px-10 py-16 font-fredoka">
+    <main className="min-h-screen bg-black text-white px-4 sm:px-10 py-10 sm:py-16 font-fredoka">
       <SEO
         title={study.title}
         description={study.summary}

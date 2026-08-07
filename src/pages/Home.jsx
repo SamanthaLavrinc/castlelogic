@@ -8,14 +8,14 @@ export default function Home() {
   const featured = caseStudies.slice(0, 3);
 
   return (
-    <main className="min-h-screen bg-black text-white px-4 sm:px-4 py-12 font-fredoka relative z-0">
+    <main className="min-h-screen bg-black text-white px-4 sm:px-4 py-8 sm:py-12 font-fredoka relative z-0">
       <SEO
         title="Home"
         description="Pittsburgh-based full-stack software engineer and designer building beautiful experiences on powerful foundations. React, Java, SQL, and NLP data pipelines."
         path="/home"
       />
       {/* Hero Section */}
-      <section className="text-center max-w-[1200px] mx-auto mb-16 relative z-10">
+      <section className="text-center max-w-[1200px] mx-auto mb-10 sm:mb-16 relative z-10">
         <h1 className="text-4xl sm:text-2xl font-bold text-castlepink mb-4 tracking-wider">
           BUILDING BEAUTIFUL EXPERIENCES ON POWERFUL FOUNDATIONS
         </h1>
@@ -36,7 +36,7 @@ export default function Home() {
           ))}
         </section>
 
-        <div className="text-center mb-16 relative z-10">
+        <div className="text-center mb-10 sm:mb-16 relative z-10">
           <Link to="/projects" className="text-castlepink hover:text-castlepurple transition-colors">
             See all projects →
           </Link>
@@ -45,7 +45,7 @@ export default function Home() {
 
       {/* About / Expertise Section */}
       <Reveal>
-        <section className="max-w-[1200px] mx-auto text-center mb-16 relative z-10">
+        <section className="max-w-[1200px] mx-auto text-center mb-10 sm:mb-16 relative z-10">
           <h2 className="text-2xl font-bold text-castlepink mb-4 tracking-wider">WHAT CASTLE LOGIC CAN DO</h2>
           <p className="text-castlepurple text-lg sm:text-xl">
             Castle Logic builds full-stack, end-to-end solutions: intuitive interfaces backed by real backend logic, data workflows, and system architecture. Whether it’s React on the surface or Java, SQL, and NLP pipelines underneath, every project blends creativity with solid engineering.

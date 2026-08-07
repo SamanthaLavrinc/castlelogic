@@ -12,9 +12,9 @@ export default function Layout() {
       <Header />
 
       {/* Main content grows to push footer down */}
-      <main className="flex-grow flex justify-center p-[10px] lg:p-0 py-8">
+      <main className="flex-grow flex justify-center p-[10px] lg:p-0 py-4 sm:py-8">
         <div className="w-full max-w-[1200px]">
-          <AnimatePresence mode="wait">
+          <AnimatePresence initial={false}>
             <motion.div
               key={location.pathname}
               initial={{ opacity: 0 }}

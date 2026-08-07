@@ -7,7 +7,7 @@ export default function Contact() {
   });
 
   return (
-    <main className="bg-black text-white px-4 sm:px-10 py-16 font-fredoka flex flex-col items-center">
+    <main className="bg-black text-white px-4 sm:px-10 py-10 sm:py-16 font-fredoka flex flex-col items-center">
       <SEO
         title="Contact"
         description="Have a project in mind? Get in touch with Samantha Lavrinc at Castle Logic."
@@ -15,7 +15,7 @@ export default function Contact() {
       />
 
       {/* Intro / pitch */}
-      <div className="w-full max-w-[700px] text-center mb-10">
+      <div className="w-full max-w-[700px] text-center mb-6 sm:mb-10">
         <h2 className="text-2xl sm:text-3xl font-bold text-castlepink mb-4 tracking-wider">
           LET'S BUILD SOMETHING TOGETHER
         </h2>

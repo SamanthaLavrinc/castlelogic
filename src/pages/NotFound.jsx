@@ -3,7 +3,7 @@ import SEO from "../components/SEO";
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen bg-black text-white px-4 sm:px-10 py-16 font-fredoka text-center flex flex-col items-center justify-center">
+    <main className="min-h-screen bg-black text-white px-4 sm:px-10 py-10 sm:py-16 font-fredoka text-center flex flex-col items-center justify-center">
       <SEO
         title="Page Not Found"
         description="That page doesn't exist on Castle Logic."
