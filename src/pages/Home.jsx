@@ -24,7 +24,7 @@ export default function Home() {
         </p>
         <br />
         <p className="mt-4 text-castlepurple">
-          Explore the portfolio below and see how design and technology intersect to solve real challenges.
+          Explore my portfolio below and see how design and technology intersect to solve real challenges.
         </p>
       </section>
 

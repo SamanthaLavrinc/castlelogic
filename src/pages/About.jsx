@@ -27,7 +27,8 @@ export default function About() {
             <img
               src={pfp}
               alt="Samantha Lavrinc"
-              className="w-full h-auto sm:h-full object-cover object-top -scale-x-100 rounded-2xl border-2 border-castlepink/70 shadow-[0_0_30px_-5px_rgba(255,70,162,0.35)]"
+              className="w-full h-auto sm:h-full object-cover object-top rounded-2xl border-2 border-castlepink/70 shadow-[0_0_30px_-5px_rgba(255,70,162,0.35)]"
+              style={{ transform: "scaleX(-1)" }}
             />
           </div>
 
