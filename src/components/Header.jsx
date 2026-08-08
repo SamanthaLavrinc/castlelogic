@@ -1,5 +1,5 @@
 import { useState } from "react";
-import logo from "../assets/side-logo.png";
+import castleIcon from "../assets/castle.png";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
@@ -25,12 +25,11 @@ export default function Header() {
       <div className="hidden lg:flex w-full max-w-[1200px] mx-auto px-4 py-4 justify-between items-center gap-4">
 
         {/* Logo */}
-        <Link to="/" className="shrink-0">
-          <img
-            src={logo}
-            alt="Castle Logic Logo"
-            className="h-16 w-auto"
-          />
+        <Link to="/" className="flex items-center gap-3 shrink-0">
+          <img src={castleIcon} alt="" className="h-12 w-auto" aria-hidden="true" />
+          <span className="font-fredoka font-bold text-3xl text-castlepink tracking-wide">
+            CASTLE LOGIC
+          </span>
         </Link>
 
         {/* Pretty full-time navigation */}
@@ -54,12 +53,11 @@ export default function Header() {
       <div className="flex lg:hidden w-full px-5 py-3 justify-between items-center gap-3">
 
         {/* Logo */}
-        <Link to="/" className="shrink-0">
-          <img
-            src={logo}
-            alt="Castle Logic Logo"
-            className="h-8 w-auto"
-          />
+        <Link to="/" className="flex items-center gap-2 shrink-0">
+          <img src={castleIcon} alt="" className="h-7 w-auto" aria-hidden="true" />
+          <span className="font-fredoka font-bold text-lg text-castlepink tracking-wide">
+            CASTLE LOGIC
+          </span>
         </Link>
 
         {/* Hamburger Button */}
