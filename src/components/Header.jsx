@@ -65,6 +65,7 @@ export default function Header() {
           onClick={() => setMenuOpen(!menuOpen)}
           className="flex h-11 w-11 shrink-0 items-center justify-center text-castlepink transition-transform duration-300"
           aria-label="Toggle menu"
+          aria-expanded={menuOpen}
         >
           <div className="relative h-6 w-6">
             <Menu
@@ -92,12 +93,14 @@ export default function Header() {
         className={`lg:hidden overflow-hidden transition-all duration-300 ${
           menuOpen ? "max-h-80" : "max-h-0"
         }`}
+        aria-hidden={!menuOpen}
       >
         <nav className="flex flex-col px-4 pb-4 font-fredoka font-bold tracking-wide">
           {pages.map((page) => (
             <Link
               key={page.name}
               to={page.path}
+              tabIndex={menuOpen ? 0 : -1}
               onClick={() => setMenuOpen(false)}
               className="py-3 border-t border-castlepink/30 text-castlepurple hover:text-castlepink transition-colors"
             >

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { X } from "lucide-react";
 import amyHurst from "../assets/design/amy_hurst.webp";
 import bird from "../assets/design/bird.webp";
 import deer from "../assets/design/deer.webp";
@@ -48,6 +49,17 @@ export default function Illustrations() {
         setSelected(projects[prevIndex]);
     };
 
+    // Escape closes the modal, since it's the standard keyboard-only way in
+    // and there's otherwise no way out once focus is inside it.
+    useEffect(() => {
+        if (!selected) return;
+        const onKeyDown = (e) => {
+            if (e.key === "Escape") setSelected(null);
+        };
+        document.addEventListener("keydown", onKeyDown);
+        return () => document.removeEventListener("keydown", onKeyDown);
+    }, [selected]);
+
     return (      
         <>
         {/* Project / Illustration Cards */}
@@ -55,8 +67,17 @@ export default function Illustrations() {
             {projects.map((proj) => (
             <div
                 key={proj.id}
+                role="button"
+                tabIndex={0}
+                aria-label={`View ${proj.title} full size`}
                 className="relative bg-gray-900 border border-castlepink rounded-lg aspect-square cursor-pointer overflow-hidden group transform transition-transform duration-300 hover:scale-[1.03]"
                 onClick={() => setSelected(proj)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setSelected(proj);
+                  }
+                }}
             >
                 <div className="w-full h-full bg-white flex items-center justify-center">
                 <img
@@ -80,12 +101,25 @@ export default function Illustrations() {
         {/* ---- MODAL WITH ARROWS ---- */}
         {selected && (
             <div
+            role="dialog"
+            aria-modal="true"
+            aria-label={selected.title}
             className="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center z-50 p-4"
             onClick={() => setSelected(null)}
             >
+            {/* CLOSE */}
+            <button
+                onClick={() => setSelected(null)}
+                aria-label="Close"
+                className="absolute top-6 right-6 text-castlepink hover:text-castlepurple"
+            >
+                <X size={28} />
+            </button>
+
             {/* LEFT ARROW */}
             <button
                 onClick={showPrev}
+                aria-label="Previous image"
                 className="absolute left-8 text-castlepink text-4xl font-bold opacity-70 hover:text-castlepurple select-none"
             >
                 ‹
@@ -102,6 +136,7 @@ export default function Illustrations() {
             {/* RIGHT ARROW */}
             <button
                 onClick={showNext}
+                aria-label="Next image"
                 className="absolute right-8 text-castlepink text-4xl font-bold opacity-70 hover:text-castlepurple select-none"
             >
                 ›

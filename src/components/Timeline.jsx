@@ -72,8 +72,17 @@ export default function Timeline() {
         {timeline.map((job, index) => (
           <div
             key={index}
+            role="button"
+            tabIndex={0}
+            aria-expanded={openIndexes.includes(index)}
             className="group bg-gray-900 rounded-lg p-4 shadow-md transition-all cursor-pointer"
             onClick={() => toggle(index)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                toggle(index);
+              }
+            }}
           >
             {/* Top row: collapse icon, title, and date */}
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 mb-1">
