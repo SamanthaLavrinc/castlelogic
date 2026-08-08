@@ -22,7 +22,7 @@ export default function Layout() {
       {/* Main content grows to push footer down */}
       <main className="flex-grow flex justify-center p-[10px] lg:p-0 py-4 sm:py-8">
         <div className="w-full max-w-[1200px]">
-          <AnimatePresence initial={false}>
+          <AnimatePresence initial={false} mode="popLayout">
             <motion.div
               key={location.pathname}
               initial={{ opacity: 0 }}
