@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import { Outlet, useLocation } from "react-router-dom";
@@ -6,6 +7,13 @@ import { AnimatePresence, motion } from "framer-motion";
 
 export default function Layout() {
   const location = useLocation();
+
+  // React Router doesn't reset scroll position on navigation by default —
+  // without this, landing on a new page keeps whatever scroll depth the
+  // previous page was at.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white">

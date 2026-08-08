@@ -35,7 +35,9 @@ export default function About() {
           {/* Text column: centered vertically within the photo's height */}
           <div className="flex-1 text-center sm:text-left sm:flex sm:flex-col sm:justify-center space-y-5">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-castlepink tracking-wide leading-tight">
-              WHERE DESIGN MEETS DEV MAGIC
+              WHERE DESIGN MEETS
+              <br />
+              DEV MAGIC
             </h1>
 
             <p className="text-xl sm:text-2xl font-semibold text-castlepurple tracking-wide">
