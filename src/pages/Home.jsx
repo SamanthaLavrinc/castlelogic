@@ -3,6 +3,7 @@ import { caseStudies } from "../content/case-studies";
 import CaseStudyCard from "../components/CaseStudyCard";
 import SEO from "../components/SEO";
 import Reveal from "../components/Reveal";
+import heroImg from "../assets/hero_img/home_hero.png";
 
 export default function Home() {
   const featured = caseStudies.slice(0, 3);
@@ -15,11 +16,13 @@ export default function Home() {
         path="/"
       />
       {/* Hero Section */}
-      <section className="text-center max-w-[1200px] mx-auto mb-10 sm:mb-16 relative z-10">
-        <h1 className="text-4xl sm:text-2xl font-bold text-castlepink mb-4 tracking-wider">
-          BUILDING BEAUTIFUL EXPERIENCES ON POWERFUL FOUNDATIONS
-        </h1>
-        <p className="text-lg sm:text-xl text-castlepurple">
+      <section className="text-center max-w-[1200px] mx-auto mb-6 sm:mb-10 relative z-10">
+        <img
+          src={heroImg}
+          alt="Castle Logic: Building Beautiful Experiences on Powerful Foundations"
+          className="w-[94vw] sm:w-[min(90vw,850px)] lg:w-full lg:max-w-[1000px] h-auto mx-auto"
+        />
+        <p className="text-lg sm:text-xl text-castlepurple mt-6 sm:mt-8 max-w-[800px] mx-auto">
           At Castle Logic, design and engineering are the same job to me. I'm a Pittsburgh-based full-stack developer with a background in UX/UI, Java backend systems, NLP pipelines, and structured data. I build things that look good and actually hold up.
         </p>
         <br />
