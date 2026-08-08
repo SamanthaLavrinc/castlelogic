@@ -15,7 +15,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="w-full bg-black relative sticky top-0 z-50 lg:static">
+    <header className="w-full bg-black relative sticky top-0 z-50">
       <div
         className="absolute bottom-0 left-0 w-full h-[1px] bg-[linear-gradient(to_right,transparent,var(--castlepink)_20%,var(--castlepink)_80%,transparent)]"
         aria-hidden="true"
