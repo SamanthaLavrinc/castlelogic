@@ -2,7 +2,6 @@ import { useState } from "react";
 import castleIcon from "../assets/castle.png";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import ShineStreak from "./ShineStreak";
 
 const pages = [
   { name: "HOME", path: "/" },
@@ -17,14 +16,13 @@ export default function Header() {
 
   return (
     <header className="w-full bg-black relative sticky top-0 z-50">
-      <ShineStreak className="top-0 left-0 h-16 lg:h-20" />
       <div
         className="absolute bottom-0 left-0 w-full h-[1px] bg-[linear-gradient(to_right,transparent,var(--castlepink)_20%,var(--castlepink)_80%,transparent)]"
         aria-hidden="true"
       />
 
       {/* Desktop Header */}
-      <div className="relative z-10 hidden lg:flex w-full max-w-[1200px] mx-auto px-4 py-4 justify-between items-center gap-4">
+      <div className="hidden lg:flex w-full max-w-[1200px] mx-auto px-4 py-4 justify-between items-center gap-4">
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 shrink-0">
@@ -52,7 +50,7 @@ export default function Header() {
       </div>
 
       {/* Mobile Header */}
-      <div className="relative z-10 flex lg:hidden w-full px-5 py-3 justify-between items-center gap-3">
+      <div className="flex lg:hidden w-full px-5 py-3 justify-between items-center gap-3">
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 shrink-0">
