@@ -16,10 +16,20 @@ export default function About() {
 
       {/* TITLE SECTION */}
       <section className="max-w-[1200px] mx-auto mb-10 sm:mb-16">
-        <div className="flex flex-col sm:flex-row sm:items-stretch gap-8 sm:gap-6">
+        <div className="about-hero-grid gap-8 sm:gap-6">
+          {/* Headline leads on mobile (before the photo); on desktop it sits
+              back inside the text column, beside the photo, same as before. */}
+          <div className="[grid-area:headline] text-center sm:text-left">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-castlepink tracking-wide leading-tight">
+              WHERE DESIGN MEETS
+              <br />
+              DEV MAGIC
+            </h1>
+          </div>
+
           {/* Photo stretches to match the text column's height, so it always spans
               from the headline down to the buttons regardless of copy length. */}
-          <div className="relative shrink-0 w-56 sm:w-60 lg:w-64 mx-auto sm:mx-0 sm:self-start sm:h-[calc(100%-30px)]">
+          <div className="[grid-area:photo] relative shrink-0 w-56 sm:w-60 lg:w-64 mx-auto sm:mx-0 sm:self-start sm:h-[calc(100%-30px)]">
             <div
               className="absolute -inset-6 bg-castlepink/15 rounded-[2rem] blur-2xl -z-10"
               aria-hidden="true"
@@ -33,13 +43,7 @@ export default function About() {
           </div>
 
           {/* Text column: centered vertically within the photo's height */}
-          <div className="flex-1 text-center sm:text-left sm:flex sm:flex-col sm:justify-center space-y-5">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-castlepink tracking-wide leading-tight">
-              WHERE DESIGN MEETS
-              <br />
-              DEV MAGIC
-            </h1>
-
+          <div className="[grid-area:textrest] text-center sm:text-left sm:flex sm:flex-col sm:justify-center space-y-5">
             <p className="text-xl sm:text-2xl font-semibold text-castlepurple tracking-wide">
               Full-Stack Engineer &amp; Designer
             </p>
