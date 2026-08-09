@@ -23,8 +23,8 @@ function ContactStarburst({ size = "w-10 h-10" }) {
       aria-hidden="true"
     >
       <span
-        className={`contact-starburst ${size} shrink-0 animate-spin [animation-duration:13s]`}
-        style={{ clipPath: STAR_POINTS, backgroundColor: "var(--castlepink)", opacity: 0.35 }}
+        className={`contact-starburst ${size} shrink-0 bg-gray-900 animate-spin [animation-duration:13s]`}
+        style={{ clipPath: STAR_POINTS }}
       />
     </span>
   );
