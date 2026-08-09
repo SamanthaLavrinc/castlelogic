@@ -15,7 +15,7 @@ export default function Contact() {
       />
 
       {/* Intro / pitch */}
-      <div className="w-full max-w-[700px] text-center mb-6 sm:mb-10">
+      <div className="w-full max-w-[700px] text-center mb-10 sm:mb-10">
         <h2 className="text-2xl sm:text-3xl font-bold text-castlepink mb-4 tracking-wider">
           LET'S BUILD SOMETHING TOGETHER
         </h2>

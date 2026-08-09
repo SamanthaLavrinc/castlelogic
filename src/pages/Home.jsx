@@ -16,7 +16,7 @@ export default function Home() {
         path="/"
       />
       {/* Hero Section */}
-      <section className="text-center max-w-[1200px] mx-auto mb-6 sm:mb-10 relative z-10">
+      <section className="text-center max-w-[1200px] mx-auto mb-10 sm:mb-10 relative z-10">
         <img
           src={heroImg}
           alt="Castle Logic: Building Beautiful Experiences on Powerful Foundations"
