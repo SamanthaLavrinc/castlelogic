@@ -34,7 +34,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="w-full bg-black relative sticky top-0 z-50">
+    <header className="w-full bg-black relative sticky top-0 z-50 overflow-hidden">
       <div
         className="absolute bottom-0 left-0 w-full h-[1px] bg-[linear-gradient(to_right,transparent,var(--castlepink)_20%,var(--castlepink)_80%,transparent)]"
         aria-hidden="true"
@@ -59,7 +59,7 @@ export default function Header() {
               to={page.path}
               className="relative group text-castlepurple hover:text-castlepink transition-colors"
             >
-              {page.name === "CONTACT" && <ContactStarburst size="w-24 h-24" />}
+              {page.name === "CONTACT" && <ContactStarburst size="w-48 h-48" />}
               {page.name}
 
               <span className="absolute left-0 bottom-[-4px] h-[2px] w-0 bg-castlepink transition-all duration-300 group-hover:w-full"></span>
