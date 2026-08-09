@@ -11,6 +11,25 @@ const pages = [
   { name: "CONTACT", path: "/contact" },
 ];
 
+// 8-point star, a semi-cheesy nod to car-lot "SALE" starbursts, kept quiet at
+// low opacity and slowed way down so it reads as a wink rather than an ad.
+const STAR_POINTS =
+  "polygon(50% 0%, 58.4% 29.7%, 85.4% 14.6%, 70.3% 41.6%, 100% 50%, 70.3% 58.4%, 85.4% 85.4%, 58.4% 70.3%, 50% 100%, 41.6% 70.3%, 14.6% 85.4%, 29.7% 58.4%, 0% 50%, 29.7% 41.6%, 14.6% 14.6%, 41.6% 29.7%)";
+
+function ContactStarburst({ size = "w-10 h-10" }) {
+  return (
+    <span
+      className="absolute inset-0 flex items-center justify-center -z-10 pointer-events-none"
+      aria-hidden="true"
+    >
+      <span
+        className={`contact-starburst ${size} animate-spin [animation-duration:9s]`}
+        style={{ clipPath: STAR_POINTS, backgroundColor: "var(--castlepink)", opacity: 0.25 }}
+      />
+    </span>
+  );
+}
+
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -40,6 +59,7 @@ export default function Header() {
               to={page.path}
               className="relative group text-castlepurple hover:text-castlepink transition-colors"
             >
+              {page.name === "CONTACT" && <ContactStarburst />}
               {page.name}
 
               <span className="absolute left-0 bottom-[-4px] h-[2px] w-0 bg-castlepink transition-all duration-300 group-hover:w-full"></span>

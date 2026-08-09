@@ -97,6 +97,12 @@ textarea:focus-visible,
   transform: scale(1.02);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .contact-starburst {
+    animation: none !important;
+  }
+}
+
 .hover-glow-small:focus-visible {
   box-shadow: 0 0 15px var(--castlepurple), 0 0 20px rgba(0, 0, 0, 0.7);
   transform: scale(1.02);
