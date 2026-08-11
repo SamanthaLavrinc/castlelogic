@@ -17,21 +17,19 @@ export default function About() {
 
       {/* TITLE SECTION */}
       <section className="max-w-[1200px] mx-auto mb-10 sm:mb-16">
-        <div className="about-hero-grid gap-8 sm:gap-6">
-          {/* Headline leads on mobile (before the photo); on desktop it sits
-              back inside the text column, beside the photo, same as before. */}
-          <div className="[grid-area:headline] text-center sm:text-left">
-            <img
-              src={aboutHeroImg}
-              alt="Where design meets dev magic"
-              className="h-auto mx-auto sm:mx-0"
-              style={{ width: "clamp(240px, 70vw, 420px)" }}
-            />
-          </div>
+        {/* Hero image: its own full-width row, centered, above photo+text. */}
+        <div className="text-center mx-auto mb-8 sm:mb-6">
+          <img
+            src={aboutHeroImg}
+            alt="Where design meets dev magic"
+            className="h-auto mx-auto"
+            style={{ width: "clamp(240px, 70vw, 600px)" }}
+          />
+        </div>
 
-          {/* Photo stretches to match the text column's height, so it always spans
-              from the headline down to the buttons regardless of copy length. */}
-          <div className="[grid-area:photo] relative shrink-0 w-56 sm:w-60 lg:w-64 mx-auto sm:mx-0 sm:self-start sm:h-[calc(100%-30px)]">
+        {/* Photo + text row: centered under the hero image, narrower measure. */}
+        <div className="max-w-[800px] mx-auto flex flex-col sm:flex-row items-start gap-8 sm:gap-6">
+          <div className="relative shrink-0 w-56 sm:w-60 lg:w-64 mx-auto sm:mx-0">
             <div
               className="absolute -inset-6 bg-castlepink/15 rounded-[2rem] blur-2xl -z-10"
               aria-hidden="true"
@@ -39,13 +37,12 @@ export default function About() {
             <img
               src={pfp}
               alt="Samantha Lavrinc"
-              className="w-full h-auto sm:h-full object-cover object-top rounded-2xl border-2 border-castlepink/70 shadow-[0_0_30px_-5px_rgba(255,70,162,0.35)]"
+              className="w-full h-auto object-cover object-top rounded-2xl border-2 border-castlepink/70 shadow-[0_0_30px_-5px_rgba(255,70,162,0.35)]"
               style={{ transform: "scaleX(-1)" }}
             />
           </div>
 
-          {/* Text column: centered vertically within the photo's height */}
-          <div className="[grid-area:textrest] text-center sm:text-left sm:flex sm:flex-col sm:justify-center space-y-5">
+          <div className="text-center sm:text-left space-y-5">
             <p className="text-xl sm:text-2xl font-semibold text-castlepurple tracking-wide">
               Full-Stack Engineer &amp; Designer
             </p>

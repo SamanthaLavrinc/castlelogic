@@ -108,24 +108,3 @@ textarea:focus-visible,
   transform: scale(1.02);
 }
 
-/* About page hero: on mobile the headline leads (before the photo), since
-   photo → headline → title → paragraph didn't read as one story. Desktop
-   keeps the original photo-beside-text layout untouched. */
-.about-hero-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-areas:
-    "headline"
-    "photo"
-    "textrest";
-}
-
-@media (min-width: 640px) {
-  .about-hero-grid {
-    grid-template-columns: auto 1fr;
-    grid-template-areas:
-      "photo headline"
-      "photo textrest";
-    align-items: start;
-  }
-}
