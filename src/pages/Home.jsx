@@ -4,6 +4,7 @@ import CaseStudyCard from "../components/CaseStudyCard";
 import SEO from "../components/SEO";
 import Reveal from "../components/Reveal";
 import heroImg from "../assets/hero_img/home_hero.png";
+import { Analytics } from "@vercel/analytics/react"
 
 export default function Home() {
   const featured = caseStudies.slice(0, 3);
