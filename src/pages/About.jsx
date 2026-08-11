@@ -28,7 +28,7 @@ export default function About() {
         </div>
 
         {/* Photo + text row: centered under the hero image, narrower measure. */}
-        <div className="max-w-[575px] mx-auto flex flex-col sm:flex-row items-start gap-8 sm:gap-6">
+        <div className="max-w-[800px] mx-auto flex flex-col sm:flex-row items-start gap-8 sm:gap-6">
           <div className="relative shrink-0 w-56 sm:w-60 lg:w-64 mx-auto sm:mx-0">
             <div
               className="absolute -inset-6 bg-castlepink/15 rounded-[2rem] blur-2xl -z-10"
