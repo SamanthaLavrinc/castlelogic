@@ -4,6 +4,7 @@ import Illustrations from "../components/Illustrations";
 import SEO from "../components/SEO";
 import Reveal from "../components/Reveal";
 import pfp from "../assets/pfp/pfp-cropped.webp";
+import aboutHeroImg from "../assets/hero_img/about_hero.png";
 
 export default function About() {
   return (
@@ -20,11 +21,12 @@ export default function About() {
           {/* Headline leads on mobile (before the photo); on desktop it sits
               back inside the text column, beside the photo, same as before. */}
           <div className="[grid-area:headline] text-center sm:text-left">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-castlepink tracking-wide leading-tight">
-              WHERE DESIGN MEETS
-              <br />
-              DEV MAGIC
-            </h1>
+            <img
+              src={aboutHeroImg}
+              alt="Where design meets dev magic"
+              className="h-auto mx-auto sm:mx-0"
+              style={{ width: "clamp(240px, 70vw, 420px)" }}
+            />
           </div>
 
           {/* Photo stretches to match the text column's height, so it always spans

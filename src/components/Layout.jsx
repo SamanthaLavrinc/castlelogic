@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import { Outlet, useLocation } from "react-router-dom";
@@ -10,8 +10,10 @@ export default function Layout() {
 
   // React Router doesn't reset scroll position on navigation by default —
   // without this, landing on a new page keeps whatever scroll depth the
-  // previous page was at.
-  useEffect(() => {
+  // previous page was at. useLayoutEffect (not useEffect) so this runs
+  // before the browser paints — otherwise the old scroll position paints
+  // for one frame before snapping, which reads as a flicker mid-transition.
+  useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 

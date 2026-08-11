@@ -35,11 +35,6 @@ export default function Header() {
 
   return (
     <header className="w-full bg-black relative sticky top-0 z-50 overflow-hidden">
-      <div
-        className="absolute bottom-0 left-0 w-full h-[1px] bg-[linear-gradient(to_right,transparent,var(--castlepink)_20%,var(--castlepink)_80%,transparent)]"
-        aria-hidden="true"
-      />
-
       {/* Desktop Header */}
       <div className="hidden lg:flex w-full max-w-[1200px] mx-auto px-4 py-4 justify-between items-center gap-4">
 
@@ -73,7 +68,7 @@ export default function Header() {
       <div className="flex lg:hidden w-full px-5 py-3 justify-between items-center gap-3">
 
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 shrink-0">
+        <Link to="/" className="flex items-center gap-2 shrink-0 py-2 sm:py-0">
           <img src={castleIcon} alt="" className="h-7 w-auto" aria-hidden="true" />
           <span className="font-fredoka font-bold text-lg text-castlepink tracking-wide">
             CASTLE LOGIC

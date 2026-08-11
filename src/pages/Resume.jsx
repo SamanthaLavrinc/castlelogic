@@ -11,8 +11,7 @@ import Skills from "../components/Skills";
 import Timeline from "../components/Timeline";
 import SEO from "../components/SEO";
 import Reveal from "../components/Reveal";
-import frontendPDF from "../assets/resume/Lavrinc-frontend.pdf";
-import backendPDF from "../assets/resume/Lavrinc-backend.pdf";
+import resumePDF from "../assets/resume/Lavrinc-resume.pdf";
 
 export default function Resume() {
 
@@ -129,18 +128,11 @@ export default function Resume() {
           </h2>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <a
-              href={frontendPDF}
+              href={resumePDF}
               download
               className="px-6 py-3 border border-castlepink hover-glow-small text-castlepink rounded-lg hover:bg-gray-800 hover:text-castlepurple transition-colors"
             >
-              Front-End & UX
-            </a>
-            <a
-              href={backendPDF}
-              download
-              className="px-6 py-3 border border-castlepink hover-glow-small text-castlepink rounded-lg hover:bg-gray-800 hover:text-castlepurple transition-colors"
-            >
-              Backend Engineering
+              Download Resume
             </a>
           </div>
         </section>

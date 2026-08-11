@@ -121,6 +121,7 @@ export default function Skills() {
       >
         {grouped.map(({ category }) => (
           <button
+            key={category}
             onClick={() => toggleTab(category)}
             className={`
               py-3 px-5 font-semibold uppercase flex-1 min-w-[120px] text-center

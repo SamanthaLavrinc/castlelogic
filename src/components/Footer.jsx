@@ -1,10 +1,6 @@
 export default function Footer() {
   return (
     <footer className="w-full bg-black text-white py-6 relative">
-      <div
-        className="absolute top-0 left-0 w-full h-[1px] bg-[linear-gradient(to_right,transparent,var(--castlepink)_20%,var(--castlepink)_80%,transparent)]"
-        aria-hidden="true"
-      />
       <div className="max-w-[1200px] mx-auto text-center text-sm space-y-2">
 
         <p className="font-fredoka tracking-wide text-castlepurple">
@@ -17,7 +13,7 @@ export default function Footer() {
 
         <a
           href="mailto:contact@castlelogic.dev"
-          className="text-castlepink hover:text-castlepurple transition-colors"
+          className="py-3.5 sm:py-0 text-castlepink hover:text-castlepurple transition-colors"
         >
           contact@castlelogic.dev
         </a>
