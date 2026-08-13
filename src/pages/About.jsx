@@ -27,7 +27,7 @@ export default function About() {
         </div>
 
         {/* Values + CTA: centered block, replaces the old photo/bio pairing. */}
-        <div className="max-w-[800px] mx-auto text-center space-y-10 sm:space-y-12">
+        <div className="max-w-[800px] mx-auto text-center space-y-5 sm:space-y-6">
           <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-x-10 gap-y-6">
             <span className="flex flex-row sm:flex-col items-center gap-2 text-castlepurple">
               <LayoutGrid size={28} className="text-castlepink" />
