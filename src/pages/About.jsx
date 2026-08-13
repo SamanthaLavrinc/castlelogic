@@ -17,7 +17,7 @@ export default function About() {
       {/* TITLE SECTION */}
       <section className="max-w-[1200px] mx-auto mb-16 sm:mb-24">
         {/* Hero image: its own full-width row, centered, above the values block. */}
-        <div className="text-center mx-auto mb-4 sm:mb-8">
+        <div className="text-center mx-auto mb-2 sm:mb-5">
           <img
             src={aboutHeroImg}
             alt="Where design meets dev magic"
