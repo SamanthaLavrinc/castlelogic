@@ -12,6 +12,7 @@ import Timeline from "../components/Timeline";
 import SEO from "../components/SEO";
 import Reveal from "../components/Reveal";
 import resumePDF from "../assets/resume/Lavrinc-resume.pdf";
+import pfpResume from "../assets/pfp/pfp-resume.png";
 
 export default function Resume() {
 
@@ -24,33 +25,49 @@ export default function Resume() {
       />
 
       {/* --- Header Banner --- */}
-      <section className="max-w-[1200px] mx-auto text-center mb-8 sm:mb-12">
-        <h1 className="text-4xl font-bold mb-1 tracking-wide">SAMANTHA LAVRINC</h1>
-        <p className="text-castlepurple text-base font-light mb-4">
-          Founder & Lead Software Engineer – Castle Logic LLC
-        </p>
-        <div className="w-12 h-[1px] bg-castlepink mx-auto mb-4"></div>
+      <section className="max-w-[1200px] mx-auto mb-14 sm:mb-20">
+        <div className="max-w-[900px] mx-auto flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12 text-center sm:text-left">
+          <div className="relative shrink-0 w-40 sm:w-48 lg:w-52">
+            <div
+              className="absolute -inset-5 bg-castlepink/15 rounded-[2rem] blur-2xl -z-10"
+              aria-hidden="true"
+            />
+            <img
+              src={pfpResume}
+              alt="Samantha Lavrinc"
+              className="w-full h-auto object-cover object-top rounded-2xl border-2 border-castlepink/70 shadow-[0_0_30px_-5px_rgba(255,70,162,0.35)]"
+            />
+          </div>
 
-        <div className="flex justify-center gap-4">
-          <a
-            href="https://www.linkedin.com/in/slavrinc/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-3 rounded-xl border border-castlepink hover-glow-small text-castlepink hover:bg-gray-800 hover:text-castlepurple transition-all"
-          >
-            <Linkedin size={18} />
-            LinkedIn
-          </a>
+          <div className="space-y-4">
+            <h1 className="text-5xl sm:text-6xl font-bold tracking-wide">SAMANTHA LAVRINC</h1>
+            <p className="text-castlepurple text-lg sm:text-xl font-light">
+              Founder & Lead Software Engineer – Castle Logic LLC
+            </p>
+            <div className="w-16 h-[2px] bg-castlepink mx-auto sm:mx-0"></div>
 
-          <a
-            href="https://github.com/SamanthaLavrinc"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-3 rounded-xl border border-castlepink hover-glow-small text-castlepink hover:bg-gray-800 hover:text-castlepurple transition-all"
-          >
-            <Github size={18} />
-            GitHub
-          </a>
+            <div className="flex flex-wrap justify-center sm:justify-start gap-4 pt-1">
+              <a
+                href="https://www.linkedin.com/in/slavrinc/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-4 py-3 rounded-xl border border-castlepink hover-glow-small text-castlepink hover:bg-gray-800 hover:text-castlepurple transition-all"
+              >
+                <Linkedin size={18} />
+                LinkedIn
+              </a>
+
+              <a
+                href="https://github.com/SamanthaLavrinc"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-4 py-3 rounded-xl border border-castlepink hover-glow-small text-castlepink hover:bg-gray-800 hover:text-castlepurple transition-all"
+              >
+                <Github size={18} />
+                GitHub
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -81,6 +98,16 @@ export default function Resume() {
         </section>
       </Reveal>
 
+      {/* --- Skills Section --- */}
+      <Reveal>
+        <section className="max-w-[1200px] mx-auto mb-8 sm:mb-12">
+          <h2 className="flex items-center gap-3 text-3xl font-bold text-castlepink mb-5 tracking-wider justify-center">
+            <Star size={28} /> SKILLS
+          </h2>
+          <Skills />
+        </section>
+      </Reveal>
+
       {/* --- Education --- */}
       <Reveal>
         <section className="max-w-[1200px] mx-auto mb-8 sm:mb-12">
@@ -107,16 +134,6 @@ export default function Resume() {
               <p>A.W. Beattie Career Center</p>
             </div>
           </div>
-        </section>
-      </Reveal>
-
-      {/* --- Skills Section --- */}
-      <Reveal>
-        <section className="max-w-[1200px] mx-auto mb-8 sm:mb-12">
-          <h2 className="flex items-center gap-3 text-3xl font-bold text-castlepink mb-5 tracking-wider justify-center">
-            <Star size={28} /> SKILLS
-          </h2>
-          <Skills />
         </section>
       </Reveal>
 

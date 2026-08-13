@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import { Check } from "lucide-react";
+import { LayoutGrid, Sparkles, Zap } from "lucide-react";
 import Illustrations from "../components/Illustrations";
 import SEO from "../components/SEO";
 import Reveal from "../components/Reveal";
-import pfp from "../assets/pfp/pfp-cropped.webp";
 import aboutHeroImg from "../assets/hero_img/about_hero.png";
 
 export default function About() {
@@ -16,9 +15,9 @@ export default function About() {
       />
 
       {/* TITLE SECTION */}
-      <section className="max-w-[1200px] mx-auto mb-10 sm:mb-16">
-        {/* Hero image: its own full-width row, centered, above photo+text. */}
-        <div className="text-center mx-auto mb-8 sm:mb-6">
+      <section className="max-w-[1200px] mx-auto mb-16 sm:mb-24">
+        {/* Hero image: its own full-width row, centered, above the values block. */}
+        <div className="text-center mx-auto mb-14 sm:mb-20">
           <img
             src={aboutHeroImg}
             alt="Where design meets dev magic"
@@ -27,61 +26,36 @@ export default function About() {
           />
         </div>
 
-        {/* Photo + text row: centered under the hero image, narrower measure. */}
-        <div className="max-w-[800px] mx-auto flex flex-col sm:flex-row items-start gap-8 sm:gap-6">
-          <div className="relative shrink-0 w-56 sm:w-60 lg:w-64 mx-auto sm:mx-0">
-            <div
-              className="absolute -inset-6 bg-castlepink/15 rounded-[2rem] blur-2xl -z-10"
-              aria-hidden="true"
-            />
-            <img
-              src={pfp}
-              alt="Samantha Lavrinc"
-              className="w-full h-auto object-cover object-top rounded-2xl border-2 border-castlepink/70 shadow-[0_0_30px_-5px_rgba(255,70,162,0.35)]"
-              style={{ transform: "scaleX(-1)" }}
-            />
+        {/* Values + CTA: centered block, replaces the old photo/bio pairing. */}
+        <div className="max-w-[800px] mx-auto text-center space-y-10 sm:space-y-12">
+          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
+            <span className="flex flex-col items-center gap-2 text-castlepurple">
+              <LayoutGrid size={28} className="text-castlepink" />
+              Clean Architecture
+            </span>
+            <span className="flex flex-col items-center gap-2 text-castlepurple">
+              <Zap size={28} className="text-castlepink" />
+              Practical Problem Solving
+            </span>
+            <span className="flex flex-col items-center gap-2 text-castlepurple">
+              <Sparkles size={28} className="text-castlepink" />
+              Thoughtful Design
+            </span>
           </div>
 
-          <div className="text-center sm:text-left space-y-5">
-            <p className="text-xl sm:text-2xl font-semibold text-castlepurple tracking-wide">
-              Full-Stack Engineer &amp; Designer
-            </p>
-
-            <p className="text-lg text-castlepurple">
-              I'm a Pittsburgh-based engineer who also designs, and a designer who also ships
-              production code. Most people pick one side. I build on both, so nothing gets lost
-              in translation.
-            </p>
-
-            <div className="flex flex-wrap justify-center sm:justify-start gap-x-6 gap-y-2">
-              <span className="flex items-center gap-2 text-castlepurple">
-                <Check size={16} className="text-castlepink shrink-0" />
-                Clean Architecture
-              </span>
-              <span className="flex items-center gap-2 text-castlepurple">
-                <Check size={16} className="text-castlepink shrink-0" />
-                Practical Problem Solving
-              </span>
-              <span className="flex items-center gap-2 text-castlepurple">
-                <Check size={16} className="text-castlepink shrink-0" />
-                Thoughtful Design
-              </span>
-            </div>
-
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-5">
-              <Link
-                to="/projects"
-                className="px-6 py-3 border border-castlepink text-castlepink rounded-lg hover-glow-small hover:bg-gray-900 hover:text-castlepurple transition-colors font-semibold"
-              >
-                View Projects
-              </Link>
-              <Link
-                to="/resume"
-                className="text-castlepink hover:text-castlepurple transition-colors underline"
-              >
-                View Resume
-              </Link>
-            </div>
+          <div className="flex flex-wrap items-center justify-center gap-5">
+            <Link
+              to="/projects"
+              className="px-6 py-3 border border-castlepink text-castlepink rounded-lg hover-glow-small hover:bg-gray-900 hover:text-castlepurple transition-colors font-semibold"
+            >
+              View Projects
+            </Link>
+            <Link
+              to="/resume"
+              className="text-castlepink hover:text-castlepurple transition-colors underline"
+            >
+              View Resume
+            </Link>
           </div>
         </div>
       </section>
