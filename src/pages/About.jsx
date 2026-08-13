@@ -17,7 +17,7 @@ export default function About() {
       {/* TITLE SECTION */}
       <section className="max-w-[1200px] mx-auto mb-16 sm:mb-24">
         {/* Hero image: its own full-width row, centered, above the values block. */}
-        <div className="text-center mx-auto mb-2 sm:mb-5">
+        <div className="text-center mx-auto mb-0 sm:mb-2">
           <img
             src={aboutHeroImg}
             alt="Where design meets dev magic"
@@ -28,7 +28,7 @@ export default function About() {
 
         {/* Values + CTA: centered block, replaces the old photo/bio pairing. */}
         <div className="max-w-[800px] mx-auto text-center space-y-10 sm:space-y-12">
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-x-10 gap-y-6">
             <span className="flex flex-col items-center gap-2 text-castlepurple">
               <LayoutGrid size={28} className="text-castlepink" />
               Clean Architecture
