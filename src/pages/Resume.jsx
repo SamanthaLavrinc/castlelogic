@@ -6,6 +6,7 @@ import {
   Star,
   Github,
   Linkedin,
+  Zap,
 } from "lucide-react";
 import Skills from "../components/Skills";
 import Timeline from "../components/Timeline";
@@ -25,7 +26,7 @@ export default function Resume() {
       />
 
       {/* --- Header Banner --- */}
-      <section className="max-w-[1200px] mx-auto mb-14 sm:mb-20">
+      <section className="max-w-[1200px] mx-auto">
         <div className="max-w-[900px] mx-auto flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12 text-center sm:text-left">
           <div className="relative shrink-0 w-40 sm:w-48 lg:w-52">
             <div
@@ -70,6 +71,19 @@ export default function Resume() {
           </div>
         </div>
       </section>
+
+      {/* --- Divider --- */}
+      <div
+        className="max-w-[420px] mx-auto flex items-center gap-4 py-12 sm:py-16"
+        aria-hidden="true"
+      >
+        <div className="flex-1 h-px bg-castlepink/40" />
+        <Zap
+          size={16}
+          className="shrink-0 text-castlepink drop-shadow-[0_0_5px_rgba(255,70,162,0.5)]"
+        />
+        <div className="flex-1 h-px bg-castlepink/40" />
+      </div>
 
       {/* --- Summary Section --- */}
       <Reveal>
