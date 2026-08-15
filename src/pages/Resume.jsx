@@ -77,12 +77,12 @@ export default function Resume() {
         className="max-w-[420px] mx-auto flex items-center gap-4 py-12 sm:py-16"
         aria-hidden="true"
       >
-        <div className="flex-1 h-px bg-castlepink/40" />
+        <div className="flex-1 h-px bg-castlepink opacity-40" />
         <Zap
           size={16}
           className="shrink-0 text-castlepink drop-shadow-[0_0_5px_rgba(255,70,162,0.5)]"
         />
-        <div className="flex-1 h-px bg-castlepink/40" />
+        <div className="flex-1 h-px bg-castlepink opacity-40" />
       </div>
 
       {/* --- Summary Section --- */}
