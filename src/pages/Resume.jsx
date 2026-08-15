@@ -35,7 +35,7 @@ export default function Resume() {
             <img
               src={pfpResume}
               alt="Samantha Lavrinc"
-              className="w-full h-auto object-cover object-top rounded-2xl shadow-[0_8px_24px_-6px_rgba(0,0,0,0.6)]"
+              className="w-full h-auto object-cover object-top rounded-2xl shadow-[0_0_32px_rgba(203,144,255,0.18)]"
             />
           </div>
 
