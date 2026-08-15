@@ -22,12 +22,12 @@ export default function About() {
             src={aboutHeroImg}
             alt="Where design meets dev magic"
             className="h-auto mx-auto"
-            style={{ width: "clamp(240px, 70vw, 750px)" }}
+            style={{ width: "clamp(350px, 70vw, 750px)" }}
           />
         </div>
 
         {/* Values + CTA: centered block, replaces the old photo/bio pairing. */}
-        <div className="max-w-[800px] mx-auto text-center space-y-5 sm:space-y-6">
+        <div className="max-w-[800px] mx-auto text-center space-y-5 sm:space-y-6 pt-3 sm:pt-0">
           <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-x-10 gap-y-3 sm:gap-y-6">
             <span className="flex flex-row sm:flex-col items-center gap-2 text-castlepurple">
               <LayoutGrid size={28} className="text-castlepink" />
@@ -62,7 +62,7 @@ export default function About() {
 
       {/* HISTORY / BACKGROUND SECTION */}
       <Reveal>
-        <section className="max-w-[1200px] mx-auto mb-10 sm:mb-16 space-y-8">
+        <section className="max-w-[1200px] mx-auto mb-10 sm:mb-16 space-y-6 sm:space-y-8">
           <h2 className="text-3xl sm:text-2xl font-bold text-castlepink text-center tracking-wider">
             A LITTLE ABOUT MY JOURNEY
           </h2>
@@ -131,7 +131,7 @@ export default function About() {
             WHAT I DO AS A FULL-STACK DEVELOPER
           </h2>
 
-          <div className="grid sm:grid-cols-2 gap-10 text-center text-castlepurple text-lg sm:text-xl">
+          <div className="grid sm:grid-cols-2 gap-5 sm:gap-10 text-center text-castlepurple text-lg sm:text-xl">
             <div className="p-6 border border-castlepink rounded-2xl bg-gray-900 hover:scale-[1.02] transition-transform">
               <h3 className="text-castlepink text-xl mb-2 tracking-wider">Frontend Engineering</h3>
               <p>React, Tailwind, performance optimization, UX/UI patterns, animation, accessibility, and clean component architecture.</p>
