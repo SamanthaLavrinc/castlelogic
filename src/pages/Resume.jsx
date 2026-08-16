@@ -80,7 +80,7 @@ export default function Resume() {
         <div className="flex-1 h-px bg-castlepink opacity-40" />
         <Zap
           size={16}
-          className="shrink-0 text-castlepink drop-shadow-[0_0_5px_rgba(255,70,162,0.5)]"
+          className="shrink-0 text-castlepink spark-ignite"
         />
         <div className="flex-1 h-px bg-castlepink opacity-40" />
       </div>
