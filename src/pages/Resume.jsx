@@ -40,7 +40,7 @@ export default function Resume() {
             />
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-2">
             <h1 className="text-5xl sm:text-6xl font-bold tracking-wide">SAMANTHA LAVRINC</h1>
             <p className="text-castlepurple text-lg sm:text-xl font-light">
               Founder & Lead Software Engineer – Castle Logic LLC
@@ -74,7 +74,7 @@ export default function Resume() {
 
       {/* --- Divider --- */}
       <div
-        className="max-w-[1200px] mx-auto flex items-center gap-4 py-12 sm:py-16"
+        className="max-w-[1200px] mx-auto flex items-center gap-4 py-12"
         aria-hidden="true"
       >
         <div className="flex-1 h-px bg-castlepink opacity-40" />
