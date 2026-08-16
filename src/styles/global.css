@@ -108,3 +108,19 @@ textarea:focus-visible,
   transform: scale(1.02);
 }
 
+/* Experience cards: same glow language as hover-glow-small buttons, but a
+   translation instead of a scale since these cards are full-width rows. */
+.timeline-card {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.timeline-card:hover,
+.timeline-card:focus-visible {
+  box-shadow: 0 0 15px var(--castlepurple), 0 0 20px rgba(0, 0, 0, 0.7);
+  transform: translateY(-3px);
+}
+
+.timeline-card.is-expanded {
+  box-shadow: 0 0 20px var(--castlepurple), 0 0 25px rgba(0, 0, 0, 0.7);
+}
+

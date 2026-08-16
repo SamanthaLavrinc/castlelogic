@@ -75,7 +75,9 @@ export default function Timeline() {
             role="button"
             tabIndex={0}
             aria-expanded={openIndexes.includes(index)}
-            className="group bg-gray-900 rounded-lg p-4 shadow-md transition-all cursor-pointer"
+            className={`group bg-gray-900 rounded-lg p-4 shadow-md cursor-pointer timeline-card ${
+              openIndexes.includes(index) ? "is-expanded" : ""
+            }`}
             onClick={() => toggle(index)}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === " ") {
