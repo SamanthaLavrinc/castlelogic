@@ -43,7 +43,7 @@ export default function Resume() {
           <div className="space-y-2">
             <h1 className="text-5xl sm:text-6xl font-bold tracking-wide">SAMANTHA LAVRINC</h1>
             <p className="text-castlepurple text-lg sm:text-xl font-light">
-              Founder & Lead Software Engineer – Castle Logic LLC
+              Founder & Software Engineer – Castle Logic LLC
             </p>
             <div className="w-16 h-[2px] bg-castlepink mx-auto sm:mx-0"></div>
 
