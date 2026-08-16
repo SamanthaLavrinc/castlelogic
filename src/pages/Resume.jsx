@@ -30,13 +30,13 @@ export default function Resume() {
         <div className="max-w-[900px] mx-auto flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12 text-center sm:text-left">
           <div className="relative shrink-0 w-40 sm:w-48 lg:w-52">
             <div
-              className="absolute -inset-5 bg-castlepink/15 rounded-[2rem] blur-2xl -z-10"
+              className="absolute -inset-5 bg-castlepink opacity-15 rounded-[2rem] blur-2xl -z-10"
               aria-hidden="true"
             />
             <img
               src={pfpResume}
               alt="Samantha Lavrinc"
-              className="w-full h-auto object-cover object-top rounded-2xl shadow-[0_0_32px_rgba(203,144,255,0.18)]"
+              className="w-full h-auto object-cover object-top rounded-2xl shadow-[0_0_15px_var(--castlepurple),0_0_20px_rgba(0,0,0,0.7)]"
             />
           </div>
 
