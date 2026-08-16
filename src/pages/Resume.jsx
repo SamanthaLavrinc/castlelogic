@@ -49,7 +49,7 @@ export default function Resume() {
               <div className="w-16 h-[2px] bg-castlepink mx-auto mt-2 sm:mx-0 sm:mt-2 sm:w-full"></div>
             </div>
 
-            <div className="flex flex-wrap justify-center sm:justify-start gap-4 pt-1">
+            <div className="flex flex-wrap justify-center sm:justify-start gap-4 mt-8 sm:mt-10 pt-1">
               <a
                 href="https://www.linkedin.com/in/slavrinc/"
                 target="_blank"
