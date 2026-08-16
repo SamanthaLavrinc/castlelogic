@@ -129,20 +129,23 @@ textarea:focus-visible,
 @keyframes spark-ignite {
   0% {
     opacity: 0;
+    transform: scale(0.4);
     filter: drop-shadow(0 0 0px rgba(255, 70, 162, 0));
   }
-  60% {
+  55% {
     opacity: 1;
-    filter: drop-shadow(0 0 10px rgba(255, 70, 162, 0.9));
+    transform: scale(1.35);
+    filter: drop-shadow(0 0 16px rgba(255, 70, 162, 1));
   }
   100% {
     opacity: 1;
+    transform: scale(1);
     filter: drop-shadow(0 0 5px rgba(255, 70, 162, 0.5));
   }
 }
 
 .spark-ignite {
-  animation: spark-ignite 400ms ease-out;
+  animation: spark-ignite 550ms ease-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
