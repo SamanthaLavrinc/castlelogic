@@ -27,7 +27,7 @@ export default function Resume() {
 
       {/* --- Header Banner --- */}
       <section className="max-w-[1200px] mx-auto">
-        <div className="max-w-[900px] mx-auto flex flex-col sm:flex-row items-center justify-center gap-12 sm:gap-8 text-center sm:text-left">
+        <div className="max-w-[900px] mx-auto flex flex-col sm:flex-row items-center sm:items-start justify-center gap-10 sm:gap-8 text-center sm:text-left">
           <div className="relative shrink-0 w-40 sm:w-48 lg:w-52">
             <div
               className="absolute -inset-5 bg-castlepink opacity-15 rounded-[2rem] blur-2xl -z-10"
