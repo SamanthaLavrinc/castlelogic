@@ -42,10 +42,12 @@ export default function Resume() {
 
           <div className="space-y-2">
             <h1 className="text-5xl sm:text-6xl font-bold tracking-wide">SAMANTHA LAVRINC</h1>
-            <p className="text-castlepurple text-lg sm:text-xl font-light">
-              Founder & Software Engineer – Castle Logic LLC
-            </p>
-            <div className="w-16 h-[2px] bg-castlepink mx-auto sm:mx-0"></div>
+            <div className="sm:inline-block">
+              <p className="text-castlepurple text-lg sm:text-xl font-light">
+                Founder & Software Engineer – Castle Logic LLC
+              </p>
+              <div className="w-16 h-[2px] bg-castlepink mx-auto mt-2 sm:mx-0 sm:mt-2 sm:w-full"></div>
+            </div>
 
             <div className="flex flex-wrap justify-center sm:justify-start gap-4 pt-1">
               <a
