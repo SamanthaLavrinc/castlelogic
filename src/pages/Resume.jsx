@@ -92,12 +92,13 @@ export default function Resume() {
             <User size={28} /> SUMMARY
           </h2>
           <p className="text-castlepurple text-xl leading-relaxed">
-            Pittsburgh-based Software Engineer with hands-on backend development experience and a
-            design background that goes back to 2006. I work in Java, SQL, and CI/CD pipelines,
-            and I'm equally comfortable in React, TypeScript, and component-driven front-end
-            development. I care about the same thing on both sides: interfaces that are intuitive
-            and backend systems that actually hold up. Formally trained in both software
-            engineering and design.
+            Software engineer with a design background who enjoys building software that's as
+            intuitive for users as it is reliable behind the scenes. Based in Pittsburgh, I have
+            hands-on experience building backend systems in Java, SQL, and CI/CD pipelines, while
+            also designing and developing modern React and TypeScript interfaces. Whether I'm
+            working on the frontend or backend, I approach problems the same way: build something
+            that's thoughtful, maintainable, and solves the right problem. Formally trained in
+            both software engineering and design.
           </p>
         </section>
       </Reveal>
