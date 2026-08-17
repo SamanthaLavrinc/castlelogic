@@ -1,6 +1,5 @@
 /* src/styles/global.css */
-@import "tailwindcss/preflight";
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
   --castlepink: #FF46A2;
