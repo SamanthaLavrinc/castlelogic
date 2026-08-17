@@ -1,4 +1,5 @@
 import { useForm, ValidationError } from "@formspree/react";
+import { Zap } from "lucide-react";
 import SEO from "../components/SEO";
 
 export default function Contact() {
@@ -25,6 +26,19 @@ export default function Contact() {
           talk through what you actually need, I put together a scoped plan, and we build it
           iteratively, so you're never waiting for one big reveal at the end.
         </p>
+      </div>
+
+      {/* --- Divider --- */}
+      <div
+        className="w-full max-w-[700px] flex items-center gap-4 mb-10 sm:mb-10"
+        aria-hidden="true"
+      >
+        <div className="flex-1 h-px bg-castlepink opacity-40" />
+        <Zap
+          size={16}
+          className="shrink-0 text-castlepink spark-ignite"
+        />
+        <div className="flex-1 h-px bg-castlepink opacity-40" />
       </div>
 
       <div
