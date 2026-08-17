@@ -44,7 +44,10 @@ export default function Resume() {
             <h1 className="text-5xl sm:text-6xl font-bold tracking-wide">SAMANTHA LAVRINC</h1>
             <div className="sm:inline-block">
               <p className="text-castlepurple text-lg sm:text-xl font-light">
-                <span className="sm:border-b sm:border-castlepink">Founder & Software Engineer</span>
+                <span className="sm:inline-block">
+                  Founder & Software Engineer
+                  <span className="hidden sm:block h-[2px] bg-castlepink mt-2"></span>
+                </span>
                 <br className="sm:hidden" />
                 <span className="hidden sm:inline"> – </span>
                 Castle Logic LLC
