@@ -27,7 +27,7 @@ export default function Resume() {
 
       {/* --- Header Banner --- */}
       <section className="max-w-[1200px] mx-auto">
-        <div className="max-w-[900px] mx-auto flex flex-col sm:flex-row items-center sm:items-start justify-center gap-10 sm:gap-8 text-center sm:text-left">
+        <div className="max-w-[900px] mx-auto flex flex-col sm:flex-row items-center sm:items-start justify-center gap-8 text-center sm:text-left">
           <div className="relative shrink-0 w-40 sm:w-48 lg:w-52">
             <div
               className="absolute -inset-5 bg-castlepink opacity-15 rounded-[2rem] blur-2xl -z-10"
@@ -52,7 +52,7 @@ export default function Resume() {
               <div className="w-16 h-[2px] bg-castlepink mx-auto mt-2 sm:mx-0 sm:mt-2 sm:w-full"></div>
             </div>
 
-            <div className="flex flex-wrap justify-center sm:justify-start gap-4 pt-10">
+            <div className="flex flex-wrap justify-center sm:justify-start gap-4 pt-6 sm:pt-10">
               <a
                 href="https://www.linkedin.com/in/slavrinc/"
                 target="_blank"
