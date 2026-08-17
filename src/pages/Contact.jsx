@@ -72,7 +72,7 @@ export default function Contact() {
             <form onSubmit={handleSubmit} className="flex flex-col gap-6">
               {/* Name */}
               <div>
-                <label className="block mb-1 text-castlepink font-semibold">Name</label>
+                <label className="block mb-1 text-castlepink font-semibold tracking-wide">Name</label>
                 <input
                   type="text"
                   name="name"
@@ -89,7 +89,7 @@ export default function Contact() {
 
               {/* Email */}
               <div>
-                <label className="block mb-1 text-castlepink font-semibold">Email</label>
+                <label className="block mb-1 text-castlepink font-semibold tracking-wide">Email</label>
                 <input
                   type="email"
                   name="email"
@@ -106,7 +106,7 @@ export default function Contact() {
 
               {/* Message */}
               <div>
-                <label className="block mb-1 text-castlepink font-semibold">Message</label>
+                <label className="block mb-1 text-castlepink font-semibold tracking-wide">Message</label>
                 <textarea
                   name="message"
                   rows="6"
@@ -125,9 +125,9 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={state.submitting}
-                className="px-6 py-3 rounded-lg bg-black border border-castlepink text-castlepurple hover:bg-gray-800 transition-all hover-glow-small-pink text-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-6 py-3 rounded-lg bg-black border border-castlepink text-castlepurple hover:bg-gray-800 transition-all hover-glow-small text-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {state.submitting ? "Sending..." : "Send Message"}
+                {state.submitting ? "Sending..." : "SEND MESSAGE"}
               </button>
 
               <ValidationError errors={state.errors} className="text-red-400 text-sm text-center" />
