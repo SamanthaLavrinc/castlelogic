@@ -127,7 +127,7 @@ export default function Contact() {
                 disabled={state.submitting}
                 className="px-6 py-3 rounded-lg bg-black border border-castlepink text-castlepurple hover:bg-gray-800 transition-all hover-glow-small text-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {state.submitting ? "Sending..." : "SEND MESSAGE"}
+                {state.submitting ? "Sending..." : "SEND"}
               </button>
 
               <ValidationError errors={state.errors} className="text-red-400 text-sm text-center" />
