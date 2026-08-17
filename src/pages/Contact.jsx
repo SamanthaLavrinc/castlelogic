@@ -53,7 +53,7 @@ export default function Contact() {
         "
       >
         {/* Title */}
-        <h1 className="text-4xl font-bold text-castlepink text-center mb-6 tracking-wider">
+        <h1 className="text-4xl font-bold text-castlepink text-center mb-4 tracking-wider">
           CONTACT ME
         </h1>
 
@@ -63,7 +63,7 @@ export default function Contact() {
           </p>
         ) : (
           <>
-            <p className="text-center text-castlepurple mb-10 text-lg">
+            <p className="text-center text-castlepurple mb-6 text-lg">
               Have a project in mind or just want to say hello?
               Send me a message below!
             </p>
@@ -125,7 +125,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={state.submitting}
-                className="mt-4 px-6 py-3 rounded-lg border border-castlepink text-castlepink hover:bg-gray-800 hover:text-castlepurple transition-all hover-glow-small text-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-6 py-3 rounded-lg border border-castlepink text-castlepink hover:bg-gray-800 hover:text-castlepurple transition-all hover-glow-small text-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {state.submitting ? "Sending..." : "Send Message"}
               </button>
