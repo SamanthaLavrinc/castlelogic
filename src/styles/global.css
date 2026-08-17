@@ -107,6 +107,20 @@ textarea:focus-visible,
   transform: scale(1.02);
 }
 
+/* Pink variant of hover-glow-small, for buttons on a castlepurple fill
+   (the purple glow would blend into the button itself). */
+.hover-glow-small-pink:hover {
+  box-shadow: 0 0 15px var(--castlepink), 0 0 20px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  transform: scale(1.02);
+  transition: all 0.3s ease;
+}
+
+.hover-glow-small-pink:focus-visible {
+  box-shadow: 0 0 15px var(--castlepink), 0 0 20px rgba(0, 0, 0, 0.7);
+  transform: scale(1.02);
+}
+
 /* Experience cards: same glow language as hover-glow-small buttons, but a
    translation instead of a scale since these cards are full-width rows. */
 .timeline-card {
