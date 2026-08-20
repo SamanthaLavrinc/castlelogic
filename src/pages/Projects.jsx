@@ -37,10 +37,10 @@ export default function Projects() {
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-5 py-3 sm:py-2 rounded-lg font-semibold transition-all border ${
+            className={`filter-chip px-5 py-3 sm:py-2 rounded-lg font-semibold border cursor-pointer ${
               activeCategory === cat
                 ? "border-castlepink text-castlepink bg-gray-900"
-                : "border-gray-700 text-gray-400 hover:border-castlepink hover:text-castlepink"
+                : "border-gray-700 text-gray-400"
             }`}
           >
             {cat}

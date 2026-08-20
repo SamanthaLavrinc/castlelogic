@@ -139,6 +139,27 @@ textarea:focus-visible,
   box-shadow: 0 0 10px rgba(255, 70, 162, 0.3), 0 6px 14px rgba(0, 0, 0, 0.35);
 }
 
+/* Filter chips: same hover language as project cards (border brighten, lift,
+   subtle glow) on the same 180ms ease-out timing, so filtering and browsing
+   read as one cohesive interaction system instead of two different ones.
+   Written as plain CSS (not Tailwind hover: utilities) because castlepink
+   isn't a registered Tailwind color, so hover:border-castlepink etc. would
+   silently fail to generate. */
+.filter-chip {
+  background-color: transparent;
+  transition: transform 180ms ease-out, box-shadow 180ms ease-out,
+    border-color 180ms ease-out, color 180ms ease-out, background-color 180ms ease-out;
+}
+
+.filter-chip:hover,
+.filter-chip:focus-visible {
+  border-color: var(--castlepink);
+  color: var(--castlepink);
+  background-color: #111827;
+  transform: translateY(-2px);
+  box-shadow: 0 0 10px rgba(255, 70, 162, 0.3), 0 6px 14px rgba(0, 0, 0, 0.35);
+}
+
 /* One-time spark on load for the divider's lightning bolt: fade in, brief
    brighter bloom, settle to its resting glow. Runs once, never loops. */
 @keyframes spark-ignite {
