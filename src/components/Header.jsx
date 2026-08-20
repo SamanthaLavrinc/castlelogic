@@ -52,6 +52,22 @@ function ContactSparkles() {
         className="sparkle-twinkle absolute -bottom-1.5 left-1/2 w-1.5 h-1.5 bg-white"
         style={{ clipPath: SPARKLE_POINTS, animationDelay: "1.7s", animationDuration: "2.8s" }}
       />
+
+      {/* Static sparkles, scattered the same way as the twinkling ones but
+          not animated — without these the twinkles read as three pulsing
+          dots rather than a glitter/sparkle texture. */}
+      <span
+        className="absolute top-1/2 -left-2 -translate-y-1/2 w-1 h-1 bg-white opacity-40"
+        style={{ clipPath: SPARKLE_POINTS }}
+      />
+      <span
+        className="absolute -top-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-white opacity-50"
+        style={{ clipPath: SPARKLE_POINTS }}
+      />
+      <span
+        className="absolute -bottom-1 -right-2 w-1.5 h-1.5 bg-white opacity-35"
+        style={{ clipPath: SPARKLE_POINTS }}
+      />
     </span>
   );
 }
