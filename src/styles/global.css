@@ -155,3 +155,35 @@ textarea:focus-visible,
   }
 }
 
+/* Soft twinkle for the sparkles layered on top of the CONTACT nav link.
+   Loops gently, each sparkle offset on its own delay/duration so they
+   glint independently instead of pulsing in unison. */
+@keyframes sparkle-twinkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+    filter: drop-shadow(0 0 0px rgba(255, 70, 162, 0));
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1);
+    filter: drop-shadow(0 0 4px rgba(255, 70, 162, 0.9));
+  }
+}
+
+.sparkle-twinkle {
+  animation-name: sparkle-twinkle;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  /* duration/delay are set per-sparkle via inline style so each one can
+     stagger independently without fighting this shorthand's cascade order */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sparkle-twinkle {
+    animation: none;
+    opacity: 0.5;
+  }
+}
+

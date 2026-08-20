@@ -30,6 +30,32 @@ function ContactStarburst({ size = "w-10 h-10" }) {
   );
 }
 
+// Small 4-point sparkle shape, distinct from the 8-point starburst above.
+const SPARKLE_POINTS =
+  "polygon(50% 0%, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0% 50%, 35% 35%)";
+
+function ContactSparkles() {
+  return (
+    <span
+      className="absolute inset-0 z-10 pointer-events-none"
+      aria-hidden="true"
+    >
+      <span
+        className="sparkle-twinkle absolute -top-1.5 left-1 w-2 h-2 bg-white"
+        style={{ clipPath: SPARKLE_POINTS, animationDelay: "0s", animationDuration: "2.4s" }}
+      />
+      <span
+        className="sparkle-twinkle absolute top-0 right-0 w-1.5 h-1.5 bg-white"
+        style={{ clipPath: SPARKLE_POINTS, animationDelay: "0.9s", animationDuration: "3.1s" }}
+      />
+      <span
+        className="sparkle-twinkle absolute -bottom-1.5 left-1/2 w-1.5 h-1.5 bg-white"
+        style={{ clipPath: SPARKLE_POINTS, animationDelay: "1.7s", animationDuration: "2.8s" }}
+      />
+    </span>
+  );
+}
+
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -55,6 +81,7 @@ export default function Header() {
               className="relative group text-castlepurple hover:text-castlepink transition-colors"
             >
               {page.name === "CONTACT" && <ContactStarburst size="w-36 h-36" />}
+              {page.name === "CONTACT" && <ContactSparkles />}
               {page.name}
 
               <span className="absolute left-0 bottom-[-4px] h-[2px] w-0 bg-castlepink transition-all duration-300 group-hover:w-full"></span>
