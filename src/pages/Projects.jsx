@@ -32,7 +32,7 @@ export default function Projects() {
       </section>
 
       {/* Category Tabs */}
-      <section className="max-w-[1200px] mx-auto mb-8 sm:mb-12 flex justify-center gap-4 flex-wrap">
+      <section className="max-w-[1200px] mx-auto mb-5 sm:mb-8 flex justify-center gap-4 flex-wrap">
         {categories.map((cat) => (
           <button
             key={cat}
