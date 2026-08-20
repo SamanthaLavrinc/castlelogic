@@ -123,6 +123,22 @@ textarea:focus-visible,
   box-shadow: 0 0 20px var(--castlepurple), 0 0 25px rgba(0, 0, 0, 0.7);
 }
 
+/* Project cards: whole card is a link, so hover/focus should read as a
+   single lift rather than the bigger glows used on buttons/timeline rows.
+   Border starts dimmed and brightens on interaction instead of animating
+   width/opacity, keeping the 150-200ms window snappy without flashing. */
+.project-card {
+  border-color: rgba(255, 70, 162, 0.45);
+  transition: transform 180ms ease-out, box-shadow 180ms ease-out, border-color 180ms ease-out;
+}
+
+.project-card:hover,
+.project-card:focus-visible {
+  border-color: var(--castlepink);
+  transform: translateY(-3px);
+  box-shadow: 0 0 10px rgba(255, 70, 162, 0.3), 0 6px 14px rgba(0, 0, 0, 0.35);
+}
+
 /* One-time spark on load for the divider's lightning bolt: fade in, brief
    brighter bloom, settle to its resting glow. Runs once, never loops. */
 @keyframes spark-ignite {
