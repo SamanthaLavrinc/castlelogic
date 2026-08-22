@@ -13,13 +13,13 @@ Clinical trial matching remains a core, fully-built-out application. It's the sh
 
 Here's a quick highlight reel before the detail, covering the pieces of this architecture that go beyond standard practice in clinical NLP, not just competent implementation of it:
 
-- **Compositional concept model:** body part and morphology compose into a diagnosis without either atom being erased, unlike the erasure pattern common in extraction pipelines.
-- **ICD-O modeled as a bridge, not a dead end:** a queryable pivot between SNOMED and ICD-10-CM, reflecting a real structural relationship most systems leave as a flat, one-way lookup.
-- **Vector similarity used for attachment resolution, not just retrieval:** determining *which body part a finding belongs to* when proximity in the text is unreliable, a harder and less-discussed problem than concept matching.
-- **Bitemporal tracking on both clinical and billing data:** effective date vs. logged date, enabling both clinical-timeline and audit-style reasoning from the same graph.
-- **A resolution-scope precision gauge:** every resolved link carries the granularity it was resolved at (phrase, sentence, paragraph, document), so downstream consumers know how much to trust it, rather than treating every match as equally certain.
-- **Indexed incremental updates instead of full reprocessing:** adding a new concept or synonym triggers a targeted search over already-stored document text, not a corpus-wide re-run of the entire NLP pipeline.
-- **Dual reasoning modes on one graph:** deterministic, auditable graph queries and RAG-assisted natural language querying, over the same data, selectable per use case rather than forced into one paradigm.
+- **COMPOSITIONAL CONCEPT MODEL:** body part and morphology compose into a diagnosis without either atom being erased, unlike the erasure pattern common in extraction pipelines.
+- **ICD-O MODELED AS A BRIDGE, NOT A DEAD END:** a queryable pivot between SNOMED and ICD-10-CM, reflecting a real structural relationship most systems leave as a flat, one-way lookup.
+- **VECTOR SIMILARITY USED FOR ATTACHMENT RESOLUTION, NOT JUST RETRIEVAL:** determining *which body part a finding belongs to* when proximity in the text is unreliable, a harder and less-discussed problem than concept matching.
+- **BITEMPORAL TRACKING ON BOTH CLINICAL AND BILLING DATA:** effective date vs. logged date, enabling both clinical-timeline and audit-style reasoning from the same graph.
+- **A RESOLUTION-SCOPE PRECISION GAUGE:** every resolved link carries the granularity it was resolved at (phrase, sentence, paragraph, document), so downstream consumers know how much to trust it, rather than treating every match as equally certain.
+- **INDEXED INCREMENTAL UPDATES INSTEAD OF FULL REPROCESSING:** adding a new concept or synonym triggers a targeted search over already-stored document text, not a corpus-wide re-run of the entire NLP pipeline.
+- **DUAL REASONING MODES ON ONE GRAPH:** deterministic, auditable graph queries and RAG-assisted natural language querying, over the same data, selectable per use case rather than forced into one paradigm.
 
 Each is unpacked below.
 
