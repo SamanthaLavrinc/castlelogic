@@ -266,8 +266,11 @@ export default function CaseStudyDetail() {
 
           {/* top offset nudged 10px below the 76% baseline so the label
               clears the baked-in subtitle text sitting just above it in the
-              image — a plain % value put them too close together. */}
-          <p className="absolute left-[4.3%] top-[calc(76%+10px)] text-xs uppercase tracking-wide text-castlepink/70">
+              image — a plain % value put them too close together. Left
+              offset is wider on mobile (8% vs. 4.3% from `sm:` up): the
+              baked-in category label sits closer to the image's own left
+              margin on narrow crops, so 4.3% reads misaligned there. */}
+          <p className="absolute left-[8%] sm:left-[4.3%] top-[calc(76%+10px)] text-xs uppercase tracking-wide text-castlepink/70">
             {study.category}
           </p>
 
@@ -396,7 +399,7 @@ function CaseStudyBody({ study }) {
                 {/* Same dark-grey card treatment as the site's other cards
                     (see Timeline.jsx's `.timeline-card` and the rounded-2xl
                     panels on About/Contact): bg-gray-900, rounded, no
-                    border — at 80% opacity here so the GradientWash glow
+                    border — at 70% opacity here so the GradientWash glow
                     behind the page shows through faintly. Extra vertical
                     padding (vs. the site's usual
                     p-6/p-8 cards) gives these more breathing room since
@@ -406,7 +409,7 @@ function CaseStudyBody({ study }) {
                     unaffected by this outer card. Body copy below is
                     `font-light`, matching Timeline.jsx's card body text —
                     Fredoka's default weight reads heavy at paragraph length. */}
-                <div className="bg-gray-900/80 rounded-2xl px-6 py-10 sm:px-8 sm:py-12">
+                <div className="bg-gray-900/70 rounded-2xl px-6 py-10 sm:px-8 sm:py-12">
                   {section.heading && (
                     <h2 className="text-sm uppercase tracking-wide text-castlepink mb-3">{section.heading}</h2>
                   )}
