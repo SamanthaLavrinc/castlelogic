@@ -14,7 +14,7 @@
     {
       "heading": "Section heading",
       "image": "projects/your-project-slug/some-image.png (optional, path relative to src/assets/)",
-      "body": "One or more paragraphs of prose for this section. Separate paragraphs with a blank line between them to render as distinct paragraphs."
+      "body": "One or more paragraphs of prose for this section. Separate paragraphs with a blank line between them to render as distinct paragraphs. Two lightweight markdown-lite conventions are also supported within a blank-line-separated block: a block where every line starts with '- ' renders as a real bulleted list (** around a lead-in term inside a list line renders as bold); a block that is a single paragraph fully wrapped in **double asterisks** renders as a bold, standalone, visually emphasized line instead of a plain paragraph (use sparingly, for pull-quote-style statements)."
     }
   ],
   "heroImage": "projects/your-project-slug/cover.png",

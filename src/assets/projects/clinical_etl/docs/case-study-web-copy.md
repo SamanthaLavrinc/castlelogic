@@ -9,6 +9,8 @@ Clinical trial matching remains a core, fully-built-out application. It's the sh
 
 ## What's distinctive here
 
+**Current status: conceptual phase only.**
+
 Here's a quick highlight reel before the detail, covering the pieces of this architecture that go beyond standard practice in clinical NLP, not just competent implementation of it:
 
 - **Compositional concept model:** body part and morphology compose into a diagnosis without either atom being erased, unlike the erasure pattern common in extraction pipelines.
@@ -107,7 +109,7 @@ A pathology report might describe a left breast biopsy in one section and a righ
 
 Here, vector similarity between the morphology mention's surrounding context and each candidate body part's surrounding context resolves the attachment, not by guessing based on distance, but by scoring which context actually reads as related. The winning pairing is written into the graph as a scored edge; low-confidence pairs route to human review rather than being silently guessed. This is the same class of problem as coreference resolution in general NLP, applied to a place where getting it wrong has real clinical and billing consequences.
 
-*Known limitation, stated honestly: true pronominal coreference ("it was treated with lumpectomy," referring to a diagnosis named two sentences earlier) is a distinct problem from attachment scoring, since there's no concept-specific text in that sentence to embed or search for at all. It has to be resolved at initial ingestion time, while the document's discourse structure is still in view, not recovered later. This is flagged as an open item, not solved by the mechanisms above.*
+*Known limitation, stated honestly: true pronominal coreference ("it was treated with lumpectomy," referring to a diagnosis named two sentences earlier) is a distinct problem from attachment scoring, since there's no concept-specific text in that sentence to embed or search for. Attachment scoring alone doesn't resolve a case like this automatically. But it isn't a silent gap: the resolution-scope precision gauge covered in the next section assigns a case like this an appropriately low confidence and routes it to human review, the same way any other low-certainty match is handled, rather than guessing and moving on. That's not the same as solving it automatically, but it is handled safely.*
 
 ---
 
@@ -121,7 +123,7 @@ A phrase-level mention ("left breast," offsets 142 to 156) and its sentence-leve
 
 This matters for two reasons:
 
-**Storage stays cheap.** The cost of "give this phrase its sentence context" is two integers, not a copied string. Clinical text is highly repetitive across patients, so avoiding duplication at every granularity keeps the index from ballooning the way naive per-mention text copies would.
+**Storage stays cheap.** The cost of "give this phrase its sentence context" is two integers, not a copied string. Clinical text is highly repetitive across patients, so avoiding duplication at every granularity keeps the index from ballooning the way naive per-mention text copies would. The same offset-based approach also means duplicated content, like copy-forwarded or templated language, can be identified across multiple related documents for a patient, not just within a single document, using the same matching mechanism rather than a separate system.
 
 **Every resolution carries an honest confidence level.** A phrase-level match is high-precision and safe to use for billing codes or registry fields, auto-resolved with no flag. A match that could only be made at sentence, paragraph, or section granularity is progressively looser: still usable for broader reasoning ("this note is broadly about breast cancer treatment"), but explicitly marked with the scope it was resolved at, and routed to human review rather than treated as equivalent to an exact match. Nothing is silently upgraded to a confidence level it didn't earn.
 
@@ -164,7 +166,7 @@ The same ontology-and-graph core, scoped to different reasoning tasks across thr
 - Readmission risk flagging from structured encounter and diagnosis history
 - Patient safety indicator tracking across documents and encounters over time
 
-One graph, one ontology, one provenance layer: different reasoning rules and output shapes per initiative, not separate systems built from scratch each time.
+**One graph, one ontology, one provenance layer: different reasoning rules and output shapes per initiative, not separate systems built from scratch each time.**
 
 ---
 
@@ -180,7 +182,7 @@ One graph, one ontology, one provenance layer: different reasoning rules and out
 
 **Open limitations**
 - Ontology and crosswalk coverage is currently narrow: hand-built, not exhaustive
-- True pronominal coreference resolution is a known open gap, distinct from the attachment-scoring mechanism already in place
+- True pronominal coreference resolution isn't resolved automatically by attachment scoring, though the same precision-gauge flagging that handles any other low-confidence match catches it and routes it to human review rather than leaving it unaddressed
 - Not yet validated against real clinical data: MIMIC access is pending
 - Output usability is still unproven with an actual end user
 - Single-developer build, not yet production-hardened or scale-tested

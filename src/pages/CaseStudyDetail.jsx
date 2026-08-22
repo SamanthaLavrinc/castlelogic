@@ -4,6 +4,59 @@ import SEO from "../components/SEO";
 import Reveal from "../components/Reveal";
 import ImageGallery from "../components/ImageGallery";
 
+// Renders `**bold**` spans within a line of section-body text as <strong>.
+// Small, general helper: lets bulleted list items (see renderSectionBlocks)
+// keep an emphasized lead-in term without hand-rolling markup in the JSON.
+function renderInlineBold(text) {
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
+    part.startsWith("**") && part.endsWith("**") ? (
+      <strong key={i}>{part.slice(2, -2)}</strong>
+    ) : (
+      part
+    )
+  );
+}
+
+// A section's `body` is one string; blocks are separated by a blank line.
+// Two lightweight markdown-lite conventions on top of plain paragraphs:
+//   - a block where every line starts with "- " renders as a real <ul>
+//   - a block that's a single paragraph fully wrapped in **double asterisks**
+//     renders as a bold, standalone, visually emphasized line
+// Kept intentionally small rather than pulling in a markdown dependency.
+function renderSectionBlocks(body) {
+  if (!body) return null;
+
+  return body.split(/\n\s*\n/).map((block, index) => {
+    const trimmed = block.trim();
+    const lines = trimmed.split("\n").map((line) => line.trim());
+
+    if (lines.length > 0 && lines.every((line) => line.startsWith("- "))) {
+      return (
+        <ul key={index} className="list-disc pl-6 space-y-2 mb-4 last:mb-0 text-castlepurple">
+          {lines.map((line, lineIndex) => (
+            <li key={lineIndex}>{renderInlineBold(line.slice(2))}</li>
+          ))}
+        </ul>
+      );
+    }
+
+    const boldMatch = trimmed.match(/^\*\*([\s\S]+)\*\*$/);
+    if (boldMatch) {
+      return (
+        <p key={index} className="text-castlepink font-bold text-lg mb-6 last:mb-0">
+          {boldMatch[1]}
+        </p>
+      );
+    }
+
+    return (
+      <p key={index} className="text-castlepurple mb-4 last:mb-0">
+        {renderInlineBold(trimmed)}
+      </p>
+    );
+  });
+}
+
 export default function CaseStudyDetail() {
   const { slug } = useParams();
   const study = getCaseStudy(slug);
@@ -104,18 +157,20 @@ export default function CaseStudyDetail() {
               <Reveal key={section.heading ?? index} className="mb-12 last:mb-0">
                 <h2 className="text-sm uppercase tracking-wide text-castlepink mb-3">{section.heading}</h2>
                 {section.imageUrl && (
-                  <img
-                    src={section.imageUrl}
-                    alt={section.heading ?? ""}
-                    loading="lazy"
-                    className="w-full rounded-lg border border-castlepink mb-4"
-                  />
+                  <div className="mb-4">
+                    <ImageGallery
+                      layout="inline"
+                      images={[
+                        {
+                          id: `${study.slug}-section-${index}`,
+                          title: section.heading ?? study.title,
+                          img: section.imageUrl,
+                        },
+                      ]}
+                    />
+                  </div>
                 )}
-                {section.body?.split(/\n\s*\n/).map((paragraph, pIndex) => (
-                  <p key={pIndex} className="text-castlepurple mb-4 last:mb-0">
-                    {paragraph}
-                  </p>
-                ))}
+                {renderSectionBlocks(section.body)}
               </Reveal>
             ))}
           </div>
