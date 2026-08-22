@@ -65,9 +65,27 @@ function renderSectionBlocks(body) {
 
     if (lines.length === 1 && lines[0].startsWith("### ")) {
       return (
-        <h3 key={index} className="text-xs uppercase tracking-wide text-castlepurple mb-2 mt-6 first:mt-0">
+        <h3 key={index} className="text-xs uppercase tracking-wide text-gray-200 mb-2 mt-6 first:mt-0">
           {lines[0].slice(4)}
         </h3>
+      );
+    }
+
+    if (lines.length > 0 && lines.every((line) => line.startsWith("> "))) {
+      // Quoted source excerpt (a snippet of the clinical note text itself,
+      // not the surrounding explanatory prose) — set apart like a codeblock
+      // so it reads as quoted raw material rather than another paragraph.
+      return (
+        <blockquote
+          key={index}
+          className="border-l-2 border-castlepurple bg-black/40 rounded-r-lg px-4 py-3 mb-4 last:mb-0 font-mono text-sm text-castlepurple"
+        >
+          {lines.map((line, lineIndex) => (
+            <p key={lineIndex} className="last:mb-0">
+              {line.slice(2)}
+            </p>
+          ))}
+        </blockquote>
       );
     }
 
@@ -83,11 +101,43 @@ function renderSectionBlocks(body) {
 
     const boldMatch = trimmed.match(/^\*\*([\s\S]+)\*\*$/);
     if (boldMatch) {
+      // A "Current status: ..." callout is a status flag, not a thematic
+      // pull-quote (see the plain pink version below) — centered, and in a
+      // soft neon red. The one deliberate exception to the site's usual
+      // pink/purple-only rule: a status flag reads more naturally in a
+      // caution color than as more brand pink, and it's a narrow, specific
+      // match rather than a general restyle of every bold pull-quote.
+      if (/^current status:/i.test(boldMatch[1])) {
+        return (
+          <p
+            key={index}
+            className="text-center text-xl tracking-wide mb-6 last:mb-0"
+            style={{ color: "#FF5A5A", textShadow: "0 0 12px rgba(255,90,90,0.55)" }}
+          >
+            {boldMatch[1]}
+          </p>
+        );
+      }
+
+      // A quoted rhetorical/example question (starts and ends with curly
+      // quotes, e.g. "Which labs occurred within 90 days of surgery?") is a
+      // different kind of pull-quote than a plain declarative statement —
+      // smaller and italic, reading as an illustrative example rather than
+      // a thematic claim the page is asserting.
+      if (/^[“"]/.test(boldMatch[1]) && /[”"]$/.test(boldMatch[1])) {
+        return (
+          <p key={index} className="text-castlepink text-lg italic tracking-wide mb-6 last:mb-0">
+            {boldMatch[1]}
+          </p>
+        );
+      }
+
       // Standalone pull-quote line: same no-font-weight rule as the bullet
-      // lead-ins above (Fredoka reads cramped at bold). Size and tracking
-      // carry the "this is a standalone, important statement" weight instead.
+      // lead-ins above (Fredoka reads cramped at bold). Size, tracking, and
+      // centering carry the "this is a standalone, important statement"
+      // weight instead.
       return (
-        <p key={index} className="text-castlepink text-xl tracking-wide mb-6 last:mb-0">
+        <p key={index} className="text-castlepink text-xl tracking-wide text-center mb-6 last:mb-0">
           {boldMatch[1]}
         </p>
       );
@@ -297,12 +347,14 @@ export default function CaseStudyDetail() {
                 math elsewhere depends on staying stable). Disabled via
                 pointer-events while the title itself is still faded out
                 (pre-dock) so an invisible trigger can't be clicked. Panel is
-                anchored `right-0` (grows down-and-left) rather than `left-0`
-                (down-and-right): the title sits well over toward the right
-                side of the bar already, after the back link, so anchoring
-                its right edge to the button's right edge keeps the panel
-                inside the viewport on narrow screens instead of overflowing
-                past the right edge. */}
+                anchored `right-0` (grows down-and-left) on mobile only —
+                the title sits well over toward the right side of the bar
+                already, after the back link, so on narrow screens a
+                `left-0`-anchored panel growing rightward overflows past the
+                viewport edge. `sm:left-0` reverts to the original
+                down-and-right growth at the `sm` breakpoint and up, where
+                there's enough room either way and left-anchored reads more
+                naturally under the title. */}
             <div ref={projectMenuRef} className="relative min-w-0">
               <button
                 type="button"
@@ -323,7 +375,7 @@ export default function CaseStudyDetail() {
               {projectMenuOpen && (
                 <div
                   role="menu"
-                  className="absolute right-0 top-full mt-2 w-64 max-h-[70vh] overflow-y-auto rounded-xl bg-gray-900/95 backdrop-blur-sm border border-castlepink/20 shadow-xl py-3 z-50"
+                  className="absolute right-0 sm:left-0 sm:right-auto top-full mt-2 w-64 max-h-[70vh] overflow-y-auto rounded-xl bg-gray-900/95 backdrop-blur-sm border border-castlepink/20 shadow-xl py-3 z-50"
                 >
                   {Object.entries(projectsByCategory).map(([category, projects]) => (
                     <div key={category} className="px-4 py-2">
@@ -576,7 +628,7 @@ function CaseStudyBody({ study }) {
                     default weight reads heavy at paragraph length. */}
                 <div className="bg-gray-900/70 rounded-2xl px-6 pt-6 pb-10 sm:px-8 sm:pt-8 sm:pb-12">
                   {section.heading && (
-                    <h2 className="text-sm uppercase tracking-wide text-castlepink mb-3">{section.heading}</h2>
+                    <h2 className="text-lg sm:text-xl uppercase tracking-wide text-castlepink mb-3">{section.heading}</h2>
                   )}
                   {section.imageUrl && (
                     <div className="mb-4">
