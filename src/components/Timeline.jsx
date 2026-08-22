@@ -112,7 +112,7 @@ export default function Timeline() {
               {/* Vertical timeline line */}
               <div className="absolute left-2 top-3 bottom-0 w-[2px] bg-castlepink"></div>
 
-              <ul className="text-md list-disc pl-6 text-castlepurple space-y-2 pt-2 relative z-10">
+              <ul className="text-md list-disc pl-6 font-light text-castlepurple space-y-2 pt-2 relative z-10">
                 {job.bullets.map((b, i) => (
                   <li key={i}>{b}</li>
                 ))}
