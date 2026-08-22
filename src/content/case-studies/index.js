@@ -11,6 +11,10 @@ export const caseStudies = Object.values(modules)
     ...study,
     heroImageUrl: resolveImage(study.heroImage),
     galleryGroups: buildGalleryGroups(study.gallery, study.slug),
+    sections: study.sections?.map((section) => ({
+      ...section,
+      imageUrl: resolveImage(section.image),
+    })),
   }));
 
 export function getCaseStudy(slug) {

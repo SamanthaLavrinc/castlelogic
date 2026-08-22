@@ -98,25 +98,50 @@ export default function CaseStudyDetail() {
           </div>
         )}
 
-        {study.problem && (
+        {study.sections?.length > 0 ? (
           <div className="mb-8">
-            <h2 className="text-sm uppercase tracking-wide text-castlepink mb-2">Problem</h2>
-            <p className="text-castlepurple">{study.problem}</p>
+            {study.sections.map((section, index) => (
+              <Reveal key={section.heading ?? index} className="mb-12 last:mb-0">
+                <h2 className="text-sm uppercase tracking-wide text-castlepink mb-3">{section.heading}</h2>
+                {section.imageUrl && (
+                  <img
+                    src={section.imageUrl}
+                    alt={section.heading ?? ""}
+                    loading="lazy"
+                    className="w-full rounded-lg border border-castlepink mb-4"
+                  />
+                )}
+                {section.body?.split(/\n\s*\n/).map((paragraph, pIndex) => (
+                  <p key={pIndex} className="text-castlepurple mb-4 last:mb-0">
+                    {paragraph}
+                  </p>
+                ))}
+              </Reveal>
+            ))}
           </div>
-        )}
+        ) : (
+          <>
+            {study.problem && (
+              <div className="mb-8">
+                <h2 className="text-sm uppercase tracking-wide text-castlepink mb-2">Problem</h2>
+                <p className="text-castlepurple">{study.problem}</p>
+              </div>
+            )}
 
-        {study.approach && (
-          <div className="mb-8">
-            <h2 className="text-sm uppercase tracking-wide text-castlepink mb-2">Approach</h2>
-            <p className="text-castlepurple">{study.approach}</p>
-          </div>
-        )}
+            {study.approach && (
+              <div className="mb-8">
+                <h2 className="text-sm uppercase tracking-wide text-castlepink mb-2">Approach</h2>
+                <p className="text-castlepurple">{study.approach}</p>
+              </div>
+            )}
 
-        {study.results && (
-          <div className="mb-8">
-            <h2 className="text-sm uppercase tracking-wide text-castlepink mb-2">Results</h2>
-            <p className="text-castlepurple">{study.results}</p>
-          </div>
+            {study.results && (
+              <div className="mb-8">
+                <h2 className="text-sm uppercase tracking-wide text-castlepink mb-2">Results</h2>
+                <p className="text-castlepurple">{study.results}</p>
+              </div>
+            )}
+          </>
         )}
 
         {study.links?.length > 0 && (
