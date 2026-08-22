@@ -1,6 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import { getCaseStudy } from "../content/case-studies";
 import SEO from "../components/SEO";
+import Reveal from "../components/Reveal";
+import ImageGallery from "../components/ImageGallery";
 
 export default function CaseStudyDetail() {
   const { slug } = useParams();
@@ -27,25 +29,46 @@ export default function CaseStudyDetail() {
   }
 
   return (
-    <main className="min-h-screen bg-black text-white px-4 sm:px-10 py-10 sm:py-16 font-fredoka">
+    <main className="min-h-screen bg-black text-white font-fredoka">
       <SEO
         title={study.title}
         description={study.summary}
         path={`/projects/${study.slug}`}
-        image={study.image ? `https://castlelogic.dev${study.image}` : undefined}
+        image={study.heroImageUrl ? `https://castlelogic.dev${study.heroImageUrl}` : undefined}
       />
-      <div className="max-w-[800px] mx-auto">
-        <Link to="/projects" className="text-castlepurple hover:text-castlepink transition-colors">
-          ← Back to Projects
-        </Link>
 
-        <p className="text-xs uppercase tracking-wide text-castlepink/70 mt-6 mb-1">{study.category}</p>
-        <h1 className="text-4xl font-semibold uppercase text-castlepink mb-4 tracking-wider">{study.title}</h1>
-        <p className="text-lg text-castlepurple mb-10">{study.summary}</p>
+      {/* Decorative header band: blurred, scaled-up hero behind the title.
+          Purely visual — the title/summary underneath carry the real content,
+          so the image layer itself is aria-hidden. */}
+      <div className="relative overflow-hidden border-b border-castlepink/20">
+        {study.heroImageUrl && (
+          <div aria-hidden="true" className="absolute inset-0">
+            <img
+              src={study.heroImageUrl}
+              alt=""
+              className="w-full h-full object-cover scale-125 blur-2xl opacity-70"
+            />
+            <div className="absolute inset-0 bg-black/60" />
+          </div>
+        )}
 
-        {study.image && (
+        <div className="relative px-4 sm:px-10 pt-10 sm:pt-16 pb-8">
+          <div className="max-w-[800px] mx-auto">
+            <Link to="/projects" className="text-castlepurple hover:text-castlepink transition-colors">
+              ← Back to Projects
+            </Link>
+
+            <p className="text-xs uppercase tracking-wide text-castlepink/70 mt-6 mb-1">{study.category}</p>
+            <h1 className="text-4xl font-semibold uppercase text-castlepink mb-4 tracking-wider">{study.title}</h1>
+            <p className="text-lg text-castlepurple">{study.summary}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-[800px] mx-auto px-4 sm:px-10 py-10 sm:py-16">
+        {study.heroImageUrl && (
           <img
-            src={study.image}
+            src={study.heroImageUrl}
             alt={study.title}
             loading="lazy"
             className="w-full rounded-lg border border-castlepink mb-10"
@@ -108,6 +131,21 @@ export default function CaseStudyDetail() {
               >
                 {link.label}
               </a>
+            ))}
+          </div>
+        )}
+
+        {study.galleryGroups?.length > 0 && (
+          <div className="mt-10">
+            <h2 className="text-sm uppercase tracking-wide text-castlepink mb-6">Gallery</h2>
+            {study.galleryGroups.map((group, index) => (
+              <Reveal key={group.label ?? index} className="mb-10 last:mb-0">
+                <ImageGallery
+                  images={group.images}
+                  groupLabel={group.label}
+                  className="grid grid-cols-2 sm:grid-cols-3 gap-4"
+                />
+              </Reveal>
             ))}
           </div>
         )}

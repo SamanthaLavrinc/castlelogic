@@ -3,5 +3,6 @@
   "title": "Clinical ETL Pipeline",
   "category": "Full-Stack",
   "order": 2,
+  "status": "concept",
   "summary": "Transforms unstructured clinical records into structured JSON for downstream analytics."
 }

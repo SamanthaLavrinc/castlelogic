@@ -1,0 +1,25 @@
+{
+  "slug": "my-orbit-mobile",
+  "title": "myOrbit: Mobile",
+  "category": "Full-Stack",
+  "order": 1.5,
+  "status": "in-progress",
+  "summary": "Compressing myOrbit's dense, multi-panel relationship graph into something that still works on a phone, without losing the information a therapist or client actually needs at a glance.",
+  "role": "Solo full-stack engineer, contracted via Castle Logic LLC for EmmeCo — built using agentic engineering workflows",
+  "stack": ["React 19", "Vite", "Tailwind CSS v4", "Cytoscape.js", "Supabase"],
+  "problem": "myOrbit's graph view was designed desktop-first, with several panels visible at once. On mobile, that had to consolidate into something that still surfaces the same information without overwhelming a small screen.",
+  "heroImage": "projects/myorbit_mobile/mobile_solution.png",
+  "gallery": [
+    {
+      "label": "The Problem",
+      "folder": "projects/myorbit_mobile",
+      "files": ["mobile_problem.png", "mobile_problem2.png", "mobile_problem3.png"]
+    },
+    {
+      "label": "The Solution",
+      "folder": "projects/myorbit_mobile",
+      "files": ["mobile_solution.png", "mobile_solution2.png", "agent_suggestion.png"]
+    }
+  ],
+  "links": []
+}

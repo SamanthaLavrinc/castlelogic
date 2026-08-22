@@ -3,5 +3,10 @@
   "title": "Illustration Showcase",
   "category": "Design",
   "order": 4,
-  "summary": "Graphic and illustration work demonstrating composition, color theory, and personality."
+  "status": "live",
+  "summary": "Graphic and illustration work demonstrating composition, color theory, and personality.",
+  "heroImage": "design/header_right.webp",
+  "gallery": [
+    { "folder": "design" }
+  ]
 }

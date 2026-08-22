@@ -3,5 +3,6 @@
   "title": "UX Lab",
   "category": "UI Experiments",
   "order": 3,
+  "status": "concept",
   "summary": "Collection of UI/interaction experiments exploring layout, hierarchy, and motion."
 }
