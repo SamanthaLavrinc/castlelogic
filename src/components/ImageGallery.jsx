@@ -145,7 +145,7 @@ export default function ImageGallery({ images, groupLabel, className, layout = "
           <img
             src={selected.img}
             alt={selected.title}
-            className="max-w-full max-h-full rounded-lg"
+            className="max-w-[min(1200px,100%)] max-h-full rounded-lg"
             onClick={(e) => e.stopPropagation()}
           />
 

@@ -192,6 +192,34 @@ textarea:focus-visible,
   }
 }
 
+/* Neon-sign flicker for the "Current status" badge on case-study pages
+   (see CaseStudyDetail.jsx): a few uneven on/off blips like a tube warming
+   up, then it settles and stays lit. Runs once on load, same "ignite, never
+   loop" convention as `spark-ignite` above — a continuously flickering
+   element sitting mid-page would be distracting on repeat visits, not just
+   a nice one-time detail. */
+@keyframes neon-sign-flicker {
+  0% { opacity: 0.2; }
+  4% { opacity: 1; }
+  8% { opacity: 0.3; }
+  12% { opacity: 1; }
+  20% { opacity: 0.4; }
+  24% { opacity: 1; }
+  55% { opacity: 0.75; }
+  60% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+.neon-sign-flicker {
+  animation: neon-sign-flicker 1.6s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neon-sign-flicker {
+    animation: none;
+  }
+}
+
 /* Soft twinkle for the sparkles layered on top of the CONTACT nav link.
    Loops gently, each sparkle offset on its own delay/duration so they
    glint independently instead of pulsing in unison. */

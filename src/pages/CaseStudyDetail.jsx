@@ -72,9 +72,23 @@ function renderSectionBlocks(body) {
     }
 
     if (lines.length > 0 && lines.every((line) => line.startsWith("> "))) {
-      // Quoted source excerpt (a snippet of the clinical note text itself,
-      // not the surrounding explanatory prose) — set apart like a codeblock
-      // so it reads as quoted raw material rather than another paragraph.
+      const quoted = lines.map((line) => line.slice(2)).join(" ");
+
+      // Two different things both use "> " in this content, and they need
+      // to look different: a quoted *question* (rhetorical or example
+      // query, always ending in "?", optionally followed by a closing
+      // curly quote) reads as a pull-quote — italic, pink, standing out by
+      // voice — not as literal data. A quoted *excerpt of source text* (a
+      // clinical note snippet, no trailing "?") is the opposite: it should
+      // look like quoted raw material, hence the codeblock treatment.
+      if (/\?[”"]?$/.test(quoted)) {
+        return (
+          <p key={index} className="text-castlepink text-lg italic tracking-wide mb-6 last:mb-0">
+            {quoted}
+          </p>
+        );
+      }
+
       return (
         <blockquote
           key={index}
@@ -102,20 +116,35 @@ function renderSectionBlocks(body) {
     const boldMatch = trimmed.match(/^\*\*([\s\S]+)\*\*$/);
     if (boldMatch) {
       // A "Current status: ..." callout is a status flag, not a thematic
-      // pull-quote (see the plain pink version below) — centered, and in a
-      // soft neon red. The one deliberate exception to the site's usual
-      // pink/purple-only rule: a status flag reads more naturally in a
-      // caution color than as more brand pink, and it's a narrow, specific
-      // match rather than a general restyle of every bold pull-quote.
+      // pull-quote (see the plain pink version below) — a literal neon-sign
+      // badge (glowing border + glowing uppercase text, like a diner "OPEN"
+      // sign) in a soft red rather than more brand pink or purple: a status
+      // flag reads more naturally in a caution color, and the neon-sign
+      // framing sells "status" as something lit up/flagged rather than just
+      // another emphasized line. `.neon-sign-flicker` (see global.css)
+      // flickers it to life once on mount, like a tube warming up, then
+      // settles into a steady glow — it doesn't loop, so it reads as a nice
+      // one-time detail rather than a distracting animation every time this
+      // card scrolls past. The one deliberate exception to the site's usual
+      // pink/purple-only rule, and a narrow, specific match rather than a
+      // general restyle of every bold pull-quote.
       if (/^current status:/i.test(boldMatch[1])) {
+        const neonRed = "#FF5A5A";
         return (
-          <p
-            key={index}
-            className="text-center text-xl tracking-wide mb-6 last:mb-0"
-            style={{ color: "#FF5A5A", textShadow: "0 0 12px rgba(255,90,90,0.55)" }}
-          >
-            {boldMatch[1]}
-          </p>
+          <div key={index} className="flex justify-center mb-6 last:mb-0">
+            <span
+              className="neon-sign-flicker inline-block rounded-full border-2 px-6 py-2 uppercase tracking-wide text-base sm:text-lg"
+              style={{
+                color: neonRed,
+                borderColor: neonRed,
+                textShadow: "0 0 6px rgba(255,90,90,0.9), 0 0 14px rgba(255,90,90,0.7), 0 0 28px rgba(255,90,90,0.5)",
+                boxShadow:
+                  "0 0 8px rgba(255,90,90,0.6), 0 0 20px rgba(255,90,90,0.4), inset 0 0 12px rgba(255,90,90,0.15)",
+              }}
+            >
+              {boldMatch[1]}
+            </span>
+          </div>
         );
       }
 
