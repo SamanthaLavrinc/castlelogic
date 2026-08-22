@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="w-full bg-black text-white py-6 relative">
+    <footer className="w-full bg-black text-white py-6 relative border-t border-castlepink/20">
       <div className="max-w-[1200px] mx-auto text-center text-sm space-y-2">
 
         <p className="font-fredoka tracking-wide text-castlepurple">

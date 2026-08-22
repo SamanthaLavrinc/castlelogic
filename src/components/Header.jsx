@@ -76,7 +76,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="w-full bg-black relative sticky top-0 z-50 overflow-hidden">
+    <header className="w-full bg-black relative sticky top-0 z-50 overflow-hidden border-b border-castlepink/20">
       {/* Desktop Header */}
       <div className="hidden lg:flex w-full max-w-[1200px] mx-auto px-4 py-4 justify-between items-center gap-4">
 
