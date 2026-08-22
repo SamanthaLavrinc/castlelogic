@@ -1,30 +1,32 @@
-// Centered ambient background motif for case-study pages: a soft, glowy,
-// star-riddled echo of the same node/constellation motif used in the
-// project's own header art (see src/assets/projects/*/images/header-image.png
-// and the layout conventions in docs/design-brief.md), just dialed way down
-// so it reads as atmosphere rather than a second illustration. Built as
-// inline SVG rather than a generated raster image: it's brand-colored,
-// crisp at any size, and trivial to re-tune (star positions, glow strength)
-// without regenerating an asset.
+// Centered ambient background motif for case-study pages: a soft, glowy
+// bloom of the brand's dual accent colors, scattered with faint stars and a
+// few small soft lightning arcs — a dialed-way-down echo of the same
+// glow/constellation/lightning language used in the project's own header
+// art and the site's hero graphic spec (see docs/design-brief.md's
+// "restrained lightning/arc treatment" note). Built as inline SVG rather
+// than a generated raster image: it's brand-colored, crisp at any size, and
+// trivial to re-tune (star/bolt positions, glow strength) without
+// regenerating an asset.
 //
-// Deliberately capped to a fixed-size box (`max-w-[1040px]`, viewBox height
-// 560) rather than sized as a percentage of its container. A percentage-based
-// glow would stretch to fill whatever tall section it's dropped into; capping
-// the box in real pixels and centering it means the motif always resolves
-// back to solid black well inside a ~1200px-wide centered content column and
-// well before the halfway point of typical viewport heights, regardless of
-// how long the page underneath is. This box is intentionally sized up close
-// to that 1200px ceiling (bigger/bolder per design feedback) while still
-// leaving a clear black margin on either side at that width. The `edgeMask`
-// radial gradient then fades the box's own edges to transparent so even
-// that capped box doesn't read as a hard-edged rectangle.
+// The viewBox is tall (1040x980) on purpose: once this is pinned full-height
+// behind the docked page (see the `fixed` mode below), the motif should be
+// able to read all the way down the visible viewport rather than looking
+// capped to a small band under the header. No SVG width/height attributes
+// are set, so it sizes by intrinsic aspect ratio from the `max-w-[1040px]`
+// CSS width alone — if the pinned viewport is shorter than that renders
+// tall, the parent's `overflow-hidden` simply crops the excess (which is
+// already faded near-black there anyway); if it's taller, empty space below
+// is just the page's own black. Horizontally, capping real pixel width to
+// 1040 and centering it means the motif still always resolves to solid
+// black well inside a ~1200px-wide centered content column, regardless of
+// viewport width. The `edgeMask` radial gradient fades the box's own edges
+// (sides most tightly, bottom more gradually to suit the taller canvas) so
+// it never reads as a hard-edged rectangle.
 //
 // Two positioning modes, chosen by the caller:
 //   - normal flow (default, `fixed={false}`): absolutely fills its nearest
 //     positioned ancestor (which must have `position: relative` and a real
-//     height), so it scrolls with the page like an ordinary background. The
-//     motif itself still only occupies the top of that box (no vertical
-//     stretch), so it sits just below the page content that precedes it.
+//     height), so it scrolls with the page like an ordinary background.
 //   - `fixed`: pinned to the viewport via `position: fixed`, offset from the
 //     top by the `top` prop (in px). Callers that flip between the two modes
 //     — e.g. on an IntersectionObserver threshold — get a background that
@@ -34,7 +36,7 @@
 // Purely decorative: aria-hidden and pointer-events-none so it never
 // intercepts clicks or gets announced to screen readers.
 export default function GradientWash({ fixed = false, top = 0, className = "" }) {
-  const edgeMask = "radial-gradient(65% 62% at 50% 26%, #000 0%, #000 38%, transparent 82%)";
+  const edgeMask = "radial-gradient(65% 78% at 50% 24%, #000 0%, #000 36%, transparent 86%)";
 
   return (
     <div
@@ -43,7 +45,7 @@ export default function GradientWash({ fixed = false, top = 0, className = "" })
       style={{ top: fixed ? top : undefined }}
     >
       <svg
-        viewBox="0 0 1040 560"
+        viewBox="0 0 1040 980"
         className="block w-full max-w-[1040px] mx-auto"
         style={{ WebkitMaskImage: edgeMask, maskImage: edgeMask }}
       >
@@ -56,27 +58,50 @@ export default function GradientWash({ fixed = false, top = 0, className = "" })
           </filter>
         </defs>
 
-        {/* Soft ambient haze — the "very glowy" layer. Two large heavily
-            blurred blobs in the brand's 55/45 pink/purple mix. */}
-        <circle cx="380" cy="152" r="215" fill="#CB90FF" opacity="0.2" filter="url(#gw-nebula-glow)" />
-        <circle cx="710" cy="228" r="254" fill="#FF46A2" opacity="0.19" filter="url(#gw-nebula-glow)" />
+        {/* Soft ambient haze — large heavily blurred blobs in the brand's
+            55/45 pink/purple mix, chained down the taller canvas so the
+            glow has presence well past the top third. */}
+        <circle cx="380" cy="170" r="230" fill="#CB90FF" opacity="0.2" filter="url(#gw-nebula-glow)" />
+        <circle cx="710" cy="260" r="270" fill="#FF46A2" opacity="0.19" filter="url(#gw-nebula-glow)" />
+        <circle cx="500" cy="560" r="250" fill="#CB90FF" opacity="0.15" filter="url(#gw-nebula-glow)" />
+        <circle cx="650" cy="680" r="220" fill="#FF46A2" opacity="0.13" filter="url(#gw-nebula-glow)" />
 
-        {/* Sparse constellation lines, nearest-neighbor only — same
-            restrained-connection rule as the header art motif. */}
-        <g stroke="#FF46A2" strokeOpacity="0.26" strokeWidth="1.2">
-          <line x1="152" y1="89" x2="266" y2="139" />
-          <line x1="266" y1="139" x2="380" y2="114" />
-          <line x1="380" y1="114" x2="520" y2="190" />
-        </g>
-        <g stroke="#CB90FF" strokeOpacity="0.24" strokeWidth="1.2">
-          <line x1="520" y1="190" x2="659" y2="152" />
-          <line x1="659" y1="152" x2="786" y2="215" />
-          <line x1="608" y1="291" x2="520" y2="190" />
-          <line x1="786" y1="215" x2="912" y2="177" />
-          <line x1="300" y1="180" x2="190" y2="253" />
+        {/* Small soft lightning arcs — the same restrained "electric arc"
+            motif as the hero graphic's POWERFUL treatment, shrunk to a
+            faint background accent rather than a foreground illustration. */}
+        <g fill="none" strokeLinecap="round" strokeLinejoin="round" filter="url(#gw-star-glow)">
+          <path
+            d="M 0 0 L 9 16 L 2 16 L 12 40"
+            transform="translate(150,230) rotate(-12) scale(0.9)"
+            stroke="#FF46A2"
+            strokeOpacity="0.45"
+            strokeWidth="1.8"
+          />
+          <path
+            d="M 0 0 L 9 16 L 2 16 L 12 40"
+            transform="translate(870,120) rotate(18) scale(1.1)"
+            stroke="#CB90FF"
+            strokeOpacity="0.4"
+            strokeWidth="1.8"
+          />
+          <path
+            d="M 0 0 L 9 16 L 2 16 L 12 40"
+            transform="translate(610,470) rotate(-20) scale(0.85)"
+            stroke="#FF46A2"
+            strokeOpacity="0.4"
+            strokeWidth="1.8"
+          />
+          <path
+            d="M 0 0 L 9 16 L 2 16 L 12 40"
+            transform="translate(330,600) rotate(10) scale(1)"
+            stroke="#CB90FF"
+            strokeOpacity="0.38"
+            strokeWidth="1.8"
+          />
         </g>
 
-        {/* Star-riddled points, each with a small soft glow. */}
+        {/* Star-riddled points, each with a small soft glow, spread down
+            through most of the taller canvas rather than bunched at top. */}
         <g filter="url(#gw-star-glow)">
           <circle cx="152" cy="89" r="2.8" fill="#FF46A2" opacity="0.85" />
           <circle cx="266" cy="139" r="2.0" fill="#CB90FF" opacity="0.78" />
@@ -98,10 +123,16 @@ export default function GradientWash({ fixed = false, top = 0, className = "" })
           <circle cx="980" cy="300" r="1.6" fill="#CB90FF" opacity="0.6" />
           <circle cx="40" cy="320" r="1.4" fill="#FF46A2" opacity="0.55" />
           <circle cx="900" cy="400" r="1.8" fill="#CB90FF" opacity="0.55" />
-          <circle cx="500" cy="470" r="1.5" fill="#FF46A2" opacity="0.5" />
-          <circle cx="150" cy="450" r="1.3" fill="#CB90FF" opacity="0.5" />
           <circle cx="700" cy="60" r="1.7" fill="#FF46A2" opacity="0.65" />
           <circle cx="300" cy="180" r="1.4" fill="#CB90FF" opacity="0.6" />
+          <circle cx="540" cy="420" r="1.7" fill="#FF46A2" opacity="0.55" />
+          <circle cx="770" cy="480" r="1.5" fill="#CB90FF" opacity="0.5" />
+          <circle cx="220" cy="470" r="1.6" fill="#FF46A2" opacity="0.52" />
+          <circle cx="450" cy="560" r="1.4" fill="#CB90FF" opacity="0.48" />
+          <circle cx="640" cy="600" r="1.8" fill="#FF46A2" opacity="0.5" />
+          <circle cx="850" cy="600" r="1.4" fill="#CB90FF" opacity="0.45" />
+          <circle cx="380" cy="680" r="1.5" fill="#FF46A2" opacity="0.42" />
+          <circle cx="120" cy="560" r="1.3" fill="#CB90FF" opacity="0.42" />
         </g>
       </svg>
     </div>

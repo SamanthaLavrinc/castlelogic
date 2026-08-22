@@ -237,7 +237,7 @@ export default function CaseStudyDetail() {
               ← Back to Projects
             </Link>
             <span
-              className={`truncate text-sm font-semibold uppercase tracking-wide text-castlepink transition-opacity duration-300 ${
+              className={`truncate text-sm font-semibold uppercase tracking-wide text-white transition-opacity duration-300 ${
                 titleVisible ? "opacity-100" : "opacity-0"
               }`}
             >
