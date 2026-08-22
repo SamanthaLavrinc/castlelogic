@@ -95,9 +95,9 @@ export default function Timeline() {
                 ) : (
                   <ChevronRight className="text-castlepink transition-all shrink-0" size={24} />
                 )}
-                <h3 className="text-xl font-semibold text-gray-200">{job.title}</h3>
+                <h3 className="text-xl font-semibold text-gray-200 leading-relaxed">{job.title}</h3>
               </div>
-              <p className="text-lg font-semibold text-grey-200 sm:shrink-0">{job.date}</p>
+              <p className="text-lg font-semibold text-grey-200 sm:shrink-0 leading-relaxed">{job.date}</p>
             </div>
 
             {/* Company */}
