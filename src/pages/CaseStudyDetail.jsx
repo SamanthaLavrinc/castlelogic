@@ -7,14 +7,24 @@ import ImageGallery from "../components/ImageGallery";
 // Renders `**bold**` spans within a line of section-body text as <strong>.
 // Small, general helper: lets bulleted list items (see renderSectionBlocks)
 // keep an emphasized lead-in term without hand-rolling markup in the JSON.
+// Lead-in terms written in ALL CAPS (e.g. "COMPOSITIONAL CONCEPT MODEL:")
+// get extra letter-spacing so the uppercase text doesn't read cramped,
+// matching the tracking-wide convention used elsewhere for small uppercase
+// labels (see CaseStudyCard's category label). Mixed-case bold spans are
+// left alone.
 function renderInlineBold(text) {
-  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
-    part.startsWith("**") && part.endsWith("**") ? (
-      <strong key={i}>{part.slice(2, -2)}</strong>
-    ) : (
-      part
-    )
-  );
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) => {
+    if (!part.startsWith("**") || !part.endsWith("**")) return part;
+
+    const content = part.slice(2, -2);
+    const isUppercase = content === content.toUpperCase() && content !== content.toLowerCase();
+
+    return (
+      <strong key={i} className={isUppercase ? "tracking-wide" : undefined}>
+        {content}
+      </strong>
+    );
+  });
 }
 
 // A section's `body` is one string; blocks are separated by a blank line.
