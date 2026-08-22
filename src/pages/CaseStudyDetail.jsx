@@ -91,9 +91,11 @@ export default function CaseStudyDetail() {
 
   const headerSentinelRef = useRef(null);
   const headerMidSentinelRef = useRef(null);
+  const barRef = useRef(null);
   const [docked, setDocked] = useState(false);
   const [titleVisible, setTitleVisible] = useState(false);
   const [navHeight, setNavHeight] = useState(0);
+  const [barHeight, setBarHeight] = useState(0);
 
   // Measure the site's sticky main nav (see Header.jsx: `sticky top-0`) so the
   // docked bar and pinned gradient below sit directly beneath it rather than
@@ -112,17 +114,36 @@ export default function CaseStudyDetail() {
     return () => resizeObserver.disconnect();
   }, [hasHeaderImage]);
 
+  // Measure the permanent back-link dock bar itself (see the `hasHeaderImage`
+  // block further down) the same way, since it now sits in normal document
+  // flow (`position: sticky`, not `fixed`) directly beneath the nav — the
+  // header image starts below both of them, not underneath either. Both
+  // heights together are what the sentinel thresholds below and
+  // GradientWash's fixed-mode `top` offset need to clear.
+  useEffect(() => {
+    if (!hasHeaderImage) return undefined;
+    const barEl = barRef.current;
+    if (!barEl) return undefined;
+
+    const updateBarHeight = () => setBarHeight(barEl.getBoundingClientRect().height);
+    updateBarHeight();
+
+    const resizeObserver = new ResizeObserver(updateBarHeight);
+    resizeObserver.observe(barEl);
+    return () => resizeObserver.disconnect();
+  }, [hasHeaderImage]);
+
   // Docks the compact back-link/title bar and pins the gradient background
   // once the header image block has scrolled fully out of view above the
   // viewport. Watches a 1px sentinel at the bottom of the header image block
   // via IntersectionObserver rather than a scroll-position pixel threshold,
   // which would need re-tuning per viewport size and break if header image
   // content changes height. `rootMargin`'s negative top offset shrinks the
-  // effective viewport by the sticky nav's own height, so the sentinel counts
-  // as "out of view" exactly when it passes behind the nav — not when it
-  // crosses the literal top edge of the browser window. Fires in both scroll
-  // directions since IntersectionObserver reports every crossing of the
-  // threshold, not just the first one.
+  // effective viewport by the sticky nav's and dock bar's combined height, so
+  // the sentinel counts as "out of view" exactly when it passes behind both
+  // — not when it crosses the literal top edge of the browser window. Fires
+  // in both scroll directions since IntersectionObserver reports every
+  // crossing of the threshold, not just the first one.
   useEffect(() => {
     if (!hasHeaderImage) return undefined;
     const sentinel = headerSentinelRef.current;
@@ -130,11 +151,11 @@ export default function CaseStudyDetail() {
 
     const observer = new IntersectionObserver(
       ([entry]) => setDocked(!entry.isIntersecting),
-      { rootMargin: `-${navHeight}px 0px 0px 0px`, threshold: 0 }
+      { rootMargin: `-${navHeight + barHeight}px 0px 0px 0px`, threshold: 0 }
     );
     observer.observe(sentinel);
     return () => observer.disconnect();
-  }, [hasHeaderImage, navHeight]);
+  }, [hasHeaderImage, navHeight, barHeight]);
 
   // Reveals the project title inside the permanent dock bar (see the
   // `hasHeaderImage` block below) earlier than the full-dock threshold above
@@ -149,11 +170,11 @@ export default function CaseStudyDetail() {
 
     const observer = new IntersectionObserver(
       ([entry]) => setTitleVisible(!entry.isIntersecting),
-      { rootMargin: `-${navHeight}px 0px 0px 0px`, threshold: 0 }
+      { rootMargin: `-${navHeight + barHeight}px 0px 0px 0px`, threshold: 0 }
     );
     observer.observe(sentinel);
     return () => observer.disconnect();
-  }, [hasHeaderImage, navHeight]);
+  }, [hasHeaderImage, navHeight, barHeight]);
 
   if (!study) {
     return (
@@ -184,6 +205,48 @@ export default function CaseStudyDetail() {
         image={study.heroImageUrl ? `https://castlelogic.dev${study.heroImageUrl}` : undefined}
       />
 
+      {/* Permanent back-link dock: for headerImage case studies this bar is
+          always mounted, always solid (it's the one and only "back to
+          projects" affordance for these pages, replacing the link that used
+          to be baked into the header image overlay below), so it's on
+          screen — and already opaque — from first paint, not just after
+          scrolling. Its title fades in once the user has scrolled about
+          halfway through the header image (see the mid-sentinel
+          IntersectionObserver effect above), well before the full-dock
+          threshold that pins the gradient background further down.
+          Rendered *before* the header image in the DOM and given
+          `position: sticky` rather than `fixed`: a sticky element still
+          reserves its own height in normal flow, so the header image below
+          it starts right after the bar instead of the bar floating on top
+          of the image's own top edge. Its static (pre-scroll) position is
+          already exactly `top: navHeight` — right below the nav — so it
+          reads as pinned from the very first frame, same as `fixed` did,
+          just without the overlap. `dock-bar-in` plays once on initial page
+          load. */}
+      {hasHeaderImage && (
+        <div
+          ref={barRef}
+          className="dock-bar-in sticky z-40 bg-black/95 backdrop-blur-sm border-b border-castlepink/20"
+          style={{ top: navHeight }}
+        >
+          <div className="flex items-center gap-4 py-3" style={{ paddingLeft: "17.7%", paddingRight: "4%" }}>
+            <Link
+              to="/projects"
+              className="shrink-0 text-sm text-castlepurple hover:text-castlepink transition-colors"
+            >
+              ← Back to Projects
+            </Link>
+            <span
+              className={`truncate text-sm font-semibold uppercase tracking-wide text-castlepink transition-opacity duration-300 ${
+                titleVisible ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              {study.title}
+            </span>
+          </div>
+        </div>
+      )}
+
       {study.headerImageUrl ? (
         /* Baked-in header: the image itself already contains the title and
            subtitle as part of its design, so this is the header, full stop —
@@ -193,10 +256,10 @@ export default function CaseStudyDetail() {
            back link and category label are thin overlays positioned (in %
            of the image's own box) to land in the empty black space the
            image was designed with, above and below its baked-in text. The
-           back link itself now lives only in the permanent dock bar below
-           (see the `hasHeaderImage` block further down) rather than also
-           being baked in here, so there's a single back-link element instead
-           of two stacked at the same spot pre-scroll. */
+           back link itself now lives only in the permanent dock bar above
+           (see the `hasHeaderImage` block just before this one) rather than
+           also being baked in here, so there's a single back-link element
+           instead of two stacked at the same spot pre-scroll. */
         <div className="relative w-full overflow-hidden border-b border-castlepink/20">
           <img src={study.headerImageUrl} alt="" className="block w-full h-auto min-h-[220px] object-cover object-left" />
           <h1 className="sr-only">{study.title}</h1>
@@ -249,48 +312,6 @@ export default function CaseStudyDetail() {
         </div>
       )}
 
-      {/* Permanent back-link dock: for headerImage case studies this bar is
-          always mounted, always solid (it's the one and only "back to
-          projects" affordance for these pages, replacing the link that used
-          to be baked into the header image overlay above), so it's on
-          screen — and already opaque — from first paint, not just after
-          scrolling. Its title fades in once the user has scrolled about
-          halfway through the header image (see the mid-sentinel
-          IntersectionObserver effect above), well before the full-dock
-          threshold that pins the gradient background further down.
-          `paddingLeft: "4%"` rather than the page's usual centered
-          `max-w-[800px] mx-auto` content column: the back link has to land
-          at the same horizontal position as the title baked into the header
-          image itself, which is placed at 4% of the image's own (full-
-          viewport) width, not 4% into a narrower centered column.
-          `position: fixed` rather than `position: sticky` deliberately —
-          it needs to reserve zero flow space so it can float over the header
-          image without pushing page content down. Pinned directly beneath
-          the measured nav height so it never overlaps the main nav.
-          `dock-bar-in` plays once on initial page load. */}
-      {hasHeaderImage && (
-        <div
-          className="dock-bar-in fixed left-0 right-0 z-40 bg-black/95 backdrop-blur-sm border-b border-castlepink/20"
-          style={{ top: navHeight }}
-        >
-          <div className="flex items-center gap-4 py-3" style={{ paddingLeft: "17.7%", paddingRight: "4%" }}>
-            <Link
-              to="/projects"
-              className="shrink-0 text-sm text-castlepurple hover:text-castlepink transition-colors"
-            >
-              ← Back to Projects
-            </Link>
-            <span
-              className={`truncate text-sm font-semibold uppercase tracking-wide text-castlepink transition-opacity duration-300 ${
-                titleVisible ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              {study.title}
-            </span>
-          </div>
-        </div>
-      )}
-
       {/* Gradient wash + body content. For non-headerImage case studies this
           renders as a bare fragment — identical DOM to before this change —
           so their pages are byte-for-byte unaffected. For headerImage case
@@ -302,10 +323,12 @@ export default function CaseStudyDetail() {
           static backdrop from that point on; it reverts the instant the user
           scrolls back up past the header image. (The dock bar's title fade
           above is driven by a separate, earlier `titleVisible` threshold —
-          the two no longer flip at the same scroll position.) */}
+          the two no longer flip at the same scroll position.) Its pinned
+          `top` offset clears both the nav and the sticky dock bar above,
+          since both now occupy real space at the top of the viewport. */}
       {hasHeaderImage ? (
         <div className="relative">
-          <GradientWash fixed={docked} top={navHeight} />
+          <GradientWash fixed={docked} top={navHeight + barHeight} />
           <div className="relative z-10">
             <CaseStudyBody study={study} />
           </div>
