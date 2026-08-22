@@ -9,15 +9,15 @@ import GradientWash from "../components/GradientWash";
 // Renders `**bold**` spans within a line of section-body text as <strong>.
 // Small, general helper: lets bulleted list items (see renderSectionBlocks)
 // keep an emphasized lead-in term without hand-rolling markup in the JSON.
-// Lead-in terms written in ALL CAPS (e.g. "COMPOSITIONAL CONCEPT MODEL:") are
-// emphasized with color + letter-spacing instead of font-weight: the body
-// font here is Fredoka, a rounded/bubbly face whose letterforms smush
-// together at bold weight, especially combined with uppercase + tracking.
-// `font-normal` overrides the browser's default bold styling of <strong>.
-// This matches the tracking-wide + color convention used elsewhere for small
-// uppercase labels (see CaseStudyCard's category label). Mixed-case bold
-// spans are left alone (still browser-default bold; none currently appear
-// in case-study content).
+// Every `**...**` span — ALL-CAPS lead-ins (e.g. "HIERARCHY:") and ordinary
+// mixed-case emphasis alike (e.g. "left breast") — gets color instead of
+// font-weight: the body font here is Fredoka, a rounded/bubbly face whose
+// letterforms smush together at bold weight. `font-normal` overrides the
+// browser's default bold styling of <strong>, and `text-castlepink` supplies
+// the emphasis instead. ALL-CAPS spans additionally get `tracking-wide`,
+// since that letter-spacing convention is specifically for short label-style
+// tokens (matches CaseStudyCard's category label), not for longer mixed-case
+// phrases sitting inline in running prose.
 function renderInlineBold(text) {
   return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) => {
     if (!part.startsWith("**") || !part.endsWith("**")) return part;
@@ -28,7 +28,7 @@ function renderInlineBold(text) {
     return (
       <strong
         key={i}
-        className={isUppercase ? "font-normal text-castlepink tracking-wide" : undefined}
+        className={`font-normal text-castlepink ${isUppercase ? "tracking-wide" : ""}`}
       >
         {content}
       </strong>
@@ -37,8 +37,11 @@ function renderInlineBold(text) {
 }
 
 // A section's `body` is one string; blocks are separated by a blank line.
-// Two lightweight markdown-lite conventions on top of plain paragraphs:
+// Lightweight markdown-lite conventions on top of plain paragraphs:
 //   - a block where every line starts with "- " renders as a real <ul>
+//   - a single-line block starting with "### " renders as a small sub-heading
+//     (one level below the section's own heading — see the h2 rendered
+//     alongside this function's output)
 //   - a block that's a single paragraph fully wrapped in **double asterisks**
 //     renders as a bold, standalone, visually emphasized line
 // Kept intentionally small rather than pulling in a markdown dependency.
@@ -48,6 +51,14 @@ function renderSectionBlocks(body) {
   return body.split(/\n\s*\n/).map((block, index) => {
     const trimmed = block.trim();
     const lines = trimmed.split("\n").map((line) => line.trim());
+
+    if (lines.length === 1 && lines[0].startsWith("### ")) {
+      return (
+        <h3 key={index} className="text-xs uppercase tracking-wide text-castlepurple mb-2 mt-6 first:mt-0">
+          {lines[0].slice(4)}
+        </h3>
+      );
+    }
 
     if (lines.length > 0 && lines.every((line) => line.startsWith("- "))) {
       return (
