@@ -296,7 +296,13 @@ export default function CaseStudyDetail() {
                 that pushes the bar's own height (which navHeight/barHeight
                 math elsewhere depends on staying stable). Disabled via
                 pointer-events while the title itself is still faded out
-                (pre-dock) so an invisible trigger can't be clicked. */}
+                (pre-dock) so an invisible trigger can't be clicked. Panel is
+                anchored `right-0` (grows down-and-left) rather than `left-0`
+                (down-and-right): the title sits well over toward the right
+                side of the bar already, after the back link, so anchoring
+                its right edge to the button's right edge keeps the panel
+                inside the viewport on narrow screens instead of overflowing
+                past the right edge. */}
             <div ref={projectMenuRef} className="relative min-w-0">
               <button
                 type="button"
@@ -317,7 +323,7 @@ export default function CaseStudyDetail() {
               {projectMenuOpen && (
                 <div
                   role="menu"
-                  className="absolute left-0 top-full mt-2 w-64 max-h-[70vh] overflow-y-auto rounded-xl bg-gray-900/95 backdrop-blur-sm border border-castlepink/20 shadow-xl py-3 z-50"
+                  className="absolute right-0 top-full mt-2 w-64 max-h-[70vh] overflow-y-auto rounded-xl bg-gray-900/95 backdrop-blur-sm border border-castlepink/20 shadow-xl py-3 z-50"
                 >
                   {Object.entries(projectsByCategory).map(([category, projects]) => (
                     <div key={category} className="px-4 py-2">
