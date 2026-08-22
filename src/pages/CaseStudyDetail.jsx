@@ -186,7 +186,7 @@ export default function CaseStudyDetail() {
           {/* top offset nudged 10px below the 76% baseline so the label
               clears the baked-in subtitle text sitting just above it in the
               image — a plain % value put them too close together. */}
-          <p className="absolute left-[4%] top-[calc(76%+10px)] text-xs uppercase tracking-wide text-castlepink/70">
+          <p className="absolute left-[4.3%] top-[calc(76%+10px)] text-xs uppercase tracking-wide text-castlepink/70">
             {study.category}
           </p>
 
