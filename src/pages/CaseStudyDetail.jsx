@@ -171,17 +171,14 @@ export default function CaseStudyDetail() {
            hidden since its text is already rendered inside the image. The
            back link and category label are thin overlays positioned (in %
            of the image's own box) to land in the empty black space the
-           image was designed with, above and below its baked-in text. */
+           image was designed with, above and below its baked-in text. The
+           back link itself now lives only in the permanent dock bar below
+           (see the `hasHeaderImage` block further down) rather than also
+           being baked in here, so there's a single back-link element instead
+           of two stacked at the same spot pre-scroll. */
         <div className="relative w-full overflow-hidden border-b border-castlepink/20">
           <img src={study.headerImageUrl} alt="" className="block w-full h-auto min-h-[220px] object-cover object-left" />
           <h1 className="sr-only">{study.title}</h1>
-
-          <Link
-            to="/projects"
-            className="absolute left-[4%] top-[5%] text-castlepurple hover:text-castlepink transition-colors"
-          >
-            ← Back to Projects
-          </Link>
 
           {/* top offset nudged 10px below the 76% baseline so the label
               clears the baked-in subtitle text sitting just above it in the
@@ -225,18 +222,26 @@ export default function CaseStudyDetail() {
         </div>
       )}
 
-      {/* Compact docked bar: only for headerImage case studies, and only
-          once the header image has scrolled out of view (see the
-          IntersectionObserver effect above). `position: fixed` rather than
-          `position: sticky` deliberately — mounting/unmounting a sticky
-          element right at the scroll threshold would insert real height into
-          the document at the user's current scroll position and jump the
-          page; a fixed element reserves no flow space, so it can appear and
-          disappear at the threshold with zero layout shift. Pinned directly
-          beneath the measured nav height so it never overlaps the main nav. */}
-      {hasHeaderImage && docked && (
+      {/* Permanent back-link dock: for headerImage case studies this bar is
+          always mounted (it's the one and only "back to projects" affordance
+          for these pages, replacing the link that used to be baked into the
+          header image overlay above), so it's on screen from first paint,
+          not just after scrolling. Its title only fades in, and its solid
+          bar background/border only appears, once the header image has
+          scrolled out of view (see the IntersectionObserver effect above) —
+          that's the "docked" moment. `position: fixed` rather than
+          `position: sticky` deliberately — even though the bar itself no
+          longer mounts/unmounts at the threshold, it still needs to reserve
+          zero flow space so it can float over the header image without
+          pushing page content down. Pinned directly beneath the measured nav
+          height so it never overlaps the main nav. `dock-bar-in` now plays
+          once on initial page load (the bar's only mount) rather than at the
+          scroll threshold. */}
+      {hasHeaderImage && (
         <div
-          className="dock-bar-in fixed left-0 right-0 z-40 bg-black/95 backdrop-blur-sm border-b border-castlepink/20"
+          className={`dock-bar-in fixed left-0 right-0 z-40 transition-colors duration-300 ${
+            docked ? "bg-black/95 backdrop-blur-sm border-b border-castlepink/20" : "border-b border-transparent"
+          }`}
           style={{ top: navHeight }}
         >
           <div className="max-w-[800px] mx-auto px-4 sm:px-10 py-3 flex items-center gap-4">
@@ -246,7 +251,11 @@ export default function CaseStudyDetail() {
             >
               ← Back to Projects
             </Link>
-            <span className="truncate text-sm font-semibold uppercase tracking-wide text-castlepink">
+            <span
+              className={`truncate text-sm font-semibold uppercase tracking-wide text-castlepink transition-opacity duration-300 ${
+                docked ? "opacity-100" : "opacity-0"
+              }`}
+            >
               {study.title}
             </span>
           </div>
