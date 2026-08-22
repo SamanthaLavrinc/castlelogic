@@ -97,7 +97,7 @@ export default function Timeline() {
                 )}
                 <h3 className="text-xl font-semibold text-gray-200 leading-relaxed">{job.title}</h3>
               </div>
-              <p className="text-lg font-semibold text-grey-200 sm:shrink-0 leading-relaxed">{job.date}</p>
+              <p className="text-lg font-semibold text-grey-200 mr-[24px] sm:shrink-0 leading-relaxed">{job.date}</p>
             </div>
 
             {/* Company */}
