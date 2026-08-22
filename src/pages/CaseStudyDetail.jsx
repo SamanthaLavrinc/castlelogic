@@ -462,7 +462,7 @@ function CaseStudyBody({ study }) {
   return (
     <>
       {study.headerImageUrl && (
-        <div className="max-w-[800px] mx-auto px-4 sm:px-10 pt-10 sm:pt-16">
+        <div className="max-w-[800px] mx-auto px-4 sm:px-10 pt-6 sm:pt-8">
           {/* Summary + intro image + role share one card (same dark-grey,
               borderless, rounded-2xl treatment as the section cards below),
               since together they're the page's single "about this project"
@@ -471,7 +471,7 @@ function CaseStudyBody({ study }) {
               blank-line-separated paragraphs in the JSON actually renders as
               multiple <p> tags — plain JSX text collapses "\n\n" to nothing,
               which was silently mashing two-paragraph summaries into one. */}
-          <div className="bg-gray-900/70 rounded-2xl px-6 py-10 sm:px-8 sm:py-12">
+          <div className="bg-gray-900/70 rounded-2xl px-6 pt-6 pb-10 sm:px-8 sm:pt-8 sm:pb-12">
             <div className="text-lg">{renderSectionBlocks(study.summary)}</div>
 
             {study.heroImageUrl && (
@@ -562,16 +562,19 @@ function CaseStudyBody({ study }) {
                     (see Timeline.jsx's `.timeline-card` and the rounded-2xl
                     panels on About/Contact): bg-gray-900, rounded, no
                     border — at 70% opacity here so the GradientWash glow
-                    behind the page shows through faintly. Extra vertical
-                    padding (vs. the site's usual
-                    p-6/p-8 cards) gives these more breathing room since
-                    they're holding full prose sections, not a short card
-                    blurb. Section images (see ImageGallery's inline layout)
-                    keep their own pink border/rounding as a nested element,
-                    unaffected by this outer card. Body copy below is
-                    `font-light`, matching Timeline.jsx's card body text —
-                    Fredoka's default weight reads heavy at paragraph length. */}
-                <div className="bg-gray-900/70 rounded-2xl px-6 py-10 sm:px-8 sm:py-12">
+                    behind the page shows through faintly. Extra *bottom*
+                    padding (vs. the site's usual p-6/p-8 cards) gives these
+                    more breathing room since they're holding full prose
+                    sections, not a short card blurb — top padding stays
+                    tighter since a heading (or the section image) usually
+                    sits right at the top of the card already, needing less
+                    clearance than the card's own bottom edge does. Section
+                    images (see ImageGallery's inline layout) keep their own
+                    pink border/rounding as a nested element, unaffected by
+                    this outer card. Body copy below is `font-light`,
+                    matching Timeline.jsx's card body text — Fredoka's
+                    default weight reads heavy at paragraph length. */}
+                <div className="bg-gray-900/70 rounded-2xl px-6 pt-6 pb-10 sm:px-8 sm:pt-8 sm:pb-12">
                   {section.heading && (
                     <h2 className="text-sm uppercase tracking-wide text-castlepink mb-3">{section.heading}</h2>
                   )}
