@@ -390,7 +390,12 @@ export default function CaseStudyDetail() {
                 viewport edge. `sm:left-0` reverts to the original
                 down-and-right growth at the `sm` breakpoint and up, where
                 there's enough room either way and left-anchored reads more
-                naturally under the title. */}
+                naturally under the title. The panel's `w-full` matches
+                whatever width the button (title text + chevron) is
+                actually rendering at — truncated-and-narrow or full-and-
+                wide — rather than a fixed size, since `min-w-0` on this
+                wrapper lets it shrink to the button's true box instead of
+                the button's untruncated content width. */}
             <div ref={projectMenuRef} className="relative min-w-0">
               <button
                 type="button"
@@ -411,7 +416,7 @@ export default function CaseStudyDetail() {
               {projectMenuOpen && (
                 <div
                   role="menu"
-                  className="absolute right-0 sm:left-0 sm:right-auto top-full mt-2 w-64 max-h-[70vh] overflow-y-auto rounded-xl bg-gray-900/95 backdrop-blur-sm border border-castlepink/20 shadow-xl py-3 z-50"
+                  className="absolute right-0 sm:left-0 sm:right-auto top-full mt-2 w-full max-h-[70vh] overflow-y-auto rounded-xl bg-gray-900/95 backdrop-blur-sm border border-castlepink/20 shadow-xl py-3 z-50"
                 >
                   {Object.entries(projectsByCategory).map(([category, projects]) => (
                     <div key={category} className="px-4 py-2">
