@@ -229,7 +229,7 @@ export default function CaseStudyDetail() {
           className="dock-bar-in sticky z-40 bg-black/95 backdrop-blur-sm border-b border-castlepink/20"
           style={{ top: navHeight }}
         >
-          <div className="flex items-center gap-4 py-3" style={{ paddingLeft: "17.7%", paddingRight: "4%" }}>
+          <div className="flex items-center gap-4 py-3" style={{ paddingLeft: "1%", paddingRight: "4%" }}>
             <Link
               to="/projects"
               className="shrink-0 text-sm text-castlepurple hover:text-castlepink transition-colors"
