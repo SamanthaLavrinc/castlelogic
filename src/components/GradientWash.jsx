@@ -1,6 +1,6 @@
 // Centered ambient background motif for case-study pages: a soft, glowy
 // bloom of the brand's dual accent colors, scattered with faint stars and a
-// few small soft lightning arcs — a dialed-way-down echo of the same
+// few small soft electric arcs — a dialed-way-down echo of the same
 // glow/constellation/lightning language used in the project's own header
 // art and the site's hero graphic spec (see docs/design-brief.md's
 // "restrained lightning/arc treatment" note). Built as inline SVG rather
@@ -23,6 +23,11 @@
 // (sides most tightly, bottom more gradually to suit the taller canvas) so
 // it never reads as a hard-edged rectangle.
 //
+// The ambient haze is built from tall rounded-rect "capsules" rather than
+// circles: a lightly blurred vertical pill reads as a soft glowing cylinder
+// of light rather than a round bloom, which suits the tall canvas far
+// better than a ball of light would.
+//
 // Two positioning modes, chosen by the caller:
 //   - normal flow (default, `fixed={false}`): absolutely fills its nearest
 //     positioned ancestor (which must have `position: relative` and a real
@@ -37,6 +42,26 @@
 // intercepts clicks or gets announced to screen readers.
 export default function GradientWash({ fixed = false, top = 0, className = "" }) {
   const edgeMask = "radial-gradient(65% 78% at 50% 24%, #000 0%, #000 36%, transparent 86%)";
+
+  // A jagged, branching electric-arc shape (main stroke + a shorter fork
+  // partway down) rather than a symmetric "flash icon" glyph — reused at a
+  // few positions/rotations/colors below.
+  const bolt = (transform, stroke, opacity) => (
+    <g transform={transform}>
+      <path
+        d="M 0 0 L 8 20 L -6 26 L 14 52 L 4 58 L 18 84 L 6 90 L 16 118 L 2 130"
+        stroke={stroke}
+        strokeOpacity={opacity}
+        strokeWidth="1.6"
+      />
+      <path
+        d="M 14 52 L 30 66 L 20 72 L 34 92"
+        stroke={stroke}
+        strokeOpacity={opacity * 0.85}
+        strokeWidth="1.3"
+      />
+    </g>
+  );
 
   return (
     <div
@@ -54,85 +79,65 @@ export default function GradientWash({ fixed = false, top = 0, className = "" })
             <feGaussianBlur stdDeviation="1.6" />
           </filter>
           <filter id="gw-nebula-glow" x="-200%" y="-200%" width="500%" height="500%">
-            <feGaussianBlur stdDeviation="68" />
+            <feGaussianBlur stdDeviation="54" />
           </filter>
         </defs>
 
-        {/* Soft ambient haze — large heavily blurred blobs in the brand's
-            55/45 pink/purple mix, chained down the taller canvas so the
-            glow has presence well past the top third. */}
-        <circle cx="380" cy="170" r="230" fill="#CB90FF" opacity="0.2" filter="url(#gw-nebula-glow)" />
-        <circle cx="710" cy="260" r="270" fill="#FF46A2" opacity="0.19" filter="url(#gw-nebula-glow)" />
-        <circle cx="500" cy="560" r="250" fill="#CB90FF" opacity="0.15" filter="url(#gw-nebula-glow)" />
-        <circle cx="650" cy="680" r="220" fill="#FF46A2" opacity="0.13" filter="url(#gw-nebula-glow)" />
+        {/* Soft ambient haze — tall rounded-rect "capsules" in the brand's
+            55/45 pink/purple mix, read as glowing vertical cylinders of
+            light rather than round blobs once blurred, chained down the
+            taller canvas so the glow has presence well past the top third. */}
+        <g filter="url(#gw-nebula-glow)">
+          <rect x="260" y="10" width="260" height="560" rx="130" ry="130" fill="#CB90FF" opacity="0.23" />
+          <rect x="560" y="70" width="300" height="640" rx="150" ry="150" fill="#FF46A2" opacity="0.22" />
+          <rect x="420" y="480" width="220" height="460" rx="110" ry="110" fill="#CB90FF" opacity="0.17" />
+        </g>
 
-        {/* Small soft lightning arcs — the same restrained "electric arc"
-            motif as the hero graphic's POWERFUL treatment, shrunk to a
-            faint background accent rather than a foreground illustration. */}
+        {/* Small soft electric arcs — the same restrained "arc" motif as
+            the hero graphic's POWERFUL treatment, shrunk to a faint
+            background accent rather than a foreground illustration. Jagged
+            multi-segment paths with a short branch fork, not a symmetric
+            flash-icon glyph. */}
         <g fill="none" strokeLinecap="round" strokeLinejoin="round" filter="url(#gw-star-glow)">
-          <path
-            d="M 0 0 L 9 16 L 2 16 L 12 40"
-            transform="translate(150,230) rotate(-12) scale(0.9)"
-            stroke="#FF46A2"
-            strokeOpacity="0.45"
-            strokeWidth="1.8"
-          />
-          <path
-            d="M 0 0 L 9 16 L 2 16 L 12 40"
-            transform="translate(870,120) rotate(18) scale(1.1)"
-            stroke="#CB90FF"
-            strokeOpacity="0.4"
-            strokeWidth="1.8"
-          />
-          <path
-            d="M 0 0 L 9 16 L 2 16 L 12 40"
-            transform="translate(610,470) rotate(-20) scale(0.85)"
-            stroke="#FF46A2"
-            strokeOpacity="0.4"
-            strokeWidth="1.8"
-          />
-          <path
-            d="M 0 0 L 9 16 L 2 16 L 12 40"
-            transform="translate(330,600) rotate(10) scale(1)"
-            stroke="#CB90FF"
-            strokeOpacity="0.38"
-            strokeWidth="1.8"
-          />
+          {bolt("translate(150,210) rotate(-10) scale(0.9)", "#FF46A2", 0.52)}
+          {bolt("translate(860,110) rotate(16) scale(1.05)", "#CB90FF", 0.46)}
+          {bolt("translate(600,440) rotate(-18) scale(0.85)", "#FF46A2", 0.46)}
+          {bolt("translate(320,590) rotate(9) scale(0.95)", "#CB90FF", 0.44)}
         </g>
 
         {/* Star-riddled points, each with a small soft glow, spread down
             through most of the taller canvas rather than bunched at top. */}
         <g filter="url(#gw-star-glow)">
-          <circle cx="152" cy="89" r="2.8" fill="#FF46A2" opacity="0.85" />
-          <circle cx="266" cy="139" r="2.0" fill="#CB90FF" opacity="0.78" />
-          <circle cx="380" cy="114" r="3.3" fill="#FF46A2" opacity="0.92" />
-          <circle cx="520" cy="190" r="3.8" fill="#FF46A2" opacity="0.95" />
-          <circle cx="659" cy="152" r="2.3" fill="#CB90FF" opacity="0.78" />
-          <circle cx="786" cy="215" r="2.5" fill="#FF46A2" opacity="0.82" />
-          <circle cx="608" cy="291" r="2.0" fill="#CB90FF" opacity="0.72" />
-          <circle cx="190" cy="253" r="1.8" fill="#CB90FF" opacity="0.68" />
-          <circle cx="836" cy="114" r="1.9" fill="#FF46A2" opacity="0.72" />
-          <circle cx="887" cy="291" r="2.3" fill="#CB90FF" opacity="0.68" />
-          <circle cx="76" cy="190" r="1.6" fill="#FF46A2" opacity="0.62" />
-          <circle cx="481" cy="329" r="1.9" fill="#CB90FF" opacity="0.62" />
-          <circle cx="317" cy="354" r="1.6" fill="#FF46A2" opacity="0.58" />
-          <circle cx="735" cy="342" r="1.8" fill="#FF46A2" opacity="0.58" />
-          <circle cx="912" cy="177" r="2.0" fill="#CB90FF" opacity="0.62" />
-          <circle cx="431" cy="51" r="1.6" fill="#CB90FF" opacity="0.58" />
-          <circle cx="950" cy="80" r="2.0" fill="#FF46A2" opacity="0.7" />
-          <circle cx="980" cy="300" r="1.6" fill="#CB90FF" opacity="0.6" />
-          <circle cx="40" cy="320" r="1.4" fill="#FF46A2" opacity="0.55" />
-          <circle cx="900" cy="400" r="1.8" fill="#CB90FF" opacity="0.55" />
-          <circle cx="700" cy="60" r="1.7" fill="#FF46A2" opacity="0.65" />
-          <circle cx="300" cy="180" r="1.4" fill="#CB90FF" opacity="0.6" />
-          <circle cx="540" cy="420" r="1.7" fill="#FF46A2" opacity="0.55" />
-          <circle cx="770" cy="480" r="1.5" fill="#CB90FF" opacity="0.5" />
-          <circle cx="220" cy="470" r="1.6" fill="#FF46A2" opacity="0.52" />
-          <circle cx="450" cy="560" r="1.4" fill="#CB90FF" opacity="0.48" />
-          <circle cx="640" cy="600" r="1.8" fill="#FF46A2" opacity="0.5" />
-          <circle cx="850" cy="600" r="1.4" fill="#CB90FF" opacity="0.45" />
-          <circle cx="380" cy="680" r="1.5" fill="#FF46A2" opacity="0.42" />
-          <circle cx="120" cy="560" r="1.3" fill="#CB90FF" opacity="0.42" />
+          <circle cx="152" cy="89" r="2.8" fill="#FF46A2" opacity="0.98" />
+          <circle cx="266" cy="139" r="2.0" fill="#CB90FF" opacity="0.9" />
+          <circle cx="380" cy="114" r="3.3" fill="#FF46A2" opacity="0.98" />
+          <circle cx="520" cy="190" r="3.8" fill="#FF46A2" opacity="0.98" />
+          <circle cx="659" cy="152" r="2.3" fill="#CB90FF" opacity="0.9" />
+          <circle cx="786" cy="215" r="2.5" fill="#FF46A2" opacity="0.94" />
+          <circle cx="608" cy="291" r="2.0" fill="#CB90FF" opacity="0.83" />
+          <circle cx="190" cy="253" r="1.8" fill="#CB90FF" opacity="0.78" />
+          <circle cx="836" cy="114" r="1.9" fill="#FF46A2" opacity="0.83" />
+          <circle cx="887" cy="291" r="2.3" fill="#CB90FF" opacity="0.78" />
+          <circle cx="76" cy="190" r="1.6" fill="#FF46A2" opacity="0.71" />
+          <circle cx="481" cy="329" r="1.9" fill="#CB90FF" opacity="0.71" />
+          <circle cx="317" cy="354" r="1.6" fill="#FF46A2" opacity="0.67" />
+          <circle cx="735" cy="342" r="1.8" fill="#FF46A2" opacity="0.67" />
+          <circle cx="912" cy="177" r="2.0" fill="#CB90FF" opacity="0.71" />
+          <circle cx="431" cy="51" r="1.6" fill="#CB90FF" opacity="0.67" />
+          <circle cx="950" cy="80" r="2.0" fill="#FF46A2" opacity="0.81" />
+          <circle cx="980" cy="300" r="1.6" fill="#CB90FF" opacity="0.69" />
+          <circle cx="40" cy="320" r="1.4" fill="#FF46A2" opacity="0.63" />
+          <circle cx="900" cy="400" r="1.8" fill="#CB90FF" opacity="0.63" />
+          <circle cx="700" cy="60" r="1.7" fill="#FF46A2" opacity="0.75" />
+          <circle cx="300" cy="180" r="1.4" fill="#CB90FF" opacity="0.69" />
+          <circle cx="540" cy="420" r="1.7" fill="#FF46A2" opacity="0.63" />
+          <circle cx="770" cy="480" r="1.5" fill="#CB90FF" opacity="0.58" />
+          <circle cx="220" cy="470" r="1.6" fill="#FF46A2" opacity="0.6" />
+          <circle cx="450" cy="560" r="1.4" fill="#CB90FF" opacity="0.55" />
+          <circle cx="640" cy="600" r="1.8" fill="#FF46A2" opacity="0.58" />
+          <circle cx="850" cy="600" r="1.4" fill="#CB90FF" opacity="0.52" />
+          <circle cx="380" cy="680" r="1.5" fill="#FF46A2" opacity="0.48" />
+          <circle cx="120" cy="560" r="1.3" fill="#CB90FF" opacity="0.48" />
         </g>
       </svg>
     </div>
