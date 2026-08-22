@@ -424,7 +424,7 @@ export default function CaseStudyDetail() {
                       category's cluster from the next. */}
                   {Object.entries(projectsByCategory).map(([category, projects], i) => (
                     <div key={category} className={`px-4 py-3 ${i > 0 ? "border-t border-castlepink/10" : ""}`}>
-                      <p className="text-[11px] font-bold uppercase tracking-widest text-gray-200 mb-2">
+                      <p className="text-[11px] font-bold uppercase tracking-widest text-gray-400 mb-2">
                         {category}
                       </p>
                       <ul className="space-y-2 border-l border-castlepink/20 pl-3">
