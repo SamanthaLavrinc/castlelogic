@@ -51,7 +51,7 @@ function renderSectionBlocks(body) {
 
     if (lines.length > 0 && lines.every((line) => line.startsWith("- "))) {
       return (
-        <ul key={index} className="list-disc pl-6 space-y-2 mb-4 last:mb-0 text-castlepurple">
+        <ul key={index} className="list-disc pl-6 space-y-2 mb-4 last:mb-0 text-castlepurple font-light">
           {lines.map((line, lineIndex) => (
             <li key={lineIndex}>{renderInlineBold(line.slice(2))}</li>
           ))}
@@ -72,7 +72,7 @@ function renderSectionBlocks(body) {
     }
 
     return (
-      <p key={index} className="text-castlepurple mb-4 last:mb-0">
+      <p key={index} className="text-castlepurple font-light mb-4 last:mb-0">
         {renderInlineBold(trimmed)}
       </p>
     );
@@ -392,23 +392,38 @@ function CaseStudyBody({ study }) {
         {study.sections?.length > 0 ? (
           <div className="mb-8">
             {study.sections.map((section, index) => (
-              <Reveal key={section.heading ?? index} className="mb-12 last:mb-0">
-                <h2 className="text-sm uppercase tracking-wide text-castlepink mb-3">{section.heading}</h2>
-                {section.imageUrl && (
-                  <div className="mb-4">
-                    <ImageGallery
-                      layout="inline"
-                      images={[
-                        {
-                          id: `${study.slug}-section-${index}`,
-                          title: section.heading ?? study.title,
-                          img: section.imageUrl,
-                        },
-                      ]}
-                    />
-                  </div>
-                )}
-                {renderSectionBlocks(section.body)}
+              <Reveal key={section.heading ?? index} className="mb-8 last:mb-0">
+                {/* Same dark-grey card treatment as the site's other cards
+                    (see Timeline.jsx's `.timeline-card` and the rounded-2xl
+                    panels on About/Contact): bg-gray-900, rounded, no
+                    border. Extra vertical padding (vs. the site's usual
+                    p-6/p-8 cards) gives these more breathing room since
+                    they're holding full prose sections, not a short card
+                    blurb. Section images (see ImageGallery's inline layout)
+                    keep their own pink border/rounding as a nested element,
+                    unaffected by this outer card. Body copy below is
+                    `font-light`, matching Timeline.jsx's card body text —
+                    Fredoka's default weight reads heavy at paragraph length. */}
+                <div className="bg-gray-900 rounded-2xl px-6 py-10 sm:px-8 sm:py-12">
+                  {section.heading && (
+                    <h2 className="text-sm uppercase tracking-wide text-castlepink mb-3">{section.heading}</h2>
+                  )}
+                  {section.imageUrl && (
+                    <div className="mb-4">
+                      <ImageGallery
+                        layout="inline"
+                        images={[
+                          {
+                            id: `${study.slug}-section-${index}`,
+                            title: section.heading ?? study.title,
+                            img: section.imageUrl,
+                          },
+                        ]}
+                      />
+                    </div>
+                  )}
+                  {renderSectionBlocks(section.body)}
+                </div>
               </Reveal>
             ))}
           </div>
