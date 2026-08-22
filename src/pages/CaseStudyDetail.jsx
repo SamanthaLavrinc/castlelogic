@@ -17,6 +17,34 @@ const projectsByCategory = caseStudies.reduce((groups, study) => {
   return groups;
 }, {});
 
+// A literal neon-sign badge (glowing border + glowing uppercase text, like
+// a diner "OPEN" sign) for a case study's `statusNote` (e.g. "Current
+// status: conceptual phase only."), rendered in the intro card below. Soft
+// red rather than more brand pink or purple: the one deliberate exception
+// to the site's usual pink/purple-only rule, since a status flag reads more
+// naturally in a caution color, and the neon-sign framing sells "status" as
+// something lit up/flagged rather than just another emphasized line.
+// `.neon-sign-flicker` (see global.css) flickers it to life once on mount,
+// like a tube warming up, then settles into a steady glow — it doesn't
+// loop, so it reads as a nice one-time detail rather than a distracting
+// animation every time this card scrolls past.
+function StatusBadge({ text }) {
+  const neonRed = "#FF5A5A";
+  return (
+    <span
+      className="neon-sign-flicker inline-block rounded-full border-2 px-6 py-2 uppercase tracking-wide text-base sm:text-lg"
+      style={{
+        color: neonRed,
+        borderColor: neonRed,
+        textShadow: "0 0 6px rgba(255,90,90,0.9), 0 0 14px rgba(255,90,90,0.7), 0 0 28px rgba(255,90,90,0.5)",
+        boxShadow: "0 0 8px rgba(255,90,90,0.6), 0 0 20px rgba(255,90,90,0.4), inset 0 0 12px rgba(255,90,90,0.15)",
+      }}
+    >
+      {text}
+    </span>
+  );
+}
+
 // Renders `**bold**` spans within a line of section-body text as <strong>.
 // Small, general helper: lets bulleted list items (see renderSectionBlocks)
 // keep an emphasized lead-in term without hand-rolling markup in the JSON.
@@ -115,39 +143,6 @@ function renderSectionBlocks(body) {
 
     const boldMatch = trimmed.match(/^\*\*([\s\S]+)\*\*$/);
     if (boldMatch) {
-      // A "Current status: ..." callout is a status flag, not a thematic
-      // pull-quote (see the plain pink version below) — a literal neon-sign
-      // badge (glowing border + glowing uppercase text, like a diner "OPEN"
-      // sign) in a soft red rather than more brand pink or purple: a status
-      // flag reads more naturally in a caution color, and the neon-sign
-      // framing sells "status" as something lit up/flagged rather than just
-      // another emphasized line. `.neon-sign-flicker` (see global.css)
-      // flickers it to life once on mount, like a tube warming up, then
-      // settles into a steady glow — it doesn't loop, so it reads as a nice
-      // one-time detail rather than a distracting animation every time this
-      // card scrolls past. The one deliberate exception to the site's usual
-      // pink/purple-only rule, and a narrow, specific match rather than a
-      // general restyle of every bold pull-quote.
-      if (/^current status:/i.test(boldMatch[1])) {
-        const neonRed = "#FF5A5A";
-        return (
-          <div key={index} className="flex justify-center mb-6 last:mb-0">
-            <span
-              className="neon-sign-flicker inline-block rounded-full border-2 px-6 py-2 uppercase tracking-wide text-base sm:text-lg"
-              style={{
-                color: neonRed,
-                borderColor: neonRed,
-                textShadow: "0 0 6px rgba(255,90,90,0.9), 0 0 14px rgba(255,90,90,0.7), 0 0 28px rgba(255,90,90,0.5)",
-                boxShadow:
-                  "0 0 8px rgba(255,90,90,0.6), 0 0 20px rgba(255,90,90,0.4), inset 0 0 12px rgba(255,90,90,0.15)",
-              }}
-            >
-              {boldMatch[1]}
-            </span>
-          </div>
-        );
-      }
-
       // A quoted rhetorical/example question (starts and ends with curly
       // quotes, e.g. "Which labs occurred within 90 days of surgery?") is a
       // different kind of pull-quote than a plain declarative statement —
@@ -588,6 +583,12 @@ function CaseStudyBody({ study }) {
                 <p className="text-castlepurple font-light">{study.role}</p>
               </div>
             )}
+
+            {study.statusNote && (
+              <div className="mt-6">
+                <StatusBadge text={study.statusNote} />
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -657,10 +658,9 @@ function CaseStudyBody({ study }) {
                     border — at 70% opacity here so the GradientWash glow
                     behind the page shows through faintly. Symmetric top/
                     bottom padding (vs. the site's usual p-6/p-8 cards, just
-                    a bit roomier) so a single-block section — like the
-                    "Current status" callout, which has no heading — reads
-                    as vertically centered in its card rather than sitting
-                    closer to one edge. Section images (see ImageGallery's
+                    a bit roomier) so a single-block, no-heading section
+                    still reads as vertically centered in its card rather
+                    than sitting closer to one edge. Section images (see ImageGallery's
                     inline layout) keep their own pink border/rounding as a
                     nested element, unaffected by this outer card. Body copy
                     below is `font-light`, matching Timeline.jsx's card body
