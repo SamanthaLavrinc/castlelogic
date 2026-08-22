@@ -396,7 +396,9 @@ function CaseStudyBody({ study }) {
                 {/* Same dark-grey card treatment as the site's other cards
                     (see Timeline.jsx's `.timeline-card` and the rounded-2xl
                     panels on About/Contact): bg-gray-900, rounded, no
-                    border. Extra vertical padding (vs. the site's usual
+                    border — at 80% opacity here so the GradientWash glow
+                    behind the page shows through faintly. Extra vertical
+                    padding (vs. the site's usual
                     p-6/p-8 cards) gives these more breathing room since
                     they're holding full prose sections, not a short card
                     blurb. Section images (see ImageGallery's inline layout)
@@ -404,7 +406,7 @@ function CaseStudyBody({ study }) {
                     unaffected by this outer card. Body copy below is
                     `font-light`, matching Timeline.jsx's card body text —
                     Fredoka's default weight reads heavy at paragraph length. */}
-                <div className="bg-gray-900 rounded-2xl px-6 py-10 sm:px-8 sm:py-12">
+                <div className="bg-gray-900/80 rounded-2xl px-6 py-10 sm:px-8 sm:py-12">
                   {section.heading && (
                     <h2 className="text-sm uppercase tracking-wide text-castlepink mb-3">{section.heading}</h2>
                   )}
