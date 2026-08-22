@@ -413,17 +413,28 @@ export default function CaseStudyDetail() {
                   role="menu"
                   className="absolute right-0 sm:left-0 sm:right-auto top-full mt-2 w-full max-h-[70vh] overflow-y-auto rounded-xl bg-gray-900/95 backdrop-blur-sm border border-castlepink/20 shadow-xl py-3 z-50"
                 >
-                  {Object.entries(projectsByCategory).map(([category, projects]) => (
-                    <div key={category} className="px-4 py-2">
-                      <p className="text-xs uppercase tracking-wide text-castlepink mb-1.5">{category}</p>
-                      <ul>
+                  {/* Category label is deliberately smaller, muted, and
+                      more widely tracked than the project links below it —
+                      a header, not another selectable row — and the
+                      projects themselves sit indented behind a left border,
+                      so the "these belong to that category" relationship
+                      reads as a visual tree rather than everything sitting
+                      flush at the same size and indent. A top border
+                      between groups (skipped on the first) separates one
+                      category's cluster from the next. */}
+                  {Object.entries(projectsByCategory).map(([category, projects], i) => (
+                    <div key={category} className={`px-4 py-3 ${i > 0 ? "border-t border-castlepink/10" : ""}`}>
+                      <p className="text-[11px] font-bold uppercase tracking-widest text-castlepink/70 mb-2">
+                        {category}
+                      </p>
+                      <ul className="space-y-2 border-l border-castlepink/20 pl-3">
                         {projects.map((project) => (
                           <li key={project.slug}>
                             <Link
                               to={`/projects/${project.slug}`}
                               role="menuitem"
                               onClick={() => setProjectMenuOpen(false)}
-                              className={`block py-1 text-sm font-semibold uppercase tracking-wide transition-colors ${
+                              className={`block text-sm font-semibold uppercase tracking-wide transition-colors ${
                                 project.slug === study.slug
                                   ? "text-white"
                                   : "text-castlepurple hover:text-castlepink"
