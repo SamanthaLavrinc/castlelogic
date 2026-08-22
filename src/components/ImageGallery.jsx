@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 
 // Shared image grid + lightbox modal (arrow nav, Escape-to-close, keyboard-
@@ -113,23 +114,25 @@ export default function ImageGallery({ images, groupLabel, className, layout = "
       )}
 
       {/* ---- MODAL WITH ARROWS ---- */}
-      {selected && (
+      {/* Portaled to document.body rather than rendered in place: this
+          component gets used deep inside page trees that create their own
+          stacking contexts (e.g. CaseStudyDetail.jsx wraps its content in a
+          `relative z-10` div so it paints above the page's ambient
+          background). A `position: fixed, z-50` element nested inside a
+          stacking context like that is still capped by it — z-index only
+          competes against siblings within the same context, so the modal
+          was rendering *underneath* the sticky nav (its own, separate,
+          higher-level stacking context) no matter how high its z-index
+          went. Escaping to `document.body` puts it in the root stacking
+          context, where its z-50 actually means "on top of everything." */}
+      {selected && createPortal(
         <div
           role="dialog"
           aria-modal="true"
           aria-label={selected.title}
-          className="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center z-50 p-4"
+          className="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center z-50 p-6 sm:p-16"
           onClick={() => setSelected(null)}
         >
-          {/* CLOSE */}
-          <button
-            onClick={() => setSelected(null)}
-            aria-label="Close"
-            className="absolute top-6 right-6 text-castlepink hover:text-castlepurple"
-          >
-            <X size={28} />
-          </button>
-
           {/* LEFT ARROW (only when there's something to navigate to) */}
           {showArrows && (
             <button
@@ -141,13 +144,40 @@ export default function ImageGallery({ images, groupLabel, className, layout = "
             </button>
           )}
 
-          {/* IMAGE */}
-          <img
-            src={selected.img}
-            alt={selected.title}
-            className="max-w-[min(1200px,100%)] max-h-full rounded-lg"
+          {/* Framed image + caption + close button, grouped in one relative
+              wrapper. The site's canvas is pure black and so is this modal's
+              own backdrop, so a bare image with no chrome around it doesn't
+              read as "a gallery view opened" at all — it just looks like
+              the image sitting on the page. The border+glow, the visible
+              title caption, and a close button anchored to the image's own
+              corner (rather than floating alone in the far viewport corner)
+              are what actually signal "this is a lightbox," independent of
+              backdrop contrast. */}
+          <div
+            className="relative flex flex-col items-center max-w-[min(1200px,100%)]"
             onClick={(e) => e.stopPropagation()}
-          />
+          >
+            <button
+              onClick={() => setSelected(null)}
+              aria-label="Close"
+              className="absolute -top-3 -right-3 rounded-full bg-black border border-castlepink/60 p-1.5 text-castlepink hover:text-castlepurple hover:border-castlepurple transition-colors"
+            >
+              <X size={18} />
+            </button>
+
+            <img
+              src={selected.img}
+              alt={selected.title}
+              className="max-w-full max-h-[70vh] sm:max-h-[75vh] rounded-lg border border-castlepink/40"
+              style={{ boxShadow: "0 0 50px rgba(203,144,255,0.25), 0 0 25px rgba(0,0,0,0.6)" }}
+            />
+
+            {selected.title && (
+              <p className="mt-4 max-w-full truncate text-sm uppercase tracking-wide text-castlepurple">
+                {selected.title}
+              </p>
+            )}
+          </div>
 
           {/* RIGHT ARROW (only when there's something to navigate to) */}
           {showArrows && (
@@ -159,7 +189,8 @@ export default function ImageGallery({ images, groupLabel, className, layout = "
               ›
             </button>
           )}
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );

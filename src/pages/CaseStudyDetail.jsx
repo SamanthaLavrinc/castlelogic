@@ -585,7 +585,7 @@ function CaseStudyBody({ study }) {
             )}
 
             {study.statusNote && (
-              <div className="mt-6">
+              <div className="mt-6 flex justify-center">
                 <StatusBadge text={study.statusNote} />
               </div>
             )}
