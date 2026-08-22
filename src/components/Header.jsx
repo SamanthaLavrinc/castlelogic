@@ -77,14 +77,6 @@ export default function Header() {
 
   return (
     <header className="w-full bg-black relative sticky top-0 z-50 overflow-hidden">
-      {/* Bottom rule, capped to the same 1200px content width as the nav
-          itself rather than running full-bleed edge to edge. Solid
-          castlepink, no opacity — a separate element (rather than a border
-          on the header itself) since a border on a full-width element can't
-          be width-capped and centered independently of the element's own
-          box. */}
-      <div className="max-w-[1200px] mx-auto border-b border-castlepink" />
-
       {/* Desktop Header */}
       <div className="hidden lg:flex w-full max-w-[1200px] mx-auto px-4 py-4 justify-between items-center gap-4">
 
@@ -175,6 +167,15 @@ export default function Header() {
           ))}
         </nav>
       </div>
+
+      {/* Bottom rule, capped to the same 1200px content width as the nav
+          itself rather than running full-bleed edge to edge. Solid
+          castlepink, no opacity. Placed last so it renders below the nav
+          row(s) above — a border on `<header>` itself would sit in the same
+          spot regardless of DOM order, but a plain child element like this
+          one renders wherever it falls in document order, so it has to come
+          after the nav content, not before it. */}
+      <div className="max-w-[1200px] mx-auto border-b border-castlepink" />
 
     </header>
   );
