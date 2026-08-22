@@ -1,11 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Zap } from "lucide-react";
-import { getCaseStudy } from "../content/case-studies";
+import { Zap, ChevronDown } from "lucide-react";
+import { caseStudies, getCaseStudy } from "../content/case-studies";
 import SEO from "../components/SEO";
 import Reveal from "../components/Reveal";
 import ImageGallery from "../components/ImageGallery";
 import GradientWash from "../components/GradientWash";
+
+// Projects grouped by category, in first-seen order (same categories
+// Projects.jsx's filter chips use — nothing hardcoded here, so a new
+// category in a case-study JSON file shows up automatically). Computed once
+// at module scope since `caseStudies` is static build-time content, not
+// per-render state.
+const projectsByCategory = caseStudies.reduce((groups, study) => {
+  (groups[study.category] ??= []).push(study);
+  return groups;
+}, {});
 
 // Renders `**bold**` spans within a line of section-body text as <strong>.
 // Small, general helper: lets bulleted list items (see renderSectionBlocks)
@@ -104,10 +114,32 @@ export default function CaseStudyDetail() {
   const headerSentinelRef = useRef(null);
   const headerMidSentinelRef = useRef(null);
   const barRef = useRef(null);
+  const projectMenuRef = useRef(null);
   const [docked, setDocked] = useState(false);
   const [titleVisible, setTitleVisible] = useState(false);
   const [navHeight, setNavHeight] = useState(0);
   const [barHeight, setBarHeight] = useState(0);
+  const [projectMenuOpen, setProjectMenuOpen] = useState(false);
+
+  // Closes the docked title's project-switcher dropdown (see the
+  // `hasHeaderImage` bar below) on an outside click or Escape — the two
+  // standard ways to dismiss a floating menu that isn't a native <select>.
+  useEffect(() => {
+    if (!projectMenuOpen) return undefined;
+
+    const onPointerDown = (e) => {
+      if (!projectMenuRef.current?.contains(e.target)) setProjectMenuOpen(false);
+    };
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") setProjectMenuOpen(false);
+    };
+    document.addEventListener("mousedown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [projectMenuOpen]);
 
   // Measure the site's sticky main nav (see Header.jsx: `sticky top-0`) so the
   // docked bar and pinned gradient below sit directly beneath it rather than
@@ -174,14 +206,23 @@ export default function CaseStudyDetail() {
   // — once the user has scrolled about halfway through the header image,
   // rather than waiting for it to scroll completely out of view. Same
   // sentinel/IntersectionObserver technique as the bottom sentinel, just
-  // watching a mid-height sentinel instead of a bottom one.
+  // watching a mid-height sentinel instead of a bottom one. Also closes the
+  // title's project-switcher dropdown the instant the title fades back out
+  // on scrolling back up — done right here rather than in a second effect
+  // watching `titleVisible`, since setting state from an effect just to
+  // react to another state change is redundant with setting it directly
+  // where the source state itself changes.
   useEffect(() => {
     if (!hasHeaderImage) return undefined;
     const sentinel = headerMidSentinelRef.current;
     if (!sentinel) return undefined;
 
     const observer = new IntersectionObserver(
-      ([entry]) => setTitleVisible(!entry.isIntersecting),
+      ([entry]) => {
+        const visible = !entry.isIntersecting;
+        setTitleVisible(visible);
+        if (!visible) setProjectMenuOpen(false);
+      },
       { rootMargin: `-${navHeight + barHeight}px 0px 0px 0px`, threshold: 0 }
     );
     observer.observe(sentinel);
@@ -248,13 +289,62 @@ export default function CaseStudyDetail() {
             >
               ← Back to Projects
             </Link>
-            <span
-              className={`truncate text-sm font-semibold uppercase tracking-wide text-white transition-opacity duration-300 ${
-                titleVisible ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              {study.title}
-            </span>
+            {/* Project switcher: the docked title doubles as a dropdown
+                trigger revealing every other project, grouped by category
+                (same categories Projects.jsx's filter chips use). `relative`
+                wrapper + `absolute` panel — a floating menu, not something
+                that pushes the bar's own height (which navHeight/barHeight
+                math elsewhere depends on staying stable). Disabled via
+                pointer-events while the title itself is still faded out
+                (pre-dock) so an invisible trigger can't be clicked. */}
+            <div ref={projectMenuRef} className="relative min-w-0">
+              <button
+                type="button"
+                onClick={() => setProjectMenuOpen((open) => !open)}
+                aria-haspopup="menu"
+                aria-expanded={projectMenuOpen}
+                className={`flex items-center gap-1.5 min-w-0 max-w-full text-sm font-semibold uppercase tracking-wide text-white transition-opacity duration-300 ${
+                  titleVisible ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+                }`}
+              >
+                <span className="truncate">{study.title}</span>
+                <ChevronDown
+                  size={14}
+                  className={`shrink-0 transition-transform duration-200 ${projectMenuOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+
+              {projectMenuOpen && (
+                <div
+                  role="menu"
+                  className="absolute left-0 top-full mt-2 w-64 max-h-[70vh] overflow-y-auto rounded-xl bg-gray-900/95 backdrop-blur-sm border border-castlepink/20 shadow-xl py-3 z-50"
+                >
+                  {Object.entries(projectsByCategory).map(([category, projects]) => (
+                    <div key={category} className="px-4 py-2">
+                      <p className="text-xs uppercase tracking-wide text-castlepink mb-1.5">{category}</p>
+                      <ul>
+                        {projects.map((project) => (
+                          <li key={project.slug}>
+                            <Link
+                              to={`/projects/${project.slug}`}
+                              role="menuitem"
+                              onClick={() => setProjectMenuOpen(false)}
+                              className={`block py-1 text-sm font-semibold uppercase tracking-wide transition-colors ${
+                                project.slug === study.slug
+                                  ? "text-white"
+                                  : "text-castlepurple hover:text-castlepink"
+                              }`}
+                            >
+                              {project.title}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
@@ -379,12 +469,18 @@ function CaseStudyBody({ study }) {
             <div className="text-lg">{renderSectionBlocks(study.summary)}</div>
 
             {study.heroImageUrl && (
-              <img
-                src={study.heroImageUrl}
-                alt={study.title}
-                loading="lazy"
-                className="w-full rounded-lg border border-castlepink mt-2 mb-8"
-              />
+              <div className="mt-2 mb-8">
+                <ImageGallery
+                  layout="inline"
+                  images={[
+                    {
+                      id: `${study.slug}-intro`,
+                      title: study.title,
+                      img: study.heroImageUrl,
+                    },
+                  ]}
+                />
+              </div>
             )}
 
             {study.role && (
@@ -401,16 +497,25 @@ function CaseStudyBody({ study }) {
           and Resume.jsx (Zap icon + `.spark-ignite` glow keyframe, see
           global.css) — reused here to separate the intro card above from
           the first section card below, instead of introducing a new
-          divider style. */}
+          divider style. Its own `py-9 sm:py-12` carries the *entire* gap
+          between the two cards, split evenly — the intro card above has no
+          trailing margin, and the sections div below has its leading
+          padding suppressed (see `pt-0` there) specifically when this
+          divider is present, so the divider sits truly centered in the gap
+          rather than hugging whichever neighbor doesn't also add padding. */}
       {study.headerImageUrl && (
-        <div className="max-w-[800px] mx-auto px-4 sm:px-10 flex items-center gap-4 py-4" aria-hidden="true">
+        <div className="max-w-[800px] mx-auto px-4 sm:px-10 flex items-center gap-4 py-9 sm:py-12" aria-hidden="true">
           <div className="flex-1 h-px bg-castlepink opacity-40" />
           <Zap size={16} className="shrink-0 text-castlepink spark-ignite" />
           <div className="flex-1 h-px bg-castlepink opacity-40" />
         </div>
       )}
 
-      <div className="max-w-[800px] mx-auto px-4 sm:px-10 py-10 sm:py-16">
+      <div
+        className={`max-w-[800px] mx-auto px-4 sm:px-10 pb-10 sm:pb-16 ${
+          study.headerImageUrl ? "pt-0" : "pt-10 sm:pt-16"
+        }`}
+      >
         {!study.headerImageUrl && study.heroImageUrl && (
           <img
             src={study.heroImageUrl}
