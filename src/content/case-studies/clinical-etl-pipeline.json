@@ -7,6 +7,8 @@
   "summary": "A hierarchy-aware, provenance-tracked reasoning graph for healthcare data, built to answer clinical, billing, and quality-reporting questions from one shared ontology, with both deterministic graph queries and RAG-assisted natural language querying available on top.",
   "role": "Independent solo project: architecture, ontology design, and system build",
   "heroImage": "projects/clinical_etl/images/graph-grounded-domains.png",
+  "cardImage": "projects/clinical_etl/images/card-header-image.png",
+  "headerImage": "projects/clinical_etl/images/header-image.png",
   "sections": [
     {
       "heading": "What's distinctive here",

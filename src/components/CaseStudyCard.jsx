@@ -25,10 +25,10 @@ export default function CaseStudyCard({ study }) {
       className="project-card flex h-full flex-col justify-between bg-gray-900 border rounded-lg p-6 cursor-pointer"
     >
       <div>
-        {study.heroImageUrl && (
+        {(study.cardImageUrl ?? study.heroImageUrl) && (
           <div className="mb-4 -mx-6 -mt-6 overflow-hidden rounded-t-lg border-b border-castlepink/20">
             <img
-              src={study.heroImageUrl}
+              src={study.cardImageUrl ?? study.heroImageUrl}
               alt=""
               loading="lazy"
               className="h-40 w-full object-cover"

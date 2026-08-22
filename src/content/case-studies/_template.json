@@ -18,6 +18,8 @@
     }
   ],
   "heroImage": "projects/your-project-slug/cover.png",
+  "cardImage": "projects/your-project-slug/card-cover.png (optional, path relative to src/assets/; used as the /projects card thumbnail instead of heroImage when set — falls back to heroImage if omitted)",
+  "headerImage": "projects/your-project-slug/header.png (optional, path relative to src/assets/; when set, the case-study detail page renders this image as the full-width top-of-page header instead of the usual blurred-band + crisp-hero-image + visible-title pattern. Use only when the image itself already has the title/subtitle baked into its design — the page overlays only a back link and the category label on top of it, and keeps <h1> in the DOM as sr-only for SEO/accessibility.)",
   "gallery": [
     { "label": "Optional group label", "folder": "projects/your-project-slug/some-subfolder" }
   ],

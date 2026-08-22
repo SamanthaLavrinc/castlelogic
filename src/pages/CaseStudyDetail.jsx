@@ -7,11 +7,15 @@ import ImageGallery from "../components/ImageGallery";
 // Renders `**bold**` spans within a line of section-body text as <strong>.
 // Small, general helper: lets bulleted list items (see renderSectionBlocks)
 // keep an emphasized lead-in term without hand-rolling markup in the JSON.
-// Lead-in terms written in ALL CAPS (e.g. "COMPOSITIONAL CONCEPT MODEL:")
-// get extra letter-spacing so the uppercase text doesn't read cramped,
-// matching the tracking-wide convention used elsewhere for small uppercase
-// labels (see CaseStudyCard's category label). Mixed-case bold spans are
-// left alone.
+// Lead-in terms written in ALL CAPS (e.g. "COMPOSITIONAL CONCEPT MODEL:") are
+// emphasized with color + letter-spacing instead of font-weight: the body
+// font here is Fredoka, a rounded/bubbly face whose letterforms smush
+// together at bold weight, especially combined with uppercase + tracking.
+// `font-normal` overrides the browser's default bold styling of <strong>.
+// This matches the tracking-wide + color convention used elsewhere for small
+// uppercase labels (see CaseStudyCard's category label). Mixed-case bold
+// spans are left alone (still browser-default bold; none currently appear
+// in case-study content).
 function renderInlineBold(text) {
   return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) => {
     if (!part.startsWith("**") || !part.endsWith("**")) return part;
@@ -20,7 +24,10 @@ function renderInlineBold(text) {
     const isUppercase = content === content.toUpperCase() && content !== content.toLowerCase();
 
     return (
-      <strong key={i} className={isUppercase ? "tracking-wide" : undefined}>
+      <strong
+        key={i}
+        className={isUppercase ? "font-normal text-castlepink tracking-wide" : undefined}
+      >
         {content}
       </strong>
     );
@@ -52,8 +59,11 @@ function renderSectionBlocks(body) {
 
     const boldMatch = trimmed.match(/^\*\*([\s\S]+)\*\*$/);
     if (boldMatch) {
+      // Standalone pull-quote line: same no-font-weight rule as the bullet
+      // lead-ins above (Fredoka reads cramped at bold). Size and tracking
+      // carry the "this is a standalone, important statement" weight instead.
       return (
-        <p key={index} className="text-castlepink font-bold text-lg mb-6 last:mb-0">
+        <p key={index} className="text-castlepink text-xl tracking-wide mb-6 last:mb-0">
           {boldMatch[1]}
         </p>
       );
@@ -100,33 +110,65 @@ export default function CaseStudyDetail() {
         image={study.heroImageUrl ? `https://castlelogic.dev${study.heroImageUrl}` : undefined}
       />
 
-      {/* Decorative header band: blurred, scaled-up hero behind the title.
-          Purely visual — the title/summary underneath carry the real content,
-          so the image layer itself is aria-hidden. */}
-      <div className="relative overflow-hidden border-b border-castlepink/20">
-        {study.heroImageUrl && (
-          <div aria-hidden="true" className="absolute inset-0">
-            <img
-              src={study.heroImageUrl}
-              alt=""
-              className="w-full h-full object-cover scale-125 blur-2xl opacity-70"
-            />
-            <div className="absolute inset-0 bg-black/60" />
-          </div>
-        )}
+      {study.headerImageUrl ? (
+        /* Baked-in header: the image itself already contains the title and
+           subtitle as part of its design, so this is the header, full stop —
+           no blurred band, no separate crisp copy, no second visible title.
+           The <h1> stays in the DOM for SEO/accessibility but is visually
+           hidden since its text is already rendered inside the image. The
+           back link and category label are thin overlays positioned (in %
+           of the image's own box) to land in the empty black space the
+           image was designed with, above and below its baked-in text. */
+        <div className="relative w-full overflow-hidden border-b border-castlepink/20">
+          <img src={study.headerImageUrl} alt="" className="block w-full h-auto min-h-[220px] object-cover object-left" />
+          <h1 className="sr-only">{study.title}</h1>
 
-        <div className="relative px-4 sm:px-10 pt-10 sm:pt-16 pb-8">
-          <div className="max-w-[800px] mx-auto">
-            <Link to="/projects" className="text-castlepurple hover:text-castlepink transition-colors">
-              ← Back to Projects
-            </Link>
+          <Link
+            to="/projects"
+            className="absolute left-[4%] top-[5%] text-castlepurple hover:text-castlepink transition-colors"
+          >
+            ← Back to Projects
+          </Link>
 
-            <p className="text-xs uppercase tracking-wide text-castlepink/70 mt-6 mb-1">{study.category}</p>
-            <h1 className="text-4xl font-semibold uppercase text-castlepink mb-4 tracking-wider">{study.title}</h1>
-            <p className="text-lg text-castlepurple">{study.summary}</p>
+          <p className="absolute left-[4%] top-[76%] text-xs uppercase tracking-wide text-castlepink/70">
+            {study.category}
+          </p>
+        </div>
+      ) : (
+        /* Decorative header band: blurred, scaled-up hero behind the title.
+            Purely visual — the title/summary underneath carry the real content,
+            so the image layer itself is aria-hidden. */
+        <div className="relative overflow-hidden border-b border-castlepink/20">
+          {study.heroImageUrl && (
+            <div aria-hidden="true" className="absolute inset-0">
+              <img
+                src={study.heroImageUrl}
+                alt=""
+                className="w-full h-full object-cover scale-125 blur-2xl opacity-70"
+              />
+              <div className="absolute inset-0 bg-black/60" />
+            </div>
+          )}
+
+          <div className="relative px-4 sm:px-10 pt-10 sm:pt-16 pb-8">
+            <div className="max-w-[800px] mx-auto">
+              <Link to="/projects" className="text-castlepurple hover:text-castlepink transition-colors">
+                ← Back to Projects
+              </Link>
+
+              <p className="text-xs uppercase tracking-wide text-castlepink/70 mt-6 mb-1">{study.category}</p>
+              <h1 className="text-4xl font-semibold uppercase text-castlepink mb-4 tracking-wider">{study.title}</h1>
+              <p className="text-lg text-castlepurple">{study.summary}</p>
+            </div>
           </div>
         </div>
-      </div>
+      )}
+
+      {study.headerImageUrl && (
+        <div className="max-w-[800px] mx-auto px-4 sm:px-10 pt-10 sm:pt-16">
+          <p className="text-lg text-castlepurple">{study.summary}</p>
+        </div>
+      )}
 
       <div className="max-w-[800px] mx-auto px-4 sm:px-10 py-10 sm:py-16">
         {study.heroImageUrl && (

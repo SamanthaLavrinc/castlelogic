@@ -10,6 +10,8 @@ export const caseStudies = Object.values(modules)
   .map((study) => ({
     ...study,
     heroImageUrl: resolveImage(study.heroImage),
+    cardImageUrl: resolveImage(study.cardImage),
+    headerImageUrl: resolveImage(study.headerImage),
     galleryGroups: buildGalleryGroups(study.gallery, study.slug),
     sections: study.sections?.map((section) => ({
       ...section,
