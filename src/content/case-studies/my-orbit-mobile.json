@@ -1,7 +1,7 @@
 {
   "slug": "my-orbit-mobile",
   "title": "myOrbit: Mobile",
-  "category": "Full-Stack",
+  "category": "UI Experiments",
   "order": 1.5,
   "status": "in-progress",
   "summary": "Compressing myOrbit's dense, multi-panel relationship graph into something that still works on a phone, without losing the information a therapist or client actually needs at a glance.",
