@@ -76,7 +76,15 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="w-full bg-black relative sticky top-0 z-50 overflow-hidden border-b border-castlepink/20">
+    <header className="w-full bg-black relative sticky top-0 z-50 overflow-hidden">
+      {/* Bottom rule, capped to the same 1200px content width as the nav
+          itself rather than running full-bleed edge to edge. Solid
+          castlepink, no opacity — a separate element (rather than a border
+          on the header itself) since a border on a full-width element can't
+          be width-capped and centered independently of the element's own
+          box. */}
+      <div className="max-w-[1200px] mx-auto border-b border-castlepink" />
+
       {/* Desktop Header */}
       <div className="hidden lg:flex w-full max-w-[1200px] mx-auto px-4 py-4 justify-between items-center gap-4">
 
