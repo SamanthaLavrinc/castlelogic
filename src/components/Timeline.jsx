@@ -101,7 +101,7 @@ export default function Timeline() {
             </div>
 
             {/* Company */}
-            <p className="text-lg ml-8 text-castlepurple mb-2">{job.company}</p>
+            <p className="text-lg ml-8 font-light text-castlepurple mb-2">{job.company}</p>
 
             {/* Collapsible bullets */}
             <div
