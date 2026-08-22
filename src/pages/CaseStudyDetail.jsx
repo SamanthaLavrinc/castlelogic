@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { Zap } from "lucide-react";
 import { getCaseStudy } from "../content/case-studies";
 import SEO from "../components/SEO";
 import Reveal from "../components/Reveal";
@@ -393,6 +394,19 @@ function CaseStudyBody({ study }) {
               </div>
             )}
           </div>
+        </div>
+      )}
+
+      {/* Same lightning-bolt divider used between sections on Contact.jsx
+          and Resume.jsx (Zap icon + `.spark-ignite` glow keyframe, see
+          global.css) — reused here to separate the intro card above from
+          the first section card below, instead of introducing a new
+          divider style. */}
+      {study.headerImageUrl && (
+        <div className="max-w-[800px] mx-auto px-4 sm:px-10 flex items-center gap-4 py-4" aria-hidden="true">
+          <div className="flex-1 h-px bg-castlepink opacity-40" />
+          <Zap size={16} className="shrink-0 text-castlepink spark-ignite" />
+          <div className="flex-1 h-px bg-castlepink opacity-40" />
         </div>
       )}
 
