@@ -229,7 +229,7 @@ export default function CaseStudyDetail() {
           className="dock-bar-in sticky z-40 bg-black/95 backdrop-blur-sm border-b border-castlepink/20"
           style={{ top: navHeight }}
         >
-          <div className="flex items-center gap-4 py-3" style={{ paddingLeft: "1%", paddingRight: "4%" }}>
+          <div className="flex items-center gap-4 py-1.5" style={{ paddingLeft: "1%", paddingRight: "4%" }}>
             <Link
               to="/projects"
               className="shrink-0 text-sm text-castlepurple hover:text-castlepink transition-colors"
@@ -355,12 +355,38 @@ function CaseStudyBody({ study }) {
     <>
       {study.headerImageUrl && (
         <div className="max-w-[800px] mx-auto px-4 sm:px-10 pt-10 sm:pt-16">
-          <p className="text-lg text-castlepurple">{study.summary}</p>
+          {/* Summary + intro image + role share one card (same dark-grey,
+              borderless, rounded-2xl treatment as the section cards below),
+              since together they're the page's single "about this project"
+              unit rather than separate blocks. `renderSectionBlocks` (not a
+              raw `{study.summary}` string) so a summary written as multiple
+              blank-line-separated paragraphs in the JSON actually renders as
+              multiple <p> tags — plain JSX text collapses "\n\n" to nothing,
+              which was silently mashing two-paragraph summaries into one. */}
+          <div className="bg-gray-900/70 rounded-2xl px-6 py-10 sm:px-8 sm:py-12">
+            <div className="text-lg">{renderSectionBlocks(study.summary)}</div>
+
+            {study.heroImageUrl && (
+              <img
+                src={study.heroImageUrl}
+                alt={study.title}
+                loading="lazy"
+                className="w-full rounded-lg border border-castlepink mt-2 mb-8"
+              />
+            )}
+
+            {study.role && (
+              <div>
+                <h2 className="text-sm uppercase tracking-wide text-castlepink mb-2">Role</h2>
+                <p className="text-castlepurple font-light">{study.role}</p>
+              </div>
+            )}
+          </div>
         </div>
       )}
 
       <div className="max-w-[800px] mx-auto px-4 sm:px-10 py-10 sm:py-16">
-        {study.heroImageUrl && (
+        {!study.headerImageUrl && study.heroImageUrl && (
           <img
             src={study.heroImageUrl}
             alt={study.title}
@@ -369,7 +395,7 @@ function CaseStudyBody({ study }) {
           />
         )}
 
-        {study.role && (
+        {!study.headerImageUrl && study.role && (
           <div className="mb-8">
             <h2 className="text-sm uppercase tracking-wide text-castlepink mb-2">Role</h2>
             <p className="text-castlepurple">{study.role}</p>
