@@ -76,7 +76,7 @@
     },
     {
       "heading": "The larger idea",
-      "body": "Most clinical AI systems ask:\n\n**“What text is relevant to this question?”**\n\nThis architecture asks a harder question:\n\n**“What relationships have to remain true for this information to be reasoned over correctly?”**\n\nand\n\n**“How can we preserve aggregate context for questions we can't predict?”**\n\nThat difference drives the entire design.\n\nThe text is still there. The codes are still there. Embeddings are still useful. LLMs are still useful.\n\nBut none of them has to carry the entire burden of reasoning.\n\nThe graph preserves the structure that makes the evidence meaningful."
+      "body": "Most clinical AI systems ask:\n\n**“What text is relevant to this question?”**\n\nThis architecture asks a harder question:\n\n**“What relationships have to remain true for this information to be reasoned over correctly?”**\n\nand\n\n**“How can we preserve aggregate context for questions we can't predict?”**\n\nThose questions lead to a different kind of architecture: one designed not only to retrieve the right evidence, but to preserve the relationships and context that make that evidence meaningful.. even for questions we haven't thought to ask yet.\n\nThe text is still there. The codes are still there. Embeddings are still useful. LLMs are still useful.\n\nBut none of them has to carry the entire burden of reasoning.\n\nThe graph preserves the structure and aggregate context that allow the evidence to remain meaningful as new questions emerge."
     }
   ],
   "links": [
