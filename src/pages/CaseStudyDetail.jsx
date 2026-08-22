@@ -135,9 +135,16 @@ function renderSectionBlocks(body) {
       // Standalone pull-quote line: same no-font-weight rule as the bullet
       // lead-ins above (Fredoka reads cramped at bold). Size, tracking, and
       // centering carry the "this is a standalone, important statement"
-      // weight instead.
+      // weight instead. The glow reuses the sitewide layered-bloom purple
+      // glow recipe (see `.hover-glow-small` / `.timeline-card` in
+      // global.css: `0 0 15px castlepurple, 0 0 20px black`) as a
+      // text-shadow instead of a box-shadow, since there's no box here.
       return (
-        <p key={index} className="text-castlepink text-xl tracking-wide text-center mb-6 last:mb-0">
+        <p
+          key={index}
+          className="text-castlepink text-xl tracking-wide text-center mb-6 last:mb-0"
+          style={{ textShadow: "0 0 15px rgba(203,144,255,0.7), 0 0 24px rgba(203,144,255,0.35)" }}
+        >
           {boldMatch[1]}
         </p>
       );
@@ -523,7 +530,7 @@ function CaseStudyBody({ study }) {
               blank-line-separated paragraphs in the JSON actually renders as
               multiple <p> tags — plain JSX text collapses "\n\n" to nothing,
               which was silently mashing two-paragraph summaries into one. */}
-          <div className="bg-gray-900/70 rounded-2xl px-6 pt-6 pb-10 sm:px-8 sm:pt-8 sm:pb-12">
+          <div className="bg-gray-900/70 rounded-2xl px-6 py-6 sm:px-8 sm:py-8">
             <div className="text-lg">{renderSectionBlocks(study.summary)}</div>
 
             {study.heroImageUrl && (
@@ -614,19 +621,18 @@ function CaseStudyBody({ study }) {
                     (see Timeline.jsx's `.timeline-card` and the rounded-2xl
                     panels on About/Contact): bg-gray-900, rounded, no
                     border — at 70% opacity here so the GradientWash glow
-                    behind the page shows through faintly. Extra *bottom*
-                    padding (vs. the site's usual p-6/p-8 cards) gives these
-                    more breathing room since they're holding full prose
-                    sections, not a short card blurb — top padding stays
-                    tighter since a heading (or the section image) usually
-                    sits right at the top of the card already, needing less
-                    clearance than the card's own bottom edge does. Section
-                    images (see ImageGallery's inline layout) keep their own
-                    pink border/rounding as a nested element, unaffected by
-                    this outer card. Body copy below is `font-light`,
-                    matching Timeline.jsx's card body text — Fredoka's
-                    default weight reads heavy at paragraph length. */}
-                <div className="bg-gray-900/70 rounded-2xl px-6 pt-6 pb-10 sm:px-8 sm:pt-8 sm:pb-12">
+                    behind the page shows through faintly. Symmetric top/
+                    bottom padding (vs. the site's usual p-6/p-8 cards, just
+                    a bit roomier) so a single-block section — like the
+                    "Current status" callout, which has no heading — reads
+                    as vertically centered in its card rather than sitting
+                    closer to one edge. Section images (see ImageGallery's
+                    inline layout) keep their own pink border/rounding as a
+                    nested element, unaffected by this outer card. Body copy
+                    below is `font-light`, matching Timeline.jsx's card body
+                    text — Fredoka's default weight reads heavy at paragraph
+                    length. */}
+                <div className="bg-gray-900/70 rounded-2xl px-6 py-6 sm:px-8 sm:py-8">
                   {section.heading && (
                     <h2 className="text-lg sm:text-xl uppercase tracking-wide text-castlepink mb-3">{section.heading}</h2>
                   )}
@@ -684,7 +690,11 @@ function CaseStudyBody({ study }) {
                 rel="noreferrer"
                 className="inline-block px-4 py-2 border border-castlepink text-castlepink rounded-lg hover-glow-small hover:bg-gray-900 hover:text-castlepurple transition-colors"
               >
-                {link.label}
+                {/* `_template.json` names this field `label`, but the only
+                    case study with real links (clinical-etl-pipeline.json)
+                    wrote it as `title` — falling back covers both instead of
+                    rendering an empty pill when the JSON uses `title`. */}
+                {link.title ?? link.label}
               </a>
             ))}
           </div>
