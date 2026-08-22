@@ -224,3 +224,29 @@ textarea:focus-visible,
   }
 }
 
+/* Brief settle-in for the docked back-link/title bar on case-study pages
+   (see CaseStudyDetail.jsx) when it mounts right at the scroll threshold —
+   a plain instant appearance read as a pop; this softens it without adding
+   any layout-affecting transition (the bar is `position: fixed`, so it
+   never reserves flow space either way). */
+@keyframes dock-bar-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dock-bar-in {
+  animation: dock-bar-in 150ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dock-bar-in {
+    animation: none;
+  }
+}
+

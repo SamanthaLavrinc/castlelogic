@@ -4,7 +4,7 @@
   "category": "UI Experiments",
   "order": 1.5,
   "status": "in-progress",
-  "summary": "Compressing myOrbit's dense, multi-panel relationship graph into something that still works on a phone, without losing the information a therapist or client actually needs at a glance.",
+  "summary": "Compressing myOrbit's dense, multi-panel relationship graph into something that still works on a phone, without losing the information a user actually needs at a glance.",
   "role": "Solo full-stack engineer, contracted via Castle Logic LLC for EmmeCo — built using agentic engineering workflows",
   "stack": ["React 19", "Vite", "Tailwind CSS v4", "Cytoscape.js", "Supabase"],
   "problem": "myOrbit's graph view was designed desktop-first, with several panels visible at once. On mobile, that had to consolidate into something that still surfaces the same information without overwhelming a small screen.",

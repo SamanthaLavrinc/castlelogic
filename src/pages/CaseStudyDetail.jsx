@@ -1,8 +1,10 @@
+import { useEffect, useRef, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getCaseStudy } from "../content/case-studies";
 import SEO from "../components/SEO";
 import Reveal from "../components/Reveal";
 import ImageGallery from "../components/ImageGallery";
+import GradientWash from "../components/GradientWash";
 
 // Renders `**bold**` spans within a line of section-body text as <strong>.
 // Small, general helper: lets bulleted list items (see renderSectionBlocks)
@@ -81,6 +83,57 @@ export default function CaseStudyDetail() {
   const { slug } = useParams();
   const study = getCaseStudy(slug);
 
+  // Scroll-docking header behavior (see GradientWash + headerImage rendering
+  // path below) only applies to case studies with a custom baked-in header
+  // image. Computed up front so the hooks below can no-op cleanly for every
+  // other case study without changing hook call order between renders.
+  const hasHeaderImage = Boolean(study?.headerImageUrl);
+
+  const headerSentinelRef = useRef(null);
+  const [docked, setDocked] = useState(false);
+  const [navHeight, setNavHeight] = useState(0);
+
+  // Measure the site's sticky main nav (see Header.jsx: `sticky top-0`) so the
+  // docked bar and pinned gradient below sit directly beneath it rather than
+  // hardcoding a height that would drift if the nav's own padding/logo size
+  // changes, or differ between the desktop and mobile nav layouts.
+  useEffect(() => {
+    if (!hasHeaderImage) return undefined;
+    const headerEl = document.querySelector("header");
+    if (!headerEl) return undefined;
+
+    const updateNavHeight = () => setNavHeight(headerEl.getBoundingClientRect().height);
+    updateNavHeight();
+
+    const resizeObserver = new ResizeObserver(updateNavHeight);
+    resizeObserver.observe(headerEl);
+    return () => resizeObserver.disconnect();
+  }, [hasHeaderImage]);
+
+  // Docks the compact back-link/title bar and pins the gradient background
+  // once the header image block has scrolled fully out of view above the
+  // viewport. Watches a 1px sentinel at the bottom of the header image block
+  // via IntersectionObserver rather than a scroll-position pixel threshold,
+  // which would need re-tuning per viewport size and break if header image
+  // content changes height. `rootMargin`'s negative top offset shrinks the
+  // effective viewport by the sticky nav's own height, so the sentinel counts
+  // as "out of view" exactly when it passes behind the nav — not when it
+  // crosses the literal top edge of the browser window. Fires in both scroll
+  // directions since IntersectionObserver reports every crossing of the
+  // threshold, not just the first one.
+  useEffect(() => {
+    if (!hasHeaderImage) return undefined;
+    const sentinel = headerSentinelRef.current;
+    if (!sentinel) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setDocked(!entry.isIntersecting),
+      { rootMargin: `-${navHeight}px 0px 0px 0px`, threshold: 0 }
+    );
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [hasHeaderImage, navHeight]);
+
   if (!study) {
     return (
       <main className="min-h-screen bg-black text-white px-4 sm:px-10 py-10 sm:py-16 font-fredoka text-center">
@@ -130,9 +183,17 @@ export default function CaseStudyDetail() {
             ← Back to Projects
           </Link>
 
-          <p className="absolute left-[4%] top-[76%] text-xs uppercase tracking-wide text-castlepink/70">
+          {/* top offset nudged 10px below the 76% baseline so the label
+              clears the baked-in subtitle text sitting just above it in the
+              image — a plain % value put them too close together. */}
+          <p className="absolute left-[4%] top-[calc(76%+10px)] text-xs uppercase tracking-wide text-castlepink/70">
             {study.category}
           </p>
+
+          {/* 1px sentinel marking the bottom edge of the header image block,
+              watched by the IntersectionObserver above to trigger the docked
+              bar + pinned gradient once this scrolls out of view. */}
+          <div ref={headerSentinelRef} aria-hidden="true" className="absolute bottom-0 left-0 h-px w-full" />
         </div>
       ) : (
         /* Decorative header band: blurred, scaled-up hero behind the title.
@@ -164,6 +225,68 @@ export default function CaseStudyDetail() {
         </div>
       )}
 
+      {/* Compact docked bar: only for headerImage case studies, and only
+          once the header image has scrolled out of view (see the
+          IntersectionObserver effect above). `position: fixed` rather than
+          `position: sticky` deliberately — mounting/unmounting a sticky
+          element right at the scroll threshold would insert real height into
+          the document at the user's current scroll position and jump the
+          page; a fixed element reserves no flow space, so it can appear and
+          disappear at the threshold with zero layout shift. Pinned directly
+          beneath the measured nav height so it never overlaps the main nav. */}
+      {hasHeaderImage && docked && (
+        <div
+          className="dock-bar-in fixed left-0 right-0 z-40 bg-black/95 backdrop-blur-sm border-b border-castlepink/20"
+          style={{ top: navHeight }}
+        >
+          <div className="max-w-[800px] mx-auto px-4 sm:px-10 py-3 flex items-center gap-4">
+            <Link
+              to="/projects"
+              className="shrink-0 text-sm text-castlepurple hover:text-castlepink transition-colors"
+            >
+              ← Back to Projects
+            </Link>
+            <span className="truncate text-sm font-semibold uppercase tracking-wide text-castlepink">
+              {study.title}
+            </span>
+          </div>
+        </div>
+      )}
+
+      {/* Gradient wash + body content. For non-headerImage case studies this
+          renders as a bare fragment — identical DOM to before this change —
+          so their pages are byte-for-byte unaffected. For headerImage case
+          studies it's wrapped in a `relative` box so the normal-flow
+          GradientWash has something to size against, with the real content
+          lifted to `relative z-10` above it. GradientWash itself swaps to a
+          viewport-pinned background once `docked` is true (in lockstep with
+          the bar above), so page content scrolls over a static backdrop from
+          that point on; both revert the instant the user scrolls back up
+          past the header image. */}
+      {hasHeaderImage ? (
+        <div className="relative">
+          <GradientWash fixed={docked} top={navHeight} />
+          <div className="relative z-10">
+            <CaseStudyBody study={study} />
+          </div>
+        </div>
+      ) : (
+        <CaseStudyBody study={study} />
+      )}
+    </main>
+  );
+}
+
+// Summary paragraph (headerImage studies only) + the shared body content
+// (hero image, role, stack, sections/problem-approach-results, links,
+// gallery) that renders identically regardless of which header variant a
+// case study uses. Split out so CaseStudyDetail can render it either bare
+// (every case study except headerImage ones, unchanged from before) or
+// wrapped in the gradient-wash positioning box (headerImage ones) without
+// duplicating this block in both branches.
+function CaseStudyBody({ study }) {
+  return (
+    <>
       {study.headerImageUrl && (
         <div className="max-w-[800px] mx-auto px-4 sm:px-10 pt-10 sm:pt-16">
           <p className="text-lg text-castlepurple">{study.summary}</p>
@@ -282,6 +405,6 @@ export default function CaseStudyDetail() {
           </div>
         )}
       </div>
-    </main>
+    </>
   );
 }
