@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import StatusBadge from "./StatusBadge";
 
 // Three status states, differentiated by label + border/fill weight only —
 // this codebase has exactly two custom color tokens (castlepink/castlepurple),
@@ -18,6 +19,9 @@ const STATUS_CLASSES = {
 export default function CaseStudyCard({ study }) {
   const statusLabel = STATUS_LABELS[study.status];
   const statusClasses = STATUS_CLASSES[study.status] ?? STATUS_CLASSES.concept;
+  // In-progress case studies show real, unfinished product screenshots —
+  // blur the card thumbnail rather than show a pre-launch UI at full detail.
+  const isBlurred = study.status === "in-progress";
 
   return (
     <Link
@@ -26,13 +30,18 @@ export default function CaseStudyCard({ study }) {
     >
       <div>
         {(study.cardImageUrl ?? study.heroImageUrl) && (
-          <div className="mb-4 -mx-6 -mt-6 overflow-hidden rounded-t-lg border-b border-castlepink/20">
+          <div className="relative mb-4 -mx-6 -mt-6 overflow-hidden rounded-t-lg border-b border-castlepink/20">
             <img
               src={study.cardImageUrl ?? study.heroImageUrl}
               alt=""
               loading="lazy"
-              className="h-40 w-full object-cover"
+              className={`h-40 w-full object-cover ${isBlurred ? "blur-md scale-110" : ""}`}
             />
+            {isBlurred && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+                <StatusBadge text="Under Construction" size="sm" />
+              </div>
+            )}
           </div>
         )}
 

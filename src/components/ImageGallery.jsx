@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
+import StatusBadge from "./StatusBadge";
 
 // Shared image grid + lightbox modal (arrow nav, Escape-to-close, keyboard-
 // operable thumbnails). Originally built for the About page's Illustrations
@@ -12,7 +13,13 @@ import { X } from "lucide-react";
 // (used for case-study section images) instead of a thumbnail square, but
 // opens the same modal. Either way, prev/next arrows only render when
 // there's more than one image to navigate to.
-export default function ImageGallery({ images, groupLabel, className, layout = "grid" }) {
+//
+// `blurred`, driven by `study.status === "in-progress"` in CaseStudyDetail,
+// blurs every image this component renders and swaps in an "Under
+// Construction" StatusBadge, including inside the lightbox modal — opening
+// an image full-size can't be used to see past the blur, since a pre-launch
+// product's real screenshots aren't meant to be publicly legible yet.
+export default function ImageGallery({ images, groupLabel, className, layout = "grid", blurred = false }) {
   const [selected, setSelected] = useState(null);
 
   const selectedIndex = selected ? images.findIndex((img) => img.id === selected.id) : -1;
@@ -54,7 +61,7 @@ export default function ImageGallery({ images, groupLabel, className, layout = "
           role="button"
           tabIndex={0}
           aria-label={`View ${images[0].title} full size`}
-          className="cursor-zoom-in"
+          className="relative cursor-zoom-in"
           onClick={() => setSelected(images[0])}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") {
@@ -67,8 +74,15 @@ export default function ImageGallery({ images, groupLabel, className, layout = "
             src={images[0].img}
             alt={images[0].title}
             loading="lazy"
-            className="w-full rounded-lg border border-castlepink transition-opacity hover:opacity-90"
+            className={`w-full rounded-lg border border-castlepink transition-opacity hover:opacity-90 ${
+              blurred ? "blur-md scale-105" : ""
+            }`}
           />
+          {blurred && (
+            <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/50">
+              <StatusBadge text="Under Construction" />
+            </div>
+          )}
         </div>
       ) : (
         /* Gallery Grid */
@@ -98,16 +112,24 @@ export default function ImageGallery({ images, groupLabel, className, layout = "
                   src={item.img}
                   alt={item.title}
                   loading="lazy"
-                  className="max-w-full max-h-full object-contain"
+                  className={`max-w-full max-h-full object-contain ${blurred ? "blur-md scale-110" : ""}`}
                 />
               </div>
 
-              {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-black bg-opacity-90 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <span className="text-castlepink font-bold text-lg text-center px-2">
-                  {item.title}
-                </span>
-              </div>
+              {/* Blurred thumbnails get a permanent badge instead of the
+                  hover-only title reveal below — the point is to keep the
+                  screenshot illegible at all times, not just until hover. */}
+              {blurred ? (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/60 px-2">
+                  <StatusBadge text="Under Construction" size="sm" />
+                </div>
+              ) : (
+                <div className="absolute inset-0 bg-black bg-opacity-90 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-castlepink font-bold text-lg text-center px-2">
+                    {item.title}
+                  </span>
+                </div>
+              )}
             </div>
           ))}
         </section>
@@ -165,12 +187,21 @@ export default function ImageGallery({ images, groupLabel, className, layout = "
               <X size={18} />
             </button>
 
-            <img
-              src={selected.img}
-              alt={selected.title}
-              className="max-w-full max-h-[70vh] sm:max-h-[75vh] rounded-lg border border-castlepink/40"
-              style={{ boxShadow: "0 0 50px rgba(203,144,255,0.25), 0 0 25px rgba(0,0,0,0.6)" }}
-            />
+            <div className="relative">
+              <img
+                src={selected.img}
+                alt={selected.title}
+                className={`max-w-full max-h-[70vh] sm:max-h-[75vh] rounded-lg border border-castlepink/40 ${
+                  blurred ? "blur-md scale-105" : ""
+                }`}
+                style={{ boxShadow: "0 0 50px rgba(203,144,255,0.25), 0 0 25px rgba(0,0,0,0.6)" }}
+              />
+              {blurred && (
+                <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/50 pointer-events-none">
+                  <StatusBadge text="Under Construction" />
+                </div>
+              )}
+            </div>
 
             {selected.title && (
               <p className="mt-4 max-w-full truncate text-sm uppercase tracking-wide text-castlepurple">

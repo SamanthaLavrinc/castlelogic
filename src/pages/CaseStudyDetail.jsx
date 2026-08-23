@@ -6,6 +6,7 @@ import SEO from "../components/SEO";
 import Reveal from "../components/Reveal";
 import ImageGallery from "../components/ImageGallery";
 import GradientWash from "../components/GradientWash";
+import StatusBadge from "../components/StatusBadge";
 
 // Projects grouped by category, in first-seen order (same categories
 // Projects.jsx's filter chips use — nothing hardcoded here, so a new
@@ -16,34 +17,6 @@ const projectsByCategory = caseStudies.reduce((groups, study) => {
   (groups[study.category] ??= []).push(study);
   return groups;
 }, {});
-
-// A literal neon-sign badge (glowing border + glowing uppercase text, like
-// a diner "OPEN" sign) for a case study's `statusNote` (e.g. "Current
-// status: conceptual phase only."), rendered in the intro card below. Soft
-// red rather than more brand pink or purple: the one deliberate exception
-// to the site's usual pink/purple-only rule, since a status flag reads more
-// naturally in a caution color, and the neon-sign framing sells "status" as
-// something lit up/flagged rather than just another emphasized line.
-// `.neon-sign-flicker` (see global.css) flickers it to life once on mount,
-// like a tube warming up, then settles into a steady glow — it doesn't
-// loop, so it reads as a nice one-time detail rather than a distracting
-// animation every time this card scrolls past.
-function StatusBadge({ text }) {
-  const neonRed = "#FF5A5A";
-  return (
-    <span
-      className="neon-sign-flicker inline-block rounded-full border-2 px-6 py-2 uppercase tracking-wide text-base sm:text-lg"
-      style={{
-        color: neonRed,
-        borderColor: neonRed,
-        textShadow: "0 0 6px rgba(255,90,90,0.9), 0 0 14px rgba(255,90,90,0.7), 0 0 28px rgba(255,90,90,0.5)",
-        boxShadow: "0 0 8px rgba(255,90,90,0.6), 0 0 20px rgba(255,90,90,0.4), inset 0 0 12px rgba(255,90,90,0.15)",
-      }}
-    >
-      {text}
-    </span>
-  );
-}
 
 // Renders `**bold**` spans within a line of section-body text as <strong>.
 // Small, general helper: lets bulleted list items (see renderSectionBlocks)
@@ -566,6 +539,11 @@ export default function CaseStudyDetail() {
 // wrapped in the gradient-wash positioning box (headerImage ones) without
 // duplicating this block in both branches.
 function CaseStudyBody({ study }) {
+  // In-progress case studies show real, unfinished product screenshots —
+  // every image below gets blurred with an "Under Construction" badge
+  // rather than shown at full detail, including inside the lightbox.
+  const isInProgress = study.status === "in-progress";
+
   return (
     <>
       {study.headerImageUrl && (
@@ -592,6 +570,7 @@ function CaseStudyBody({ study }) {
                       img: study.heroImageUrl,
                     },
                   ]}
+                  blurred={isInProgress}
                 />
               </div>
             )}
@@ -636,12 +615,21 @@ function CaseStudyBody({ study }) {
         }`}
       >
         {!study.headerImageUrl && study.heroImageUrl && (
-          <img
-            src={study.heroImageUrl}
-            alt={study.title}
-            loading="lazy"
-            className="w-full rounded-lg border border-castlepink mb-10"
-          />
+          <div className="relative mb-10">
+            <img
+              src={study.heroImageUrl}
+              alt={study.title}
+              loading="lazy"
+              className={`w-full rounded-lg border border-castlepink ${
+                isInProgress ? "blur-md scale-105" : ""
+              }`}
+            />
+            {isInProgress && (
+              <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/50">
+                <StatusBadge text="Under Construction" />
+              </div>
+            )}
+          </div>
         )}
 
         {!study.headerImageUrl && study.role && (
@@ -700,6 +688,7 @@ function CaseStudyBody({ study }) {
                             img: section.imageUrl,
                           },
                         ]}
+                        blurred={isInProgress}
                       />
                     </div>
                   )}
@@ -762,6 +751,7 @@ function CaseStudyBody({ study }) {
                   images={group.images}
                   groupLabel={group.label}
                   className="grid grid-cols-2 sm:grid-cols-3 gap-4"
+                  blurred={isInProgress}
                 />
               </Reveal>
             ))}
