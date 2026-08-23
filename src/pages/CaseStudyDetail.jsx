@@ -336,7 +336,11 @@ export default function CaseStudyDetail() {
         title={study.title}
         description={study.summary}
         path={`/projects/${study.slug}`}
-        image={study.heroImageUrl ? `https://castlelogic.dev${study.heroImageUrl}` : undefined}
+        image={
+          study.heroImageUrl || study.headerImageUrl
+            ? `https://castlelogic.dev${study.heroImageUrl ?? study.headerImageUrl}`
+            : undefined
+        }
       />
 
       {/* Permanent back-link dock: for headerImage case studies this bar is
@@ -471,13 +475,17 @@ export default function CaseStudyDetail() {
           <img src={study.headerImageUrl} alt="" className="block w-full h-auto min-h-[220px] object-cover object-left" />
           <h1 className="sr-only">{study.title}</h1>
 
-          {/* top offset nudged 10px below the 76% baseline so the label
-              clears the baked-in subtitle text sitting just above it in the
-              image — a plain % value put them too close together. Left
-              offset is wider on mobile (8% vs. 4.3% from `sm:` up): the
-              baked-in category label sits closer to the image's own left
-              margin on narrow crops, so 4.3% reads misaligned there. */}
-          <p className="absolute left-[8%] sm:left-[4.3%] top-[calc(76%+10px)] text-xs uppercase tracking-wide text-castlepink/70">
+          {/* Anchored to the image's *bottom* edge (within its 80px safe
+              margin) rather than pinned just below where a one-line
+              subtitle happens to end — a fixed top-offset tuned for
+              clinical-etl-pipeline's single-line subtitle collided with
+              illustration-showcase's baked-in subtitle, which wraps to two
+              lines and runs lower. Bottom-anchoring clears any subtitle
+              length without per-image tuning. Left offset is wider on
+              mobile (8% vs. 4.3% from `sm:` up): the baked-in category
+              label sits closer to the image's own left margin on narrow
+              crops, so 4.3% reads misaligned there. */}
+          <p className="absolute left-[8%] sm:left-[4.3%] bottom-[8%] text-xs uppercase tracking-wide text-castlepink/70">
             {study.category}
           </p>
 

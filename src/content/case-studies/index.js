@@ -6,6 +6,7 @@ const modules = import.meta.glob(["./*.json", "!./_template.json"], {
 
 export const caseStudies = Object.values(modules)
   .map((mod) => mod.default ?? mod)
+  .filter((study) => study.published !== false)
   .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
   .map((study) => ({
     ...study,

@@ -13,7 +13,9 @@ const CASE_STUDIES_DIR = path.resolve("src/content/case-studies");
 function getCaseStudySlugs() {
   return readdirSync(CASE_STUDIES_DIR)
     .filter((file) => file.endsWith(".json") && !file.startsWith("_"))
-    .map((file) => JSON.parse(readFileSync(path.join(CASE_STUDIES_DIR, file), "utf-8")).slug);
+    .map((file) => JSON.parse(readFileSync(path.join(CASE_STUDIES_DIR, file), "utf-8")))
+    .filter((study) => study.published !== false)
+    .map((study) => study.slug);
 }
 
 const routes = [

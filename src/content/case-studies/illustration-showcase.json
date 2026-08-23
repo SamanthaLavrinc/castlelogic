@@ -5,7 +5,8 @@
   "order": 4,
   "status": "live",
   "summary": "Graphic and illustration work demonstrating composition, color theory, and personality.",
-  "heroImage": "design/header_right.webp",
+  "headerImage": "projects/illustration_showcase/images/header-image.webp",
+  "cardImage": "projects/illustration_showcase/images/card-header-image.webp",
   "gallery": [
     { "folder": "design" }
   ]
