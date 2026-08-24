@@ -51,6 +51,9 @@ function renderInlineBold(text) {
 // A section's `body` is one string; blocks are separated by a blank line.
 // Lightweight markdown-lite conventions on top of plain paragraphs:
 //   - a block where every line starts with "- " renders as a real <ul>
+//   - a block where every line starts with "1. " (any digit) renders as a
+//     real <ol>, for step/phase lists where the order itself is meaningful
+//     (see the MVP roadmap section) rather than an unordered bullet set
 //   - a single-line block starting with "### " renders as a small sub-heading
 //     (one level below the section's own heading — see the h2 rendered
 //     alongside this function's output)
@@ -111,6 +114,16 @@ function renderSectionBlocks(body) {
             <li key={lineIndex}>{renderInlineBold(line.slice(2))}</li>
           ))}
         </ul>
+      );
+    }
+
+    if (lines.length > 0 && lines.every((line) => /^\d+\.\s/.test(line))) {
+      return (
+        <ol key={index} className="list-decimal pl-6 space-y-2 mb-4 last:mb-0 text-castlepurple font-light">
+          {lines.map((line, lineIndex) => (
+            <li key={lineIndex}>{renderInlineBold(line.replace(/^\d+\.\s/, ""))}</li>
+          ))}
+        </ol>
       );
     }
 

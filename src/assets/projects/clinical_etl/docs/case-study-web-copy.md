@@ -16,6 +16,7 @@ Here's a quick highlight reel before the detail, covering the pieces of this arc
 - **COMPOSITIONAL CONCEPT MODEL:** body part and morphology compose into a diagnosis without either atom being erased, unlike the erasure pattern common in extraction pipelines.
 - **ICD-O MODELED AS A BRIDGE, NOT A DEAD END:** a queryable pivot between SNOMED and ICD-10-CM, reflecting a real structural relationship most systems leave as a flat, one-way lookup.
 - **VECTOR SIMILARITY USED FOR ATTACHMENT RESOLUTION, NOT JUST RETRIEVAL:** determining *which body part a finding belongs to* when proximity in the text is unreliable, a harder and less-discussed problem than concept matching.
+- **CORROBORATING EVIDENCE ACROSS MENTIONS:** combining several independently weak signals, like body-part relation, temporal proximity, and shared document metadata, into one inspectable confidence score linking separate mentions to the same clinical event, the same evidence-weighting logic behind patient-level record linkage, applied to findings instead.
 - **BITEMPORAL TRACKING ON BOTH CLINICAL AND BILLING DATA:** effective date vs. logged date, enabling both clinical-timeline and audit-style reasoning from the same graph.
 - **A RESOLUTION-SCOPE PRECISION GAUGE:** every resolved link carries the granularity it was resolved at (phrase, sentence, paragraph, document), so downstream consumers know how much to trust it, rather than treating every match as equally certain.
 - **INDEXED INCREMENTAL UPDATES INSTEAD OF FULL REPROCESSING:** adding a new concept or synonym triggers a targeted search over already-stored document text, not a corpus-wide re-run of the entire NLP pipeline.
@@ -109,7 +110,44 @@ A pathology report might describe a left breast biopsy in one section and a righ
 
 Here, vector similarity between the morphology mention's surrounding context and each candidate body part's surrounding context resolves the attachment, not by guessing based on distance, but by scoring which context actually reads as related. The winning pairing is written into the graph as a scored edge; low-confidence pairs route to human review rather than being silently guessed. This is the same class of problem as coreference resolution in general NLP, applied to a place where getting it wrong has real clinical and billing consequences.
 
-*Known limitation, stated honestly: true pronominal coreference ("it was treated with lumpectomy," referring to a diagnosis named two sentences earlier) is a distinct problem from attachment scoring, since there's no concept-specific text in that sentence to embed or search for. Attachment scoring alone doesn't resolve a case like this automatically. But it isn't a silent gap: the resolution-scope precision gauge covered in the next section assigns a case like this an appropriately low confidence and routes it to human review, the same way any other low-certainty match is handled, rather than guessing and moving on. That's not the same as solving it automatically, but it is handled safely.*
+*Known limitation, stated honestly: true pronominal coreference ("it was treated with lumpectomy," referring to a diagnosis named two sentences earlier) is a distinct problem from attachment scoring, since there's no concept-specific text in that sentence to embed or search for. Attachment scoring alone doesn't resolve a case like this automatically. But it isn't a silent gap: the resolution-scope precision gauge covered further down assigns a case like this an appropriately low confidence and routes it to human review, the same way any other low-certainty match is handled, rather than guessing and moving on. That's not the same as solving it automatically, but it is handled safely.*
+
+---
+
+## Corroborating evidence: linking mentions to the same clinical event
+
+Attachment resolution answers "which body part does this finding belong to." A related but separate question is whether multiple, independently resolved mentions, possibly from different documents, different modalities, different points in a workup, actually describe the same underlying clinical event.
+
+No single mention typically states this outright. A mammogram report says "3 o'clock mass, left breast." A procedure note says "upper outer quadrant," with the laterality only established earlier in the same document. A pathology report says "invasive ductal carcinoma, moderately differentiated," with no laterality stated anywhere in it at all. Each resolves cleanly on its own. Nothing forces the system to recognize that all three are talking about the same lesion.
+
+The fix borrows a well-established idea from a different corner of health data, probabilistic record linkage, and applies it one level down from where it's normally used.
+
+Record linkage (Fellegi-Sunter, 1969, still the backbone of most patient-matching systems today) works by combining several individually weak signals, a matching birthdate, a similar name, a shared address, into a single confidence score for whether two records describe the same person. No one field is proof by itself; several weak signals agreeing is strong evidence.
+
+This applies the same evidence-combination logic to findings instead of patients:
+
+- **Body-part relation strength**, via the ICD-O hierarchy: how anatomically close are the sites each mention describes?
+- **Temporal proximity**: how close together in time did these mentions occur?
+- **Procedure-type match**: does the sequence of imaging, biopsy, and pathology follow a coherent diagnostic workup?
+- **Shared or related document metadata**: do the documents reference the same diagnosis code, encounter, or ordering provider?
+
+Each signal alone is circumstantial. A shared body part could be coincidence. Two events two weeks apart could be unrelated. But when several independent signals agree, the combined confidence that these mentions describe the same clinical event is far stronger than any single signal could support: the same "several weak signals, one strong conclusion" logic behind record linkage, just re-targeted at findings instead of people.
+
+Graph-wise, this means resolved mentions don't just stand alone once attached to a body part or concept. They can also link into a shared clinical-event node, with each contributing edge carrying its own signal type and score, and the event node carrying the combined confidence. That combined score is fully inspectable: not a black-box result, but a visible sum of exactly which evidence contributed and how much.
+
+*[Image: corroborating-evidence-dark.png]*
+
+Record linkage at the patient level is mature and widely deployed. Applying that same evidence-combination logic at the finding level, tying together a diagnostic workup's separate mentions into one coherent, confidence-scored event, doesn't seem to be common practice in clinical NLP as far as I've seen, though I haven't done an exhaustive survey of the field. It's a promising direction rather than a proven one at this stage: the weighting scheme, the right signal set, and how well it holds up on real clinical text are all open questions this architecture hasn't answered yet. But it's the kind of idea worth testing, because it moves individually-resolved facts a step closer to something a person could actually cross-examine.
+
+### One more signal: context, not just co-occurrence
+
+The same weighted-evidence mechanism extends naturally to a narrower, older problem: deciding whether two concepts in a document should be related at all.
+
+The system I worked on handled this with hard-coded span logic: to link concept A and concept B, scan the text between them for specific blocking terms, e.g., a procedure or a negation, and manually program that check for every relationship type worth extracting. It worked, but it didn't scale. Every new relationship needed a new rule, and the rule count grew with how much we wanted the system to notice, not with anything about the underlying language.
+
+Soft, learned relevance between two entities, rather than a hard include/exclude gate, isn't a new idea in NLP generally; it's been the mainstream approach in relation extraction for a long time. But the system I worked on stuck with hard rules for a real reason, not an oversight: they're auditable in a way statistical relation extraction usually isn't. You can point to exactly which trigger term blocked exactly which relationship.
+
+The move here keeps both: intervening concepts become one more scored signal inside the same graph structure already used for attachment resolution and event linking, instead of a hard-coded rule. The score is still traceable, still an inspectable edge property, not a buried weight, so the auditability that justified hard rules in the original system doesn't have to be sacrificed to get the scaling benefit.
 
 ---
 
@@ -175,6 +213,7 @@ The same ontology-and-graph core, scoped to different reasoning tasks across thr
 **Strengths**
 - Grounds reasoning in real domain structure, not just semantic similarity
 - Full provenance to source document and span, on every answer, down to the exact resolution scope it was matched at
+- Combines independently weak signals, like body-part relation, temporal proximity, and shared metadata, into a single inspectable confidence score linking mentions across documents to the same clinical event
 - Generalizes across code systems, proven with a SNOMED/ICD-O/RxNorm ontology applied to two unrelated clinical domains
 - Same graph and provenance layer extends to billing/claims and quality-reporting use cases, not just clinical narrative
 - Deterministic mode gives an auditable option most RAG-only systems don't offer
@@ -183,6 +222,7 @@ The same ontology-and-graph core, scoped to different reasoning tasks across thr
 **Open limitations**
 - Ontology and crosswalk coverage is currently narrow: hand-built, not exhaustive
 - True pronominal coreference resolution isn't resolved automatically by attachment scoring, though the same precision-gauge flagging that handles any other low-confidence match catches it and routes it to human review rather than leaving it unaddressed
+- Corroborating-evidence linking is a promising direction, not a validated one; the right signal set and weighting scheme are still open questions
 - Not yet validated against real clinical data: MIMIC access is pending
 - Output usability is still unproven with an actual end user
 - Single-developer build, not yet production-hardened or scale-tested
@@ -193,7 +233,7 @@ The same ontology-and-graph core, scoped to different reasoning tasks across thr
 
 MVP scoped to two tracks (breast cancer, for oncology/registry, and A1c monitoring, for chronic disease), both matched against ClinicalTrials.gov.
 
-1. **Architecture locked** *(done):* graph schema, compositional model, ICD-O bridge, bitemporal design, resolution-scope gauge, and incremental-update strategy finalized.
+1. **Architecture locked** *(done):* graph schema, compositional model, ICD-O bridge, bitemporal design, resolution-scope gauge, corroborating-evidence linking, and incremental-update strategy finalized.
 2. **Ontology & data ingestion** *(planned):* SNOMED/ICD-O/NAACCR seed data and synthetic clinical notes for both tracks.
 3. **Reasoning rules & trial matching** *(planned):* 3 to 5 rules live; ClinicalTrials.gov ingestion and matching, both tracks.
 4. **Dual-mode demo** *(planned):* RAG and deterministic modes, toggleable, with full provenance on output.
