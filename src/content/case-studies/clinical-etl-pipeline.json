@@ -32,7 +32,7 @@
     {
       "heading": "One patient, every source, two clocks",
       "image": "projects/clinical_etl/images/patient-hub-bitemporal.png",
-      "body": "Clinical documents and billing claims can describe the same patient while recording time in fundamentally different ways.\n\nA diagnosis can be entered into the system today but describe a condition that became clinically relevant years earlier. A claim can have a service date that precedes its adjudication or logging date.\n\nThe graph therefore keeps both:\n\n- **Effective date** — when the clinical event or condition actually applies.\n- **Logged date** — when the system recorded the information.\n\nEvery mention and claim remains connected to the same patient-level graph.\n\nThat makes it possible to reason across documents, encounters, and claims without forcing everything onto a single timeline."
+      "body": "Clinical documents and billing claims can describe the same patient while recording time in fundamentally different ways.\n\nA diagnosis can be entered into the system today but describe a condition that became clinically relevant years earlier. A claim can have a service date that precedes its adjudication or logging date.\n\nThe graph therefore keeps both:\n\n- **Effective date:** when the clinical event or condition actually applies.\n- **Logged date:** when the system recorded the information.\n\nEvery mention and claim remains connected to the same patient-level graph.\n\nThat makes it possible to reason across documents, encounters, and claims without forcing everything onto a single timeline."
     },
     {
       "heading": "Two dates, one query in practice",
@@ -41,7 +41,7 @@
     },
     {
       "heading": "Multidimensional clinical reasoning",
-      "body": "The architecture is built around a simple premise:\n\n**A clinical fact is rarely just a concept.**\n\nIts meaning can depend on what it is, where it belongs, what it is composed of, when it became true, when it was recorded, what source established it, how precisely it was resolved, and how it relates to other concepts.\n\nThose dimensions are modeled independently but connected through the graph.\n\nConsider a single pathology finding. The system may need to know:\n\n- what the morphology is,\n- which anatomical site it belongs to,\n- whether that site was explicitly stated or inferred,\n- what other concepts compose the diagnosis,\n- when the finding became clinically effective,\n- which document established it,\n- where in that document the evidence appears,\n- how confidently the relationship was resolved,\n- and how the resulting clinical concept maps into downstream coding systems.\n\nNo single retrieval operation answers all of those questions.\n\nThe graph provides the structure between them.\n\nVector similarity can then be used selectively where the problem is genuinely fuzzy—for example, determining which anatomical context a morphology mention belongs to when the document structure is ambiguous.\n\nThis makes semantic retrieval a component of the reasoning system rather than a substitute for one."
+      "body": "The architecture is built around a simple premise:\n\n**A clinical fact is rarely just a concept.**\n\nIts meaning can depend on what it is, where it belongs, what it is composed of, when it became true, when it was recorded, what source established it, how precisely it was resolved, and how it relates to other concepts.\n\nThose dimensions are modeled independently but connected through the graph.\n\nConsider a single pathology finding. The system may need to know:\n\n- what the morphology is,\n- which anatomical site it belongs to,\n- whether that site was explicitly stated or inferred,\n- what other concepts compose the diagnosis,\n- when the finding became clinically effective,\n- which document established it,\n- where in that document the evidence appears,\n- how confidently the relationship was resolved,\n- and how the resulting clinical concept maps into downstream coding systems.\n\nNo single retrieval operation answers all of those questions.\n\nThe graph provides the structure between them.\n\nVector similarity can then be used selectively where the problem is genuinely fuzzy, for example determining which anatomical context a morphology mention belongs to when the document structure is ambiguous.\n\nThis makes semantic retrieval a component of the reasoning system rather than a substitute for one."
     },
     {
       "heading": "Two ways to ask the same question",
@@ -87,7 +87,7 @@
   ],
   "links": [
     {
-      "title": "Use of Artificial Intelligence Chatbots for Cancer Treatment Information — JAMA Oncology (2023)",
+      "title": "Use of Artificial Intelligence Chatbots for Cancer Treatment Information (JAMA Oncology, 2023)",
       "url": "https://jamanetwork.com/journals/jamaoncology/fullarticle/2808731"
     }
   ]
