@@ -138,12 +138,24 @@ export default function ImageGallery({ images, groupLabel, className, layout = "
               }}
             >
               <div className="w-full h-full bg-white flex items-center justify-center">
-                <img
-                  src={item.img}
-                  alt={item.title}
-                  loading="lazy"
-                  className={`max-w-full max-h-full object-contain ${blurred ? "blur-md scale-110" : ""}`}
-                />
+                {isVideoSrc(item.img) ? (
+                  <video
+                    src={item.img}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    aria-label={item.title}
+                    className={`max-w-full max-h-full object-contain ${blurred ? "blur-md scale-110" : ""}`}
+                  />
+                ) : (
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                    loading="lazy"
+                    className={`max-w-full max-h-full object-contain ${blurred ? "blur-md scale-110" : ""}`}
+                  />
+                )}
               </div>
 
               {/* Blurred thumbnails get a permanent badge instead of the
@@ -218,14 +230,31 @@ export default function ImageGallery({ images, groupLabel, className, layout = "
             </button>
 
             <div className="relative">
-              <img
-                src={selected.img}
-                alt={selected.title}
-                className={`max-w-full max-h-[70vh] sm:max-h-[75vh] rounded-lg border border-castlepink/40 ${
-                  blurred ? "blur-md scale-105" : ""
-                }`}
-                style={{ boxShadow: "0 0 50px rgba(203,144,255,0.25), 0 0 25px rgba(0,0,0,0.6)" }}
-              />
+              {isVideoSrc(selected.img) ? (
+                <video
+                  key={selected.id}
+                  src={selected.img}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  controls
+                  aria-label={selected.title}
+                  className={`max-w-full max-h-[70vh] sm:max-h-[75vh] rounded-lg border border-castlepink/40 ${
+                    blurred ? "blur-md scale-105" : ""
+                  }`}
+                  style={{ boxShadow: "0 0 50px rgba(203,144,255,0.25), 0 0 25px rgba(0,0,0,0.6)" }}
+                />
+              ) : (
+                <img
+                  src={selected.img}
+                  alt={selected.title}
+                  className={`max-w-full max-h-[70vh] sm:max-h-[75vh] rounded-lg border border-castlepink/40 ${
+                    blurred ? "blur-md scale-105" : ""
+                  }`}
+                  style={{ boxShadow: "0 0 50px rgba(203,144,255,0.25), 0 0 25px rgba(0,0,0,0.6)" }}
+                />
+              )}
               {blurred && (
                 <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/50 pointer-events-none">
                   <StatusBadge text="Under Construction" />
