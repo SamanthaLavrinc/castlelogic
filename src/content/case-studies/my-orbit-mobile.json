@@ -13,7 +13,7 @@
   "sections": [
     {
       "heading": "What did not fit",
-      "image": "projects/myorbit_mobile/first_attempt_group_menu.png",
+      "image": "projects/myorbit_mobile/from_web_to_mobile.png",
       "body": "The desktop layout has a toolbar across the top, groups and people on the left, the graph in the middle, and the selected person's details on the right. On a phone, cramming all of that into one screen either leaves the map as a thin strip or hides useful information behind a stack of screens.\n\nEditing makes the problem more obvious. Adding a person means entering a name, choosing a group, setting closeness and connection tone, and selecting relationships. A tiny panel at the bottom is not enough room for that.\n\nThe first mobile pass worked in the narrow sense that the controls were there. It still felt like the desktop interface had been folded in half."
     },
     {
