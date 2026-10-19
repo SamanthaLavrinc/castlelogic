@@ -7,6 +7,7 @@
   "summary": "MyOrbit was built around a large graph with a panel on either side. That works on a desktop, where there is room for the people list, the map, and the selected person's details at the same time. On a phone, those three columns do not fit, and shrinking the map defeats the reason for using a map in the first place.\n\nI redesigned the mobile interface around one constraint: keep the map visible while people browse, select someone, or edit details.",
   "role": "Solo full-stack engineer, contracted through Castle Logic LLC for EmmeCo. Designed, built and tested with an agentic engineering workflow I set up and ran.",
   "stack": ["React 19", "Vite", "Tailwind CSS v4", "Supabase"],
+  "heroImage": "projects/myorbit_mobile/hero.png",
   "cardImage": "projects/myorbit_mobile/card-header-image.png",
   "headerImage": "projects/myorbit_mobile/header-image.png",
   "sections": [
