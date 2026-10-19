@@ -24,8 +24,11 @@ export function resolveImage(relativePath) {
   return assetsByPath[relativePath];
 }
 
+// A leading "01_"-style prefix only controls sort order in a folder gallery
+// (folders sort by filename, so numbering is how new files get appended at
+// the end instead of landing alphabetically), so it's dropped from the title.
 function titleFromFilename(file) {
-  const name = file.replace(/\.[^./]+$/, "");
+  const name = file.replace(/\.[^./]+$/, "").replace(/^\d+[_-]+/, "");
   return name.replace(/[_-]+/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 

@@ -65,7 +65,7 @@
   "gallery": [
     { "label": "The Live App", "folder": "projects/myorbit_e2e/live" },
     { "label": "Figma & Process", "folder": "projects/myorbit_e2e/figma" },
-    { "label": "In Development", "folder": "projects/myorbit_e2e/development" }
+    { "label": "Development Process", "folder": "projects/myorbit_e2e/development" }
   ],
   "links": [
     { "title": "Live product", "url": "https://myorbit.network" }
