@@ -1,17 +1,22 @@
 import { Link } from "react-router-dom";
 import StatusBadge from "./StatusBadge";
 
-// Three status states, differentiated by label + border/fill weight only —
+// Four status states, differentiated by label + border/fill weight only —
 // this codebase has exactly two custom color tokens (castlepink/castlepurple),
-// so no new hues get introduced here.
+// so no new hues get introduced here. "shipped" reuses "live"'s weight: both
+// mean "done, out in the world," just worded differently per case study
+// (e.g. myOrbit Mobile reads "Shipped" rather than "Live" since the mobile
+// redesign is a finished sub-project of the still-evolving live flagship).
 const STATUS_LABELS = {
   live: "Live",
+  shipped: "Shipped",
   "in-progress": "In Progress",
   concept: "Concept",
 };
 
 const STATUS_CLASSES = {
   live: "border-castlepink bg-castlepink/10 text-castlepink",
+  shipped: "border-castlepink bg-castlepink/10 text-castlepink",
   "in-progress": "border-castlepink/40 text-castlepurple",
   concept: "border-castlepink/20 text-castlepurple/60",
 };

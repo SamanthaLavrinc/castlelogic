@@ -1,9 +1,13 @@
-// Eagerly resolves every image under src/assets/** to its built URL, keyed by
-// the path relative to src/assets/ (matching how heroImage/gallery.folder are
-// authored in the case-study JSON, e.g. "projects/myorbit_e2e/figma/foo.png").
-// Dropping a new image into an already-referenced folder is picked up
-// automatically on next build/HMR — no manual import list to maintain.
-const assetModules = import.meta.glob("../../assets/**/*.{png,jpg,jpeg,webp,svg,gif}", {
+// Eagerly resolves every image (or short looping video clip) under
+// src/assets/** to its built URL, keyed by the path relative to src/assets/
+// (matching how heroImage/gallery.folder are authored in the case-study
+// JSON, e.g. "projects/myorbit_e2e/figma/foo.png"). Dropping a new file into
+// an already-referenced folder is picked up automatically on next
+// build/HMR — no manual import list to maintain. `mp4` sits alongside the
+// image extensions here because callers (ImageGallery's inline layout) treat
+// a resolved path as "image or video" based on its own extension, not based
+// on which glob it came from — see ImageGallery.jsx's `isVideo` check.
+const assetModules = import.meta.glob("../../assets/**/*.{png,jpg,jpeg,webp,svg,gif,mp4}", {
   eager: true,
   import: "default",
 });

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Zap, ChevronDown } from "lucide-react";
+import { Zap, ChevronDown, ImageOff } from "lucide-react";
 import { caseStudies, getCaseStudy } from "../content/case-studies";
 import SEO from "../components/SEO";
 import Reveal from "../components/Reveal";
@@ -18,9 +18,11 @@ const projectsByCategory = caseStudies.reduce((groups, study) => {
   return groups;
 }, {});
 
-// Renders `**bold**` spans within a line of section-body text as <strong>.
-// Small, general helper: lets bulleted list items (see renderSectionBlocks)
-// keep an emphasized lead-in term without hand-rolling markup in the JSON.
+// Renders `**bold**` and `*italic*` spans within a line of section-body text
+// as <strong>/<em>. Small, general helper: lets bulleted/numbered list items
+// (see renderSectionBlocks) carry an emphasized lead-in term or an inline
+// annotation without hand-rolling markup in the JSON.
+//
 // Every `**...**` span — ALL-CAPS lead-ins (e.g. "HIERARCHY:") and ordinary
 // mixed-case emphasis alike (e.g. "left breast") — gets color instead of
 // font-weight: the body font here is Fredoka, a rounded/bubbly face whose
@@ -30,21 +32,59 @@ const projectsByCategory = caseStudies.reduce((groups, study) => {
 // since that letter-spacing convention is specifically for short label-style
 // tokens (matches CaseStudyCard's category label), not for longer mixed-case
 // phrases sitting inline in running prose.
+//
+// A single `*...*` span (e.g. a roadmap item's inline "*(done)*" tag) is a
+// quieter secondary annotation, not emphasis — muted and italic rather than
+// colored. The split regex tries the double-asterisk alternative first, so
+// `**bold**` is never mistaken for two adjacent single-asterisk spans.
+//
+// `[text](url)` is a standard markdown link, for a mid-sentence reference to
+// an external URL (e.g. "**Live product:** [myorbit.network](https://...)")
+// — distinct from the dedicated `links` field's call-to-action button
+// further down the page, which is for the one or two links worth their own
+// button, not every inline mention of a URL.
 function renderInlineBold(text) {
-  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) => {
-    if (!part.startsWith("**") || !part.endsWith("**")) return part;
+  return text.split(/(\*\*[^*]+\*\*|\*[^*]+\*|\[[^\]]+\]\([^)]+\))/g).map((part, i) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      const content = part.slice(2, -2);
+      const isUppercase = content === content.toUpperCase() && content !== content.toLowerCase();
 
-    const content = part.slice(2, -2);
-    const isUppercase = content === content.toUpperCase() && content !== content.toLowerCase();
+      return (
+        <strong
+          key={i}
+          className={`font-normal text-castlepink ${isUppercase ? "tracking-wide" : ""}`}
+        >
+          {content}
+        </strong>
+      );
+    }
 
-    return (
-      <strong
-        key={i}
-        className={`font-normal text-castlepink ${isUppercase ? "tracking-wide" : ""}`}
-      >
-        {content}
-      </strong>
-    );
+    if (part.startsWith("[")) {
+      const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+      if (linkMatch) {
+        return (
+          <a
+            key={i}
+            href={linkMatch[2]}
+            target="_blank"
+            rel="noreferrer"
+            className="text-castlepink underline hover:text-castlepurple transition-colors"
+          >
+            {linkMatch[1]}
+          </a>
+        );
+      }
+    }
+
+    if (part.startsWith("*") && part.endsWith("*")) {
+      return (
+        <em key={i} className="text-castlepurple/60">
+          {part.slice(1, -1)}
+        </em>
+      );
+    }
+
+    return part;
   });
 }
 
@@ -59,6 +99,11 @@ function renderInlineBold(text) {
 //     alongside this function's output)
 //   - a block that's a single paragraph fully wrapped in **double asterisks**
 //     renders as a bold, standalone, visually emphasized line
+//   - a block fully wrapped in a single pair of *asterisks* (not a double
+//     pair — see the regex's `[^*]` guard right after the opening asterisk)
+//     renders as a quieter italic aside: a "Concrete example:" walkthrough or
+//     a "Known limitation, stated honestly:" admission, set apart from the
+//     surrounding prose by voice rather than by being louder than it
 // Kept intentionally small rather than pulling in a markdown dependency.
 function renderSectionBlocks(body) {
   if (!body) return null;
@@ -124,6 +169,23 @@ function renderSectionBlocks(body) {
             <li key={lineIndex}>{renderInlineBold(line.replace(/^\d+\.\s/, ""))}</li>
           ))}
         </ol>
+      );
+    }
+
+    // Single-asterisk wrap, e.g. "*Concrete example: ...*" — the `[^*]`
+    // right after the opening `*` is what keeps this from also matching a
+    // `**double-asterisk**` block (there the character right after the first
+    // `*` is itself a `*`, which fails this guard and falls through to the
+    // boldMatch check below instead).
+    const italicMatch = trimmed.match(/^\*([^*][\s\S]*)\*$/);
+    if (italicMatch) {
+      return (
+        <p
+          key={index}
+          className="text-castlepurple/80 italic text-sm border-l-2 border-castlepurple/30 pl-4 mb-4 last:mb-0"
+        >
+          {renderInlineBold(italicMatch[1])}
+        </p>
       );
     }
 
@@ -652,6 +714,16 @@ function CaseStudyBody({ study }) {
           </div>
         )}
 
+        {/* Mirrors the headerImage path's badge above: a case study that
+            hasn't gotten its baked-in header art yet (see myOrbit/myOrbit
+            Mobile) still needs its status badge visible now, not silently
+            inert until that art shows up. */}
+        {!study.headerImageUrl && study.statusNote && (
+          <div className="mb-8 flex justify-center">
+            <StatusBadge text={study.statusNote} />
+          </div>
+        )}
+
         {study.stack?.length > 0 && (
           <div className="mb-8">
             <h2 className="text-sm uppercase tracking-wide text-castlepink mb-2">Stack</h2>
@@ -703,6 +775,24 @@ function CaseStudyBody({ study }) {
                         ]}
                         blurred={isInProgress}
                       />
+                    </div>
+                  )}
+                  {/* Dev-only stand-in for a section that names an `image`
+                      path which hasn't landed on disk yet (see
+                      resolveAssets.js: a missing file just resolves to
+                      `undefined`, so the real <ImageGallery> above silently
+                      renders nothing). Without this, a missing asset is
+                      invisible while browsing — this makes it obvious which
+                      section still needs its file, and exactly what filename
+                      is expected, without showing a broken-looking box to
+                      real visitors once the asset ships and this build goes
+                      to production. */}
+                  {import.meta.env.DEV && section.image && !section.imageUrl && (
+                    <div className="mb-4 flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed border-castlepurple/40 bg-black/30 px-4 py-10 text-center">
+                      <ImageOff size={28} className="text-castlepurple/50" />
+                      <p className="text-sm text-castlepurple/60">
+                        Image needed: <span className="font-mono">{section.image}</span>
+                      </p>
                     </div>
                   )}
                   {renderSectionBlocks(section.body)}

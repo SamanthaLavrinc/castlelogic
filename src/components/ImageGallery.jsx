@@ -3,6 +3,12 @@ import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import StatusBadge from "./StatusBadge";
 
+// `img` is just a resolved asset URL (see resolveAssets.js, which globs both
+// image and .mp4 files under the same case-study-authoring convention), so
+// "is this a video" is decided by the extension on that URL, not by a
+// separate field the JSON would otherwise have to carry per item.
+const isVideoSrc = (src) => /\.mp4($|\?)/i.test(src ?? "");
+
 // Shared image grid + lightbox modal (arrow nav, Escape-to-close, keyboard-
 // operable thumbnails). Originally built for the About page's Illustrations
 // grid; reused here so every image gallery on the site, illustrations or
@@ -57,33 +63,57 @@ export default function ImageGallery({ images, groupLabel, className, layout = "
       )}
 
       {layout === "inline" ? (
-        <div
-          role="button"
-          tabIndex={0}
-          aria-label={`View ${images[0].title} full size`}
-          className="relative cursor-zoom-in"
-          onClick={() => setSelected(images[0])}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              setSelected(images[0]);
-            }
-          }}
-        >
-          <img
-            src={images[0].img}
-            alt={images[0].title}
-            loading="lazy"
-            className={`w-full rounded-lg border border-castlepink transition-opacity hover:opacity-90 ${
-              blurred ? "blur-md scale-105" : ""
-            }`}
-          />
-          {blurred && (
-            <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/50">
-              <StatusBadge text="Under Construction" />
-            </div>
-          )}
-        </div>
+        isVideoSrc(images[0].img) ? (
+          // Short looping demo clips (e.g. a closeness-change drag, a PDF
+          // export) play inline rather than opening the lightbox: there's no
+          // "full size" view more useful than the clip already autoplaying
+          // at full width, and the modal below is built around a single
+          // static <img>, not video playback state.
+          <div className="relative">
+            <video
+              src={images[0].img}
+              autoPlay
+              muted
+              loop
+              playsInline
+              aria-label={images[0].title}
+              className={`w-full rounded-lg border border-castlepink ${blurred ? "blur-md scale-105" : ""}`}
+            />
+            {blurred && (
+              <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/50">
+                <StatusBadge text="Under Construction" />
+              </div>
+            )}
+          </div>
+        ) : (
+          <div
+            role="button"
+            tabIndex={0}
+            aria-label={`View ${images[0].title} full size`}
+            className="relative cursor-zoom-in"
+            onClick={() => setSelected(images[0])}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                setSelected(images[0]);
+              }
+            }}
+          >
+            <img
+              src={images[0].img}
+              alt={images[0].title}
+              loading="lazy"
+              className={`w-full rounded-lg border border-castlepink transition-opacity hover:opacity-90 ${
+                blurred ? "blur-md scale-105" : ""
+              }`}
+            />
+            {blurred && (
+              <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/50">
+                <StatusBadge text="Under Construction" />
+              </div>
+            )}
+          </div>
+        )
       ) : (
         /* Gallery Grid */
         <section

@@ -1,14 +1,44 @@
 {
   "slug": "my-orbit-mobile",
-  "title": "myOrbit: Mobile",
+  "title": "myorbit: Mobile",
   "category": "UI Experiments",
   "order": 1.5,
-  "status": "in-progress",
-  "summary": "Compressing myOrbit's dense, multi-panel relationship graph into something that still works on a phone, without losing the information a user actually needs at a glance.",
-  "role": "Solo full-stack engineer, contracted via Castle Logic LLC for EmmeCo. Built using agentic engineering workflows.",
+  "status": "shipped",
+  "summary": "myorbit was built around a large graph with a panel on either side. That works on a desktop, where there is room for the people list, the map, and the selected person's details at the same time. On a phone, those three columns do not fit, and shrinking the map defeats the reason for using a map in the first place.\n\nI redesigned the mobile interface around one constraint: keep the map visible while people browse, select someone, or edit details.",
+  "role": "Solo full-stack engineer, contracted through Castle Logic LLC for EmmeCo. Designed, built and tested with an agentic engineering workflow I set up and ran.",
   "stack": ["React 19", "Vite", "Tailwind CSS v4", "Supabase"],
-  "problem": "myOrbit's graph view was designed desktop-first, with several panels visible at once. On mobile, that had to consolidate into something that still surfaces the same information without overwhelming a small screen.",
-  "heroImage": "projects/myorbit_mobile/mobile_solution.png",
+  "cardImage": "projects/myorbit_mobile/card-header-image.png",
+  "headerImage": "projects/myorbit_mobile/header-image.png",
+  "sections": [
+    {
+      "heading": "What did not fit",
+      "image": "projects/myorbit_mobile/mobile_problem.png",
+      "body": "The desktop layout has a toolbar across the top, groups and people on the left, the graph in the middle, and the selected person's details on the right. On a phone, cramming all of that into one screen either leaves the map as a thin strip or hides useful information behind a stack of screens.\n\nEditing makes the problem more obvious. Adding a person means entering a name, choosing a group, setting closeness and connection tone, and selecting relationships. A tiny panel at the bottom is not enough room for that.\n\nThe first mobile pass worked in the narrow sense that the controls were there. It still felt like the desktop interface had been folded in half."
+    },
+    {
+      "heading": "The layout",
+      "image": "projects/myorbit_mobile/mobile_solution.png",
+      "body": "I went with a bottom drawer that opens partway. The people list and selected person's details live in that drawer, while the graph stays visible above it.\n\nForms open in a floating window over the map instead of taking over the whole screen. When the form closes, the user is back where they were. Selecting a person also recenters the graph in the space above the drawer, so the selected node does not end up hidden behind the panel.\n\nI considered making editing full-screen, or shrinking the graph to a narrow strip while a form was open. Full-screen editing would have hidden the map, and the strip was too small to be useful. The half-height drawer and floating forms kept the map present without adding another awkward layout state."
+    },
+    {
+      "heading": "What moved where",
+      "body": "- **The two side panels became tabs.** The people list and person details now share one drawer. The details tab shows the selected person's name, so it is clear whose information is open.\n- **Adding became a button, not a destination.** An early version gave Add Person and Add Group their own tab. I replaced that with one plus button that opens both actions.\n- **Notes have their own entry point.** One button opens a person's notes, including the option to add another, instead of giving notes a whole section in the details panel.\n- **Closeness and tone can change in place.** Quick dropdowns let users change either value without opening a separate edit form.\n- **The toolbar moved into menus.** Rename, export, and delete are still available, but they no longer compete for space in the main header. The header keeps the back arrow, map name, and account controls."
+    },
+    {
+      "heading": "ChatGPT gave me a sketch, not a spec",
+      "image": "projects/myorbit_mobile/agent_suggestion.png",
+      "body": "I described the layout problem to ChatGPT and asked for a mockup. It suggested the two-tab drawer and a plus menu for adding people and groups. Those ideas were useful, and the overall direction is close to what shipped.\n\nI did not use the image as a specification. It could not settle the spacing, the interaction details, or what happens on a small phone. I worked those out in the app and tested the result against real device sizes."
+    },
+    {
+      "heading": "Phone behavior that needed its own work",
+      "body": "Some of the mobile work is invisible until it breaks on an actual phone:\n\n- **Safe areas:** content accounts for the notch and home bar instead of sliding underneath them.\n- **Inputs:** text fields are sized to avoid the automatic zoom some phones trigger when a field is too small.\n- **Tap targets:** buttons are at least 44 pixels across.\n- **Page movement:** the app fills the available screen, so the whole page does not rubber-band while someone is trying to pan the graph.\n- **Home screen icons:** the app has icons for people who save it to their phone's home screen.\n\nOne bug was particularly annoying to track down. Sometimes tapping the drawer handle opened the drawer and then immediately closed it. The tap was being treated as both a drag and a click. On a laptop, that behavior never showed up, which is why testing the phone interaction mattered."
+    },
+    {
+      "heading": "Portrait and landscape",
+      "image": "projects/myorbit_mobile/mobile_before_after.png",
+      "body": "Portrait phones use the bottom drawer. Landscape phones use the desktop layout, because a short, wide screen has more room for side panels than for a drawer taking up the bottom half.\n\nAutomated layout tests cover ten phone profiles and four desktop browsers. There are still a few known issues on short landscape screens, including cases where the desktop layout is slightly too tall. Those are tracked rather than treated as finished.\n\nThe map stays visible while the rest of the interface changes around it."
+    }
+  ],
   "gallery": [
     {
       "label": "The Problem",
