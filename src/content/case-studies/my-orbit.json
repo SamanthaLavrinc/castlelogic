@@ -64,7 +64,7 @@
   ],
   "gallery": [
     { "label": "The Live App", "folder": "projects/myorbit_e2e/live" },
-    { "label": "Figma & Process", "folder": "projects/myorbit_e2e/figma" },
+    { "label": "Figma Mockups", "folder": "projects/myorbit_e2e/figma" },
     { "label": "Development Process", "folder": "projects/myorbit_e2e/development" }
   ],
   "links": [
