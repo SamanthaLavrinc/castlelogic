@@ -64,12 +64,15 @@ export default function ImageGallery({ images, groupLabel, className, layout = "
 
       {layout === "inline" ? (
         isVideoSrc(images[0].img) ? (
-          // Short looping demo clips (e.g. a closeness-change drag, a PDF
-          // export) play inline rather than opening the lightbox: there's no
-          // "full size" view more useful than the clip already autoplaying
-          // at full width, and the modal below is built around a single
-          // static <img>, not video playback state.
-          <div className="relative">
+          // Short looping demo clips play inline rather than opening the
+          // lightbox: the clip is already autoplaying at full size.
+          //
+          // Inline media (video and image alike) is capped at 75vh tall and
+          // centered instead of always stretched to the card's width: a
+          // portrait phone capture stretched to full width renders taller
+          // than the screen and blurry from upscaling. Landscape media still
+          // fills the width, since its height never reaches the cap.
+          <div className="relative w-fit max-w-full mx-auto">
             <video
               src={images[0].img}
               autoPlay
@@ -77,7 +80,7 @@ export default function ImageGallery({ images, groupLabel, className, layout = "
               loop
               playsInline
               aria-label={images[0].title}
-              className={`w-full rounded-lg border border-castlepink ${blurred ? "blur-md scale-105" : ""}`}
+              className={`block max-w-full max-h-[75vh] w-auto h-auto rounded-lg border border-castlepink ${blurred ? "blur-md scale-105" : ""}`}
             />
             {blurred && (
               <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/50">
@@ -90,7 +93,7 @@ export default function ImageGallery({ images, groupLabel, className, layout = "
             role="button"
             tabIndex={0}
             aria-label={`View ${images[0].title} full size`}
-            className="relative cursor-zoom-in"
+            className="relative w-fit max-w-full mx-auto cursor-zoom-in"
             onClick={() => setSelected(images[0])}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === " ") {
@@ -103,7 +106,7 @@ export default function ImageGallery({ images, groupLabel, className, layout = "
               src={images[0].img}
               alt={images[0].title}
               loading="lazy"
-              className={`w-full rounded-lg border border-castlepink transition-opacity hover:opacity-90 ${
+              className={`block max-w-full max-h-[75vh] w-auto h-auto rounded-lg border border-castlepink transition-opacity hover:opacity-90 ${
                 blurred ? "blur-md scale-105" : ""
               }`}
             />
