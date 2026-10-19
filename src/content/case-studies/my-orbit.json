@@ -1,10 +1,10 @@
 {
   "slug": "my-orbit",
-  "title": "myorbit",
+  "title": "MyOrbit",
   "category": "Full-Stack",
   "order": 1,
   "status": "live",
-  "summary": "myorbit is a map of the people in your life. People are nodes, relationships are connections, and the map can show how everyone fits together instead of giving you another list of names to keep straight.\n\nI was responsible for the design, frontend, backend, database, security, billing, testing, and deployment. I also had to figure out how to make the graph work on a phone without compromising usability.",
+  "summary": "MyOrbit is a map of the people in your life. People are nodes, relationships are connections, and the map can show how everyone fits together instead of giving you another list of names to keep straight.\n\nI was responsible for the design, frontend, backend, database, security, billing, testing, and deployment. I also had to figure out how to make the graph work on a phone without compromising usability.",
   "role": "Solo full-stack engineer, contracted through Castle Logic LLC for EmmeCo. Designed, built and tested with an agentic engineering workflow I set up and ran.",
   "stack": ["React 19", "Vite", "Tailwind CSS v4", "Cytoscape.js", "Supabase", "jsPDF", "SendGrid", "Vercel", "Vitest", "Playwright", "pgTAP", "GitHub Actions", "Figma"],
   "heroImage": "projects/myorbit_e2e/hero/hero.png",

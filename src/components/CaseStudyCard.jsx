@@ -5,7 +5,7 @@ import StatusBadge from "./StatusBadge";
 // this codebase has exactly two custom color tokens (castlepink/castlepurple),
 // so no new hues get introduced here. "shipped" reuses "live"'s weight: both
 // mean "done, out in the world," just worded differently per case study
-// (e.g. myOrbit Mobile reads "Shipped" rather than "Live" since the mobile
+// (e.g. MyOrbit Mobile reads "Shipped" rather than "Live" since the mobile
 // redesign is a finished sub-project of the still-evolving live flagship).
 const STATUS_LABELS = {
   live: "Live",

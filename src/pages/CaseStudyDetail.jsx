@@ -715,7 +715,7 @@ function CaseStudyBody({ study }) {
         )}
 
         {/* Mirrors the headerImage path's badge above: a case study that
-            hasn't gotten its baked-in header art yet (see myOrbit/myOrbit
+            hasn't gotten its baked-in header art yet (see MyOrbit/MyOrbit
             Mobile) still needs its status badge visible now, not silently
             inert until that art shows up. */}
         {!study.headerImageUrl && study.statusNote && (
