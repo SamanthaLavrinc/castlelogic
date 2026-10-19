@@ -227,7 +227,7 @@ export default function ImageGallery({ images, groupLabel, className, layout = "
             <button
               onClick={() => setSelected(null)}
               aria-label="Close"
-              className="absolute -top-3 -right-3 rounded-full bg-black border border-castlepink/60 p-1.5 text-castlepink hover:text-castlepurple hover:border-castlepurple transition-colors"
+              className="absolute -top-3 -right-3 z-10 rounded-full bg-black border border-castlepink/60 p-1.5 text-castlepink hover:text-castlepurple hover:border-castlepurple transition-colors"
             >
               <X size={18} />
             </button>
