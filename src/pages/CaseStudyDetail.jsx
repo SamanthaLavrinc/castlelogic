@@ -443,7 +443,11 @@ export default function CaseStudyDetail() {
                 wide — rather than a fixed size, since `min-w-0` on this
                 wrapper lets it shrink to the button's true box instead of
                 the button's untruncated content width. */}
-            <div ref={projectMenuRef} className="relative min-w-0">
+            {/* `static` below `sm` on purpose: the menu then positions against
+                the sticky bar itself and spans its width on phones, so it fits
+                whether the title is "MyOrbit" or a five-word name. From `sm` up
+                it anchors to the title and matches its width (min 16rem). */}
+            <div ref={projectMenuRef} className="static sm:relative min-w-0">
               <button
                 type="button"
                 onClick={() => setProjectMenuOpen((open) => !open)}
@@ -463,7 +467,7 @@ export default function CaseStudyDetail() {
               {projectMenuOpen && (
                 <div
                   role="menu"
-                  className="absolute right-0 sm:left-0 sm:right-auto top-full mt-2 w-full max-h-[70vh] overflow-y-auto rounded-xl bg-gray-900/95 backdrop-blur-sm border border-castlepink/20 shadow-xl py-3 z-50"
+                  className="absolute left-4 right-4 sm:left-0 sm:right-auto top-full mt-2 sm:w-full sm:min-w-64 max-h-[70vh] overflow-y-auto overflow-x-hidden break-words rounded-xl bg-gray-900/95 backdrop-blur-sm border border-castlepink/20 shadow-xl py-3 z-50"
                 >
                   {/* Category label is deliberately smaller, muted, and
                       more widely tracked than the project links below it —
