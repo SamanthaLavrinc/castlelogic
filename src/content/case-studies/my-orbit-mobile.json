@@ -18,7 +18,7 @@
     },
     {
       "heading": "The layout",
-      "image": "projects/myorbit_mobile/mobile_design_response_2.png",
+      "image": "projects/myorbit_mobile/mobile_design_consolidation_2.png",
       "body": "I went with a bottom drawer that opens partway. The people list and selected person's details live in that drawer, while the graph stays visible above it.\n\nForms open in a floating window over the map instead of taking over the whole screen. When the form closes, the user is back where they were. Selecting a person also recenters the graph in the space above the drawer, so the selected node does not end up hidden behind the panel.\n\nI considered making editing full-screen, or shrinking the graph to a narrow strip while a form was open. Full-screen editing would have hidden the map, and the strip was too small to be useful. The half-height drawer and floating forms kept the map present without adding another awkward layout state."
     },
     {
@@ -49,7 +49,7 @@
     {
       "label": "Development Process",
       "folder": "projects/myorbit_mobile",
-      "files": ["first_attempt_group_menu.png", "first_attempt_person_display.png", "first_attempt_add_menu.png", "agent_suggestion.png", "mobile_design_response_1.png", "mobile_design_response_2.png"]
+      "files": ["first_attempt_group_menu.png", "first_attempt_person_display.png", "first_attempt_add_menu.png", "agent_suggestion.png", "mobile_design_consolidation_1.png", "mobile_design_consolidation_2.png"]
     }
   ],
   "links": []
