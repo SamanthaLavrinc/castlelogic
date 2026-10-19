@@ -36,7 +36,7 @@
     },
     {
       "heading": "Portrait and landscape",
-      "image": "projects/myorbit_mobile/mobile_before_after.png",
+      "image": "projects/myorbit_mobile/landscape_layout.png",
       "body": "Portrait phones use the bottom drawer. Landscape phones use the desktop layout, because a short, wide screen has more room for side panels than for a drawer taking up the bottom half.\n\nAutomated layout tests cover ten phone profiles and four desktop browsers. There are still a few known issues on short landscape screens, including cases where the desktop layout is slightly too tall. Those are tracked rather than treated as finished.\n\nThe map stays visible while the rest of the interface changes around it."
     }
   ],
