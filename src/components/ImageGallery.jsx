@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import StatusBadge from "./StatusBadge";
@@ -8,6 +8,32 @@ import StatusBadge from "./StatusBadge";
 // "is this a video" is decided by the extension on that URL, not by a
 // separate field the JSON would otherwise have to carry per item.
 const isVideoSrc = (src) => /\.mp4($|\?)/i.test(src ?? "");
+
+// Muted looping clip that only plays while it's near the viewport. A plain
+// `autoPlay` makes the browser download every clip on the page at load, even
+// ones far below the fold; `preload="metadata"` fetches just enough to size
+// the element (so nothing shifts when it starts), and the observer starts
+// playback (which streams the rest) within 200px of the screen and pauses it
+// once it scrolls away.
+function LazyVideo(props) {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const video = ref.current;
+    if (!video) return undefined;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) video.play().catch(() => {});
+        else video.pause();
+      },
+      { rootMargin: "200px 0px" }
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
+  return <video ref={ref} muted loop playsInline preload="metadata" {...props} />;
+}
 
 // Shared image grid + lightbox modal (arrow nav, Escape-to-close, keyboard-
 // operable thumbnails). Originally built for the About page's Illustrations
@@ -73,12 +99,8 @@ export default function ImageGallery({ images, groupLabel, className, layout = "
           // than the screen and blurry from upscaling. Landscape media still
           // fills the width, since its height never reaches the cap.
           <div className="relative w-fit max-w-full mx-auto">
-            <video
+            <LazyVideo
               src={images[0].img}
-              autoPlay
-              muted
-              loop
-              playsInline
               aria-label={images[0].title}
               className={`block max-w-full max-h-[75vh] w-auto h-auto rounded-lg border border-castlepink ${blurred ? "blur-md scale-105" : ""}`}
             />
@@ -142,12 +164,8 @@ export default function ImageGallery({ images, groupLabel, className, layout = "
             >
               <div className="w-full h-full bg-white flex items-center justify-center">
                 {isVideoSrc(item.img) ? (
-                  <video
+                  <LazyVideo
                     src={item.img}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
                     aria-label={item.title}
                     className={`max-w-full max-h-full object-contain ${blurred ? "blur-md scale-110" : ""}`}
                   />
