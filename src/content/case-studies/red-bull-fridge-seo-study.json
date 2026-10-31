@@ -1,0 +1,36 @@
+{
+  "slug": "red-bull-fridge-seo-study",
+  "title": "SEO for One Fridge",
+  "category": "Experiments",
+  "order": 4,
+  "status": "live",
+  "summary": "I have a brand-new Red Bull cooler to sell, so I gave it its own page on my site and did all the SEO for it. This tracks whether any of that actually gets the fridge found.",
+  "role": "Seller, SEO person, and the only stakeholder.",
+  "stack": ["HTML", "Schema.org JSON-LD", "Google Search Console", "Vercel Analytics"],
+  "sections": [
+    {
+      "heading": "The setup",
+      "image": "projects/red_bull_fridge/fridge.jpg",
+      "body": "The fridge is an RB-SMC 106 ECO CCR, still sealed in its shipping crate. Normally you would post it on a marketplace and wait. Instead it got a dedicated page on castlelogic.dev, built to rank for one search: Red Bull mini fridge for sale in Pittsburgh.\n\nThe page is styled as the most over-the-top AI landing page I could get. Gradient headlines, glowing buttons, sparkles in every heading, and a FAQ with no sense of proportion. That part is the joke. The SEO underneath it is real."
+    },
+    {
+      "heading": "What's on the page",
+      "body": "- **Title and description** built around the exact search I want to show up for, including the city.\n- **A canonical URL** so search engines treat one address as the real one.\n- **Product markup** with the model, price, condition, and availability, so search engines can read the listing as a listing.\n- **FAQ markup** for the giant FAQ.\n- **Breadcrumb markup** tying the page back to the rest of the site.\n- **Social preview tags** so a shared link shows the photo instead of a blank card.\n- **Analytics** on the page itself, since it lives outside the main app."
+    },
+    {
+      "heading": "What I didn't do",
+      "body": "Search engines judge a whole site, not just one page. If the fridge page gets caught doing something sketchy, my portfolio pays for it too.\n\nSo there is no hidden text, no invisible keywords, and no made-up reviews or star ratings. Every ridiculous thing on the page is visible, and every fact on it is true."
+    },
+    {
+      "heading": "What I'm measuring",
+      "body": "- **Search Console:** which searches show the page, how often, where it ranks, and whether anyone clicks.\n- **Analytics:** visits to the page and where they came from.\n- **The inbox:** whether anyone actually emails about the fridge.\n\nThe last one is the only number that matters to the fridge."
+    },
+    {
+      "heading": "Results",
+      "body": "None yet. The page just went up, and search engines take a while to notice a new page, let alone rank it.\n\nI'll add results here as they come in."
+    }
+  ],
+  "links": [
+    { "label": "See the listing", "url": "https://castlelogic.dev/red-bull-mini-fridge-for-sale/" }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "slug": "spring-ant-farm",
+  "title": "Spring Ant Farm",
+  "category": "Backend",
+  "order": 3,
+  "status": "in-progress",
+  "summary": "An ant colony simulation where the server runs the colony and the browser just watches. I'm building it to learn Spring Boot properly, with something on screen that moves when the backend does.",
+  "role": "Solo developer. A personal project for learning Spring Boot.",
+  "stack": ["Java 21", "Spring Boot 4", "Maven", "Server-Sent Events", "HTML Canvas"],
+  "sections": [
+    {
+      "heading": "Why an ant farm",
+      "body": "I wanted to learn Spring Boot on something more interesting than a to-do list API. A simulation gives the backend a real job: it has to keep state, update it on a schedule, and push changes out to whoever is watching.\n\nAnts are a good fit for that. Each one is simple, there are a lot of them, and you can tell right away if something is broken because they stop moving or all pile up in a corner."
+    },
+    {
+      "heading": "How it works right now",
+      "body": "The colony lives on the server. The browser never decides where an ant goes. It only draws what the server tells it.\n\n- **The colony:** a service holds a list of ants on a 100 by 100 grid. The number of ants comes from a config property, so changing the colony size does not mean touching code.\n- **The clock:** a scheduled task ticks every 200 milliseconds and moves each ant one step in a random direction, clamped so nobody walks off the edge.\n- **The stream:** every tick, the server sends the full list of ants to every open browser tab over Server-Sent Events. A plain endpoint also returns the current state once, for anything that just wants a snapshot.\n- **The view:** a single HTML page opens the stream and redraws a canvas each time a new update arrives.\n\nIf you open the page in two tabs, both show the same colony, because there is only one colony and it belongs to the server."
+    },
+    {
+      "heading": "What I'm learning from it",
+      "body": "Most of the value so far has been seeing how Spring wires things together. The service, the broadcaster, and the controller never create each other. Spring builds each one and hands it the pieces it needs through its constructor.\n\nStreaming taught me about connections that go away without saying goodbye. When someone closes a tab, the server only finds out the next time it tries to send to them. The broadcaster keeps a thread-safe list of viewers and drops anyone whose send fails, so a closed tab does not break the update for everyone else."
+    },
+    {
+      "heading": "Current status",
+      "body": "Right now the ants just wander. Nothing tells them where food is or how to get home, so the colony looks more like a crowd than a colony.\n\nThis page will grow as the project does."
+    }
+  ],
+  "links": []
+}

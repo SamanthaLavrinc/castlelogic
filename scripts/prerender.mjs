@@ -27,11 +27,33 @@ const routes = [
   ...getCaseStudySlugs().map((slug) => `/projects/${slug}`),
 ];
 
+// Standalone HTML pages served straight from public/. They skip prerendering
+// (they aren't React routes) but still belong in the sitemap. Listing their
+// images gets them into Google Images too.
+const staticPages = [
+  {
+    route: "/red-bull-mini-fridge-for-sale/",
+    lastmod: "2026-10-30",
+    images: [
+      "red-bull-mini-fridge-for-sale-pittsburgh.jpg",
+      "red-bull-fridge-crate-pittsburgh.webp",
+      "red-bull-fridge-for-sale-ai-concept.jpg",
+    ],
+  },
+];
+
+function sitemapEntry({ route, lastmod, images = [] }) {
+  const lines = [`    <loc>${SITE_URL}${route}</loc>`];
+  if (lastmod) lines.push(`    <lastmod>${lastmod}</lastmod>`);
+  for (const image of images) {
+    lines.push(`    <image:image>\n      <image:loc>${SITE_URL}${route}${image}</image:loc>\n    </image:image>`);
+  }
+  return `  <url>\n${lines.join("\n")}\n  </url>`;
+}
+
 function writeSitemapAndRobots() {
-  const urls = routes
-    .map((route) => `  <url>\n    <loc>${SITE_URL}${route}</loc>\n  </url>`)
-    .join("\n");
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
+  const urls = [...routes.map((route) => ({ route })), ...staticPages].map(sitemapEntry).join("\n");
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${urls}\n</urlset>\n`;
   writeFileSync(path.join(DIST_DIR, "sitemap.xml"), sitemap);
 
   const robots = `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`;
