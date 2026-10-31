@@ -1,7 +1,7 @@
 {
   "slug": "my-orbit-mobile",
   "title": "MyOrbit: Mobile",
-  "category": "UI Experiments",
+  "category": "Experiments",
   "order": 1.5,
   "status": "shipped",
   "summary": "MyOrbit was built around a large graph with a panel on either side. That works on a desktop, where there is room for the people list, the map, and the selected person's details at the same time. On a phone, those three columns do not fit, and shrinking the map defeats the reason for using a map in the first place.\n\nI redesigned the mobile interface around one constraint: keep the map visible while people browse, select someone, or edit details.",
