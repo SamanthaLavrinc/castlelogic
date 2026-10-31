@@ -16,8 +16,8 @@ export default function Projects() {
   return (
     <main className="min-h-screen bg-black text-white px-4 sm:px-10 py-8 sm:py-12 font-fredoka">
       <SEO
-        title="Projects"
-        description="Full-stack builds, UI experiments, and design work from Castle Logic. Case studies spanning React, backend architecture, and illustration."
+        title="Software & Design Projects"
+        description="Case studies from Castle Logic, a Pittsburgh software and design studio: full-stack web apps, mobile UI, healthcare data pipelines, and experiments."
         path="/projects"
       />
 

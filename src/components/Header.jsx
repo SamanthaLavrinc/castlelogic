@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 const pages = [
   { name: "HOME", path: "/" },
   { name: "PROJECTS", path: "/projects" },
+  { name: "SERVICES", path: "/services" },
   { name: "RESUME", path: "/resume" },
   { name: "ABOUT", path: "/about" },
   { name: "CONTACT", path: "/contact" },

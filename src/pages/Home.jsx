@@ -12,12 +12,15 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-black text-white px-4 sm:px-4 py-8 sm:py-12 font-fredoka relative z-0">
       <SEO
-        title="Software Engineering & Product Design"
-        description="Pittsburgh-based full-stack software engineer and designer building beautiful experiences on powerful foundations. React, Java, SQL, and NLP data pipelines."
+        title="Samantha Lavrinc, Pittsburgh Software Developer & Designer"
+        description="Castle Logic is a woman-owned software and design studio in Pittsburgh. Samantha Lavrinc builds full-stack web apps, websites, and data pipelines with React, Java, and SQL."
         path="/"
       />
       {/* Hero Section */}
       <section className="text-center max-w-[1200px] mx-auto mb-10 sm:mb-10 relative z-10">
+        {/* The hero image carries the visible headline, so the h1 is for
+            search engines and screen readers only. */}
+        <h1 className="sr-only">Castle Logic: Pittsburgh software development and design by Samantha Lavrinc</h1>
         <img
           src={heroImg}
           alt="Castle Logic: Building Beautiful Experiences on Powerful Foundations"
@@ -54,6 +57,9 @@ export default function Home() {
           <p className="text-castlepurple text-lg sm:text-xl">
             Castle Logic builds full-stack, end-to-end solutions: intuitive interfaces backed by real backend logic, data workflows, and system architecture. Whether it’s React on the surface or Java, SQL, and NLP pipelines underneath, every project blends creativity with solid engineering.
           </p>
+          <Link to="/services" className="inline-block mt-4 text-castlepink hover:text-castlepurple transition-colors">
+            See services →
+          </Link>
         </section>
       </Reveal>
 

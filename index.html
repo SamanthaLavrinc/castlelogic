@@ -37,41 +37,158 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Castle Logic LLC",
-      "url": "https://castlelogic.dev",
-      "logo": "https://castlelogic.dev/icon.png",
-      "description": "Design and development studio specializing in modern, responsive UI/UX solutions.",
-      "email": "contact@castlelogic.dev",
-      "foundingDate": "2024",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Pittsburgh",
-        "addressRegion": "PA",
-        "addressCountry": "US"
-      }
-    }
-    </script>
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Samantha Lavrinc",
-      "url": "https://castlelogic.dev",
-      "jobTitle": "Founder & Lead Software Engineer",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Castle Logic LLC"
-      },
-      "email": "contact@castlelogic.dev",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Pittsburgh",
-        "addressRegion": "PA",
-        "addressCountry": "US"
-      },
-      "knowsAbout": ["React", "Java", "SQL", "TypeScript", "UX/UI Design", "NLP", "Full-Stack Development"]
+      "@graph": [
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://castlelogic.dev/#organization",
+          "name": "Castle Logic LLC",
+          "alternateName": "Castle Logic",
+          "url": "https://castlelogic.dev",
+          "logo": "https://castlelogic.dev/icon.png",
+          "image": "https://castlelogic.dev/castle.png",
+          "description": "Woman-owned software development and design studio in Pittsburgh, PA. Full-stack web apps, websites, backend systems, data pipelines, and UX/UI design.",
+          "slogan": "Building beautiful experiences on powerful foundations",
+          "email": "contact@castlelogic.dev",
+          "foundingDate": "2024",
+          "founder": {
+            "@id": "https://castlelogic.dev/#samantha"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Pittsburgh",
+            "addressRegion": "PA",
+            "addressCountry": "US"
+          },
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Pittsburgh"
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Allegheny County, PA"
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Western Pennsylvania"
+            }
+          ],
+          "knowsAbout": [
+            "React",
+            "Java",
+            "SQL",
+            "TypeScript",
+            "PostgreSQL",
+            "UX/UI Design",
+            "NLP",
+            "Data Pipelines",
+            "Full-Stack Development",
+            "Web Development",
+            "Illustration",
+            "Branding"
+          ],
+          "keywords": "woman-owned business, woman-owned software company Pittsburgh, women in business Pittsburgh, women in tech Pittsburgh, Pittsburgh software developer, Pittsburgh web developer, Pittsburgh web design, full-stack developer Pittsburgh, React developer Pittsburgh, Java developer Pittsburgh",
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Software development and design services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Custom web application development",
+                  "areaServed": "Pittsburgh, PA"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Website design and development",
+                  "areaServed": "Pittsburgh, PA"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Backend and API development",
+                  "areaServed": "Pittsburgh, PA"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Data pipelines and NLP",
+                  "areaServed": "Pittsburgh, PA"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "UX/UI design",
+                  "areaServed": "Pittsburgh, PA"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Illustration and branding",
+                  "areaServed": "Pittsburgh, PA"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://castlelogic.dev/#samantha",
+          "name": "Samantha Lavrinc",
+          "url": "https://castlelogic.dev/about",
+          "jobTitle": "Founder & Lead Software Engineer",
+          "worksFor": {
+            "@id": "https://castlelogic.dev/#organization"
+          },
+          "description": "Pittsburgh full-stack software developer and designer, founder of Castle Logic, a woman-owned software studio.",
+          "email": "contact@castlelogic.dev",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Pittsburgh",
+            "addressRegion": "PA",
+            "addressCountry": "US"
+          },
+          "knowsAbout": [
+            "React",
+            "Java",
+            "SQL",
+            "TypeScript",
+            "PostgreSQL",
+            "UX/UI Design",
+            "NLP",
+            "Data Pipelines",
+            "Full-Stack Development",
+            "Web Development",
+            "Illustration",
+            "Branding"
+          ],
+          "sameAs": [
+            "https://www.linkedin.com/in/slavrinc/",
+            "https://github.com/SamanthaLavrinc"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://castlelogic.dev/#website",
+          "name": "Castle Logic",
+          "url": "https://castlelogic.dev",
+          "publisher": {
+            "@id": "https://castlelogic.dev/#organization"
+          }
+        }
+      ]
     }
     </script>
 

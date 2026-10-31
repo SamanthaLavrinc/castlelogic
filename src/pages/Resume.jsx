@@ -20,7 +20,7 @@ export default function Resume() {
   return (
     <main className="min-h-screen bg-black text-white px-4 sm:px-10 py-8 sm:py-12 font-fredoka">
       <SEO
-        title="Resume"
+        title="Samantha Lavrinc Resume, Pittsburgh Software Engineer"
         description="Samantha Lavrinc's resume: Pittsburgh-based Software Engineer with backend development experience and a design background dating back to 2006. Java, SQL, React, and TypeScript."
         path="/resume"
       />

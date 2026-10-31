@@ -9,13 +9,16 @@ export default function About() {
   return (
     <main className="min-h-screen bg-black text-white px-4 sm:px-10 pt-10 sm:pt-16 pb-8 sm:pb-12 font-fredoka">
       <SEO
-        title="About"
-        description="Meet Samantha Lavrinc, a Pittsburgh-based full-stack developer and designer blending clean code, product engineering, and illustrative design at Castle Logic."
+        title="About Samantha Lavrinc, Pittsburgh Full-Stack Developer"
+        description="Samantha Lavrinc is a Pittsburgh full-stack developer and designer and the founder of Castle Logic, a woman-owned software studio. From illustration to React, Java, SQL, and NLP pipelines."
         path="/about"
       />
 
       {/* TITLE SECTION */}
       <section className="max-w-[1200px] mx-auto mb-16 sm:mb-16">
+        {/* The hero image carries the visible headline, so the h1 is for
+            search engines and screen readers only. */}
+        <h1 className="sr-only">About Samantha Lavrinc, Pittsburgh full-stack developer and designer</h1>
         {/* Hero image: its own full-width row, centered, above the values block. */}
         <div className="text-center mx-auto mb-0 sm:mb-2">
           <img

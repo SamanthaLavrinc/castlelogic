@@ -6,6 +6,7 @@ import CaseStudyDetail from "../pages/CaseStudyDetail";
 import About from "../pages/About";
 import Resume from "../pages/Resume";
 import Contact from "../pages/Contact";
+import Services from "../pages/Services";
 import NotFound from "../pages/NotFound";
 
 export default function AppRoutes() {
@@ -16,6 +17,7 @@ export default function AppRoutes() {
         <Route path="/home" element={<Navigate to="/" replace />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:slug" element={<CaseStudyDetail />} />
+        <Route path="/services" element={<Services />} />
         <Route path="/about" element={<About />} />
         <Route path="/resume" element={<Resume />} />
         <Route path="/contact" element={<Contact />} />

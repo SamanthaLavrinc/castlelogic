@@ -10,16 +10,16 @@ export default function Contact() {
   return (
     <main className="bg-black text-white px-4 sm:px-10 py-10 sm:py-16 font-fredoka flex flex-col items-center">
       <SEO
-        title="Contact"
-        description="Have a project in mind? Get in touch with Samantha Lavrinc at Castle Logic."
+        title="Hire a Pittsburgh Software Developer"
+        description="Hire Samantha Lavrinc for a project or a role. Castle Logic is a woman-owned software and design studio in Pittsburgh, open to contract work and full-time positions."
         path="/contact"
       />
 
       {/* Intro / pitch */}
       <div className="w-full max-w-[700px] text-center mb-10 sm:mb-10">
-        <h2 className="text-2xl sm:text-3xl font-bold text-castlepink mb-4 tracking-wider">
+        <h1 className="text-2xl sm:text-3xl font-bold text-castlepink mb-4 tracking-wider">
           LET'S BUILD SOMETHING TOGETHER
-        </h2>
+        </h1>
         <p className="text-castlepurple text-lg">
           I'm open to full-time roles and contract work alike. If you're hiring, I'd love to
           hear about the role. If you've got a project in mind, here's roughly how it goes: we
