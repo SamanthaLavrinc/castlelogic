@@ -4,22 +4,38 @@
   "category": "Experiments",
   "order": 4,
   "status": "live",
-  "summary": "I have a brand-new Red Bull cooler to sell, so I gave it its own page on my site and did all the SEO for it. This tracks whether any of that actually gets the fridge found.",
+  "summary": "I have a brand-new Red Bull cooler to sell, so I gave it its own page on my site and threw every SEO technique I know at it. This tracks whether any of that actually gets the fridge found.",
   "role": "Seller, SEO person, and the only stakeholder.",
-  "stack": ["HTML", "Schema.org JSON-LD", "Google Search Console", "Vercel Analytics"],
+  "stack": ["HTML", "Schema.org JSON-LD", "XML sitemap", "Google Search Console", "Bing Webmaster Tools", "Vercel Analytics"],
+  "heroImage": "projects/red_bull_fridge/hero.jpg",
+  "cardImage": "projects/red_bull_fridge/card-header-image.jpg",
+  "headerImage": "projects/red_bull_fridge/header-image.jpg",
   "sections": [
     {
       "heading": "The setup",
-      "image": "projects/red_bull_fridge/fridge.jpg",
-      "body": "The fridge is an RB-SMC 106 ECO CCR, still sealed in its shipping crate. Normally you would post it on a marketplace and wait. Instead it got a dedicated page on castlelogic.dev, built to rank for one search: Red Bull mini fridge for sale in Pittsburgh.\n\nThe page is styled as the most over-the-top AI landing page I could get. Gradient headlines, glowing buttons, sparkles in every heading, and a FAQ with no sense of proportion. That part is the joke. The SEO underneath it is real."
+      "image": "projects/red_bull_fridge/listing-page.jpg",
+      "body": "The fridge is an RB-SMC 106 ECO CCR, still sealed in its shipping crate in Bethel Park. Normally you would post it on a marketplace and wait. Instead it got a dedicated page on castlelogic.dev.\n\nThe page is styled as the most over-the-top AI landing page I could get. Gradient headlines, glowing buttons, sparkles in every heading, and a FAQ with no sense of proportion. That part is the joke. The SEO underneath it is real.\n\nThis is a placeholder while the experiment runs. I'll fill in results as they come in."
+    },
+    {
+      "heading": "The question",
+      "body": "Can one page on a small personal site show up for real searches from people who might actually buy a fridge?\n\nI'm not trying to beat Red Bull or a big retailer for \"Red Bull fridge.\" I'm trying to show up for the long, specific searches where there is almost no competition, like \"Red Bull fridge Pittsburgh\" or \"bar fridge Bethel Park.\""
     },
     {
       "heading": "What's on the page",
-      "body": "- **Title and description** built around the exact search I want to show up for, including the city.\n- **A canonical URL** so search engines treat one address as the real one.\n- **Product markup** with the model, price, condition, and availability, so search engines can read the listing as a listing.\n- **FAQ markup** for the giant FAQ.\n- **Breadcrumb markup** tying the page back to the rest of the site.\n- **Social preview tags** so a shared link shows the photo instead of a blank card.\n- **Analytics** on the page itself, since it lives outside the main app."
+      "body": "- **Title and description** built around the searches I want to show up for, including Pittsburgh and Bethel Park.\n- **Product markup** with the model, price, condition, pickup location, no shipping, and no returns, so search engines can read the listing as a listing.\n- **FAQ markup** for 30 questions, most of them written around things people actually type into Google.\n- **Breadcrumb markup** tying the page back to the rest of the site.\n- **Social preview tags** so a shared link shows the crate photo instead of a blank card.\n- **Image file names and alt text** that describe the fridge, since images get searched too.\n- **Analytics** on the page itself, since it lives outside the main app."
     },
     {
-      "heading": "What I didn't do",
-      "body": "Search engines judge a whole site, not just one page. If the fridge page gets caught doing something sketchy, my portfolio pays for it too.\n\nSo there is no hidden text, no invisible keywords, and no made-up reviews or star ratings. Every ridiculous thing on the page is visible, and every fact on it is true."
+      "heading": "Going overboard on purpose",
+      "body": "A normal listing targets one phrase. This one targets every phrase I could think of.\n\n- **Every name for it:** Red Bull fridge, Redbull fridge, Red Bull cooler, bar fridge, beverage cooler, glass door mini fridge, energy drink fridge, and the model number written three different ways.\n- **Every room:** bar, game room, man cave, garage, office, and events each get their own card.\n- **Every neighborhood:** pickup is in Bethel Park, so the page names the South Hills towns around it and then the rest of Pittsburgh.\n- **Christmas:** it is late October, so there is a whole section pitching it as the perfect Christmas gift for men.\n\nThere is also an \"Also Known As\" section that is just a wall of search phrases. That is textbook keyword stuffing, and Google says it can hurt rankings. I left it in on purpose, because whether it helps, hurts, or does nothing is part of what I want to find out."
+    },
+    {
+      "heading": "Where I drew the line",
+      "body": "Search engines judge a whole site, not just one page, so the fridge page could cost my portfolio if it goes too far.\n\n- **No fake reviews or star ratings.** Google's rich results test flags them as missing. They stay missing, because I don't have any real ones.\n- **No hidden text on the page.** Every ridiculous thing is visible. The only invisible keywords are in a meta tag that Google has ignored for years, and that is there for the bit.\n- **The AI art is labeled.** The page has one AI-generated promo image, and it says so. The real crate photo is the one marked as the product image.\n- **Every fact is true.** The model, the size, the condition, and the pickup location are all accurate."
+    },
+    {
+      "heading": "Getting it found",
+      "image": "projects/red_bull_fridge/fridge.jpg",
+      "body": "A page nobody links to can sit unnoticed for weeks. On launch day, October 30, 2026, I:\n\n- **Added it to the sitemap**, along with its three images so they can show up in image search.\n- **Resubmitted the sitemap** in Google Search Console and asked Google to index the page.\n- **Did the same in Bing Webmaster Tools**, which also feeds DuckDuckGo and some AI search tools.\n- **Ran Google's rich results test.** It found the product listing. The only warnings left are the missing reviews and ratings.\n\nNext, the link goes into the marketplace listings for the same fridge."
     },
     {
       "heading": "What I'm measuring",
@@ -27,7 +43,7 @@
     },
     {
       "heading": "Results",
-      "body": "None yet. The page just went up, and search engines take a while to notice a new page, let alone rank it.\n\nI'll add results here as they come in."
+      "body": "None yet. The page went live on October 30, 2026, and search engines take a while to notice a new page, let alone rank it.\n\nI'll add results here as they come in."
     }
   ],
   "links": [
