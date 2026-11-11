@@ -71,29 +71,48 @@ export default function About() {
           </h2>
 
           <div className="text-castlepurple text-lg sm:text-xl space-y-6 leading-relaxed">
-
             <p>
-              I started in <span className="text-castlepink">graphic design and illustration</span>:
-              color palettes, shapes, storytelling, all of it. Over time I got curious about how
-              design actually works on the web, which pulled me into frontend development, and
-              then backend architecture, and eventually full-stack systems, because I wanted to
-              understand the whole thing, not just the part people see.
+              Many moons ago (well, relatively speaking), I started my adult life intending to be a graphic designer and illustrator. That didn't exactly work out, which, personally, I think was probably the universe doing me a favor and redirecting me toward something I'd end up enjoying more.
             </p>
 
             <p>
-              Since then I've worked on product teams and in healthcare tech, pairing visual
-              storytelling with real technical engineering. Whether I'm building a front end or
-              architecting NLP and ETL logic that turns messy clinical text into clean, structured
-              data, the job is the same: bridge the side that looks good with the side that
-              actually works, the part users never see but always feel.
+              While I was doing graphic design, people were constantly asking me for things outside the scope of making pretty pictures. Websites, functionality, things that required me to apparently moonlight as a webmaster. It became a bit of a low-key annoyance that I could see what people wanted to build but didn't have the skills to build it for them. I wanted to do more than just the visual part.
             </p>
 
             <p>
-              Today, Castle Logic is everything I care about in one place:
-              <span className="text-castlepink"> React, Java, SQL, and data pipelines that turn
-                chaos into structure</span>,
-              plus illustration and design and the plain goal of building things that actually
-              help people.
+              Some of that probably goes back to the era I grew up in. I was part of the first wave of kids with access to Angelfire, GeoCities, and eventually MySpace. The early internet was the wild west. If you had a technical problem, you weren't asking an AI. You were digging through some highly specialized message board you found on page four of a Yahoo search, hoping someone with a username like xXx_DarkWizard92_xXx had encountered the same problem.
+            </p>
+
+            <p>
+              It was frustrating, but it taught you how to troubleshoot. You learned to follow a problem down whatever rabbit hole it took you into, because somewhere, no matter how obscure the issue, there was probably an answer. I developed some pretty strong problem-solving skills that way.
+            </p>
+
+            <p>
+              Eventually, the writing was on the wall for illustration as a career. The market was changing, work was becoming increasingly globalized, and a lot of what I did could be done by someone else for considerably less. I needed to figure out what I wanted to do next.
+            </p>
+
+            <p>
+              My first thought was architecture. Actual buildings, not software architecture. I've always been fascinated by the intersection of design, function, form, materials, and all the systems that have to come together to make something work. Some of that might also be attributable to the unreasonable amount of time I spent building castles in modded Minecraft. When your inventory fills up and you have to run halfway across your base to put things away, suddenly you're thinking about layout and workflow efficiency. Maybe I was just trying to optimize my Minecraft commute.
+            </p>
+
+            <p>
+              There was just one problem with the architecture idea. I'd already spent enough money figuring out what I didn't want to do. Student loans have a way of making you reconsider things.
+            </p>
+
+            <p>
+              Fortunately, computers were already pretty familiar territory. My first computer was a Commodore, and I've been around them longer than I've been able to read. I grew up through the Oregon Trail era, typing class in middle school, Microsoft Office introductions in high school, the evolution of the internet and social media, and the transition from 32-bit to 64-bit operating systems (which, if I remember correctly, mostly involved breaking my computer).
+            </p>
+
+            <p>
+              I'd spent my whole life tinkering with computers and figuring out how things worked. I'd just never considered making a career out of it. So I went back to school for computer science.
+            </p>
+
+            <p>
+              Since then, I've worked across frontend development, backend architecture, and full-stack engineering, including three years in healthcare technology building clinical NLP pipelines in Java and PostgreSQL. I've worked with hundreds of thousands of patient records, dealt with the joys of messy clinical data, and spent plenty of time figuring out why something that should have worked absolutely did not. More recently, I've been building products from concept through production, including a therapy insight platform that brought together a lot of my interests in design, engineering, and understanding how people actually use software.
+            </p>
+
+            <p>
+              Today, Castle Logic is basically all of those things in one place. React, Java, SQL, data pipelines, illustration, design, and whatever else happens to catch my interest. I still care about the visual side of what I build, but I also want to understand everything underneath it. Turns out I just wanted to build the whole thing all along.
             </p>
           </div>
         </section>
@@ -108,20 +127,43 @@ export default function About() {
 
           <div className="text-castlepurple text-lg sm:text-xl space-y-6 leading-relaxed">
             <p>
-              I use AI to direct and orchestrate development work the same way a lead engineer
-              directs a team. I set the architecture, hand off focused implementation, and review
-              everything before it ships. It's the same structured, detail-driven habit I already
-              built doing NLP and clinical data pipelines, just applied to how I run multiple
-              projects at once now.
+              I'm a big believer in the 80/20 rule. Not everything needs to be perfect, and not every edge case deserves the same amount of attention. I tend to look at things in terms of effort versus value. A lot of the time, 80% of the value comes from 20% of the work. I've seen people spend days chasing the last 20% of use cases while the other 80% is already working just fine. Sometimes that extra effort is necessary, but knowing where to spend your time is a big part of getting things done.
+            </p>
+
+            <h3 className="text-2xl sm:text-xl font-bold text-castlepink text-center tracking-wider pt-4">
+              WORKING WITH AI
+            </h3>
+
+            <p>
+              I've spent the last year building software with AI agents pretty much every day. I don't really subscribe to the idea that AI-generated code is inherently worse than human-written code. Both make mistakes. Humans have limited working memory, forget established patterns, and overlook edge cases. AI has its own problems, but it also has access to a pretty enormous body of programming knowledge. It also helps that AI isn't stuck in the same habits I might have picked up years ago in college from a book on Java 7.
             </p>
 
             <p>
-              What AI still can't do is notice the one small thing that actually matters: the edge
-              case a client didn't think to mention, the detail that changes how a feature should
-              really work. That's the part that's on me. Years spent building tools for
-              healthcare, and more recently a therapy insight platform, taught me how to listen
-              for what people actually need underneath what they say they want, and turn that into
-              something that runs reliably and feels right to use.
+              My background in healthcare NLP made the transition to working with agents feel pretty natural. A lot of my work at Realyze involved taking things that already existed elsewhere in the codebase and adapting them to new requirements. We'd have an established process for searching a document, identifying concepts within a particular section or sentence, filtering those concepts against some criteria, and doing something slightly different with the results. The underlying logic was already there. The work was understanding it well enough to reuse it.
+            </p>
+
+            <p>
+              That's not all that different from how I work with AI agents now. I can give an agent an existing implementation, explain what needs to change, and have it adapt the logic to a new requirement. The important part is giving it enough context to understand what it's working with and what the end result should be.
+            </p>
+
+            <p>
+              Development is iterative regardless. Especially in NLP, you're never going to anticipate every possible input. Somewhere there's a rando describing something in the most Shakespearean way imaginable, and your carefully constructed logic has no idea what to do with it. You make adjustments, encounter new edge cases, and keep improving. I like that AI has been trained on an enormous amount of material that I might not remember in the moment. It can bring established patterns and approaches into the conversation that I might personally overlook.
+            </p>
+
+            <p>
+              There's an old comic about the difference between what a customer asks for, what sales promises, what engineering builds, and what the customer actually wanted. It's illustrated with a tire swing, and every version looks completely different. I think AI-assisted development is a lot like that. You can have a capable implementation agent and still end up with something completely different from what you intended if the instructions and context aren't there.
+            </p>
+
+            <p>
+              A big part of my job is closing those gaps. I establish the architecture, break work into manageable pieces, keep project context organized, and give agents enough information to work within the existing system instead of making up their own interpretation. Then I review what comes back, identify what needs fixing, and iterate. Database, unit, and browser tests are as integral a part of that process as they would be for human-engineered code.
+            </p>
+
+            <p>
+              I don't know exactly where software engineering is headed, but I think there's going to be plenty of work in taking AI-generated software and turning it into something reliable, maintainable, and usable. Writing code is becoming less of a bottleneck. Knowing what needs to be built, recognizing when something is wrong, and knowing how to communicate that to an agent is becoming its own engineering skill.
+            </p>
+
+            <p>
+              That's the work I enjoy. The tools are different, but I'm still solving problems, figuring out how things fit together, and making sure the end result actually works.
             </p>
           </div>
         </section>
