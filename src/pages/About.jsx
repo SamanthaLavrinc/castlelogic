@@ -108,7 +108,7 @@ export default function About() {
             </p>
 
             <p>
-              Since then, I've worked across frontend development, backend architecture, and full-stack engineering, including three years in healthcare technology building clinical NLP pipelines in Java and PostgreSQL. I've worked with hundreds of thousands of patient records, dealt with the joys of messy clinical data, and spent plenty of time figuring out why something that should have worked absolutely did not. More recently, I've been building products from concept through production, including a therapy insight platform that brought together a lot of my interests in design, engineering, and understanding how people actually use software.
+              Since then, I've worked across frontend development, backend architecture, and full-stack engineering, including three years in healthcare technology building clinical NLP pipelines in Java and PostgreSQL. I've worked with hundreds of thousands of patient records, dealt with the joys of messy clinical data, and spent plenty of time figuring out why something that should have worked absolutely did not. More recently, I've been building products from concept through production, including a relationship-mapping app that brought together a lot of my interests in design, engineering, and understanding how people actually use software.
             </p>
 
             <p>
@@ -183,7 +183,7 @@ export default function About() {
             </div>
             <div className="p-6 border border-castlepink rounded-2xl bg-gray-900 hover:scale-[1.02] transition-transform">
               <h3 className="text-castlepink text-xl mb-2 tracking-wider">Backend & Systems</h3>
-              <p>Java, Typescript, SQL/PostgreSQL, authentication, API design, infrastructure planning, and data-driven logic.</p>
+              <p>Java, TypeScript, SQL/PostgreSQL, authentication, API design, infrastructure planning, and data-driven logic.</p>
             </div>
             <div className="p-6 border border-castlepink rounded-2xl bg-gray-900 hover:scale-[1.02] transition-transform">
               <h3 className="text-castlepink text-xl mb-2 tracking-wider">Design & Illustration</h3>
